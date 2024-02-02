@@ -1,4 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
+using Handy_Dandy.Views.Login;
+using Handy_Dandy.ViewModels.Login;
 
 namespace Handy_Dandy;
 
@@ -18,6 +20,13 @@ public static class MauiProgram
 #if DEBUG
 		builder.Logging.AddDebug();
 #endif
+
+		//Views
+		builder.Services.AddSingleton<LoginPage>();
+
+
+		//View Models
+		builder.Services.AddSingleton<LoginPageViewModel>();
 
 		return builder.Build();
 	}
