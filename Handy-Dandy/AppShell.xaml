@@ -6,9 +6,12 @@
     Shell.FlyoutBehavior="Disabled"
     xmlns:LoginPages="clr-namespace:Handy_Dandy.Views.Login">
 
-    
+
     <ShellContent Title="Login Page"
         ContentTemplate="{DataTemplate LoginPages:LoginPage}"
         Route="LoginPage" />
+
+    <ShellContent FlyoutItemIsVisible="False" Shell.FlyoutBehavior="Disabled"
+        ContentTemplate="{DataTemplate LoginPages:SignUpPage}" Route="SignUpPage" />
 </Shell>
 

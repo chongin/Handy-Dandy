@@ -23,7 +23,7 @@ public static class MauiProgram
 
 		//Views
 		builder.Services.AddSingleton<LoginPage>();
-
+		builder.Services.AddSingleton<SignUpPage>();
 
 		//View Models
 		builder.Services.AddSingleton<LoginPageViewModel>();

@@ -33,6 +33,29 @@
                 <Entry Placeholder="Password" Margin="20,0,0,0" VerticalOptions="Center" IsPassword="True"/>
             </Frame>
         </StackLayout>
-        <CheckBox Content="Remember Me" />
+        <StackLayout Orientation="Horizontal">
+            <CheckBox x:Name="RememberCB" Color="{StaticResource Primary}"/>
+            <Label Text="Remember Me" Margin="-5,0,0,0" FontSize="12" VerticalOptions ="Center"/>
+
+            <Label Text="Forgot Passord?" FontSize="12" VerticalOptions="Center" TextColor="{StaticResource Primary}" HorizontalOptions="EndAndExpand">
+                
+            </Label>
+        </StackLayout>
+
+        <Button Text="LOGIN" x:Name="loginBtn" HeightRequest="40" VerticalOptions="End" HorizontalOptions="Fill"
+                Margin="20,0,20,0" CornerRadius="10" Padding="0" FontAttributes="Bold"
+                Grid.Row="3" Background="{StaticResource Primary}"/>
+
+        <Label Grid.Row="4" Padding="0,12,0,0" HorizontalOptions="Center" HorizontalTextAlignment="Center" FontSize="14"> 
+             <Label.FormattedText>
+                  <FormattedString>
+                        <Span Text="Don't have an account?   " />
+                        <Span Text="Sign Up" TextDecorations="Underline" TextColor="{DynamicResource Primary}"/>
+                  </FormattedString>
+             </Label.FormattedText>
+            <Label.GestureRecognizers>
+                <TapGestureRecognizer Tapped="SignUpLabel_Tapped" />
+            </Label.GestureRecognizers>
+        </Label>
     </VerticalStackLayout>
 </ContentPage>

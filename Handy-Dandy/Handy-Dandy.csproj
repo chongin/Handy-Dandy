@@ -59,11 +59,19 @@
 	  <None Remove="ViewModels\" />
 	  <None Remove="ViewModels\Login\" />
 	  <None Remove="Views\Login\" />
+	  <None Remove="Resources\Images\user.png" />
+	  <None Remove="Resources\Images\password.png" />
+	  <None Remove="Resources\Images\login.png" />
 	</ItemGroup>
 	<ItemGroup>
 	  <Folder Include="Views\" />
 	  <Folder Include="ViewModels\" />
 	  <Folder Include="ViewModels\Login\" />
 	  <Folder Include="Views\Login\" />
+	</ItemGroup>
+	<ItemGroup>
+	  <BundleResource Include="Resources\Images\user.png" />
+	  <BundleResource Include="Resources\Images\password.png" />
+	  <BundleResource Include="Resources\Images\login.png" />
 	</ItemGroup>
 </Project>
