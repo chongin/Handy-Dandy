@@ -9,15 +9,4 @@ public partial class LoginPage : ContentPage
 		InitializeComponent();
 		this.BindingContext = loginPageViewModel;
 	}
-
-    public async void SignUpLabel_Tapped(object sender, EventArgs e)
-    {
-        // Handle the sign-up click event
-        // Put your sign-up logic here
-        //await Shell.Current.GoToAsync("//SignUpPage");
-        AppShell.Current.Dispatcher.Dispatch(async () =>
-        {
-            await Shell.Current.GoToAsync($"//{nameof(SignUpPage)}");
-        });
-    }
 }

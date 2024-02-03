@@ -20,7 +20,7 @@
             </Frame>
 
             <Frame HeightRequest="45" Margin="-20,0,0,0" Padding="0" HasShadow="True" BorderColor="White" HorizontalOptions="FillAndExpand">
-                <Entry Placeholder="User Name" Margin="20,0,0,0" VerticalOptions="Center" Keyboard="Email"/>
+                <Entry Placeholder="User Name" Text="{Binding Email}" Margin="20,0,0,0" VerticalOptions="Center" Keyboard="Email"/>
             </Frame>
         </StackLayout>
 
@@ -30,7 +30,7 @@
             </Frame>
 
             <Frame HeightRequest="45" Margin="-20,0,0,0" Padding="0" HasShadow="True" BorderColor="White" HorizontalOptions="FillAndExpand">
-                <Entry Placeholder="Password" Margin="20,0,0,0" VerticalOptions="Center" IsPassword="True"/>
+                <Entry Placeholder="Password" Text="{Binding Password}" Margin="20,0,0,0" VerticalOptions="Center" IsPassword="True"/>
             </Frame>
         </StackLayout>
         <StackLayout Orientation="Horizontal">
@@ -44,7 +44,7 @@
 
         <Button Text="LOGIN" x:Name="loginBtn" HeightRequest="40" VerticalOptions="End" HorizontalOptions="Fill"
                 Margin="20,0,20,0" CornerRadius="10" Padding="0" FontAttributes="Bold"
-                Grid.Row="3" Background="{StaticResource Primary}"/>
+                Grid.Row="3" Background="{StaticResource Primary}" Command="{Binding LoginCommand}"/>
 
         <Label Grid.Row="4" Padding="0,12,0,0" HorizontalOptions="Center" HorizontalTextAlignment="Center" FontSize="14"> 
              <Label.FormattedText>
@@ -54,7 +54,7 @@
                   </FormattedString>
              </Label.FormattedText>
             <Label.GestureRecognizers>
-                <TapGestureRecognizer Tapped="SignUpLabel_Tapped" />
+                <TapGestureRecognizer Command="{Binding SignUpCommand}" />
             </Label.GestureRecognizers>
         </Label>
     </VerticalStackLayout>
