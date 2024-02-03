@@ -4,7 +4,8 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     Shell.FlyoutBehavior="Disabled"
-    xmlns:LoginPages="clr-namespace:Handy_Dandy.Views.Login">
+    xmlns:LoginPages="clr-namespace:Handy_Dandy.Views.Login"
+    xmlns:MainPages="clr-namespace:Handy_Dandy">
 
 
     <ShellContent Title="Login Page"
@@ -13,5 +14,10 @@
 
     <ShellContent FlyoutItemIsVisible="False" Shell.FlyoutBehavior="Disabled"
         ContentTemplate="{DataTemplate LoginPages:SignUpPage}" Route="SignUpPage" />
+
+    <ShellContent Title="Main Page"
+        ContentTemplate="{DataTemplate MainPages:MainPage}"
+        Route="MainPage" />
+
 </Shell>
 

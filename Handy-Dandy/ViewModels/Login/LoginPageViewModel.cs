@@ -25,9 +25,9 @@ namespace Handy_Dandy.ViewModels.Login
 
 		private async Task Login()
 		{
-            App.CurrentUser.Email = Email;
-            App.CurrentUser.Password = Password;
-            await Shell.Current.GoToAsync("//SignUpPage");
+            //App.CurrentUser.Email = Email;
+            //App.CurrentUser.Password = Password;
+            await Shell.Current.GoToAsync("//MainPage");
         }
 
         public async Task SignUp()
