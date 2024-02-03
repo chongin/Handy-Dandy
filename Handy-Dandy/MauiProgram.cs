@@ -27,8 +27,8 @@ public static class MauiProgram
 
 		//View Models
 		builder.Services.AddSingleton<LoginPageViewModel>();
-
-		return builder.Build();
+        builder.Services.AddSingleton<SignUpPageViewModel>();
+        return builder.Build();
 	}
 }
 

@@ -1,9 +1,9 @@
 ﻿using System;
 namespace Handy_Dandy.Models
 {
-	public class UserBasicInfo
+	public class User
 	{
-		public UserBasicInfo()
+		public User()
 		{
 		}
 
@@ -25,21 +25,5 @@ namespace Handy_Dandy.Models
 		Client,
 		Workder
 	}
-
-	public class Client: UserBasicInfo
-	{
-		public Client()
-		{
-
-		}
-	}
-
-    public class Workder : UserBasicInfo
-    {
-        public Workder()
-        {
-
-        }
-    }
 }
 

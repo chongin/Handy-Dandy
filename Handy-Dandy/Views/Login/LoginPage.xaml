@@ -9,9 +9,10 @@
         Padding="30,0"
         VerticalOptions="Center">
        
-        <VerticalStackLayout Spacing="80">
-            <Label Text="Handy Dandy" FontSize="40" TextColor="Gold" HorizontalTextAlignment="Center" />
-            <Image Source="login.png" HeightRequest="100" WidthRequest="100" />
+        <VerticalStackLayout Spacing="10">
+            <Label Text="Handy Dandy" FontSize="45" FontAttributes="Bold" TextColor ="Gold" HorizontalTextAlignment="Center" />
+            <Label Text="Professional Home Services Company" FontSize="12" TextColor="Blue" HorizontalTextAlignment="Center" />
+            <Image Source="login.png" Margin="0,40,0,0"  HeightRequest="100" WidthRequest="100" />
         </VerticalStackLayout>
 
         <StackLayout Orientation="Horizontal">
@@ -46,7 +47,17 @@
                 Margin="20,0,20,0" CornerRadius="10" Padding="0" FontAttributes="Bold"
                 Grid.Row="3" Background="{StaticResource Primary}" Command="{Binding LoginCommand}"/>
 
-        <Label Grid.Row="4" Padding="0,12,0,0" HorizontalOptions="Center" HorizontalTextAlignment="Center" FontSize="14"> 
+       
+        <StackLayout Orientation="Horizontal" Margin="0,0,0,0" HorizontalOptions="Center">
+            <Label Grid.Row="3" Text="Or login with" FontSize="12" TextColor="#3498db" HorizontalOptions="Center" VerticalOptions="Center"/>
+            <StackLayout Orientation="Horizontal" Margin="20,0,20,0">
+                <Image Aspect="AspectFit" HeightRequest="30" WidthRequest="30" Source="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSo626DNKJxdHM-VNRD0m7x_8Jim-r9kRalJQ"/>
+                <Image Aspect="AspectFit" HeightRequest="30" WidthRequest="30" Source="https://www.freepnglogos.com/uploads/google-logo-png/google-logo-icon-png-transparent-background-osteopathy-16.png"/>
+            </StackLayout>
+        </StackLayout>
+
+
+         <Label Grid.Row="4" Padding="0,12,0,0" HorizontalOptions="Center" HorizontalTextAlignment="Center" FontSize="14"> 
              <Label.FormattedText>
                   <FormattedString>
                         <Span Text="Don't have an account?   " />
