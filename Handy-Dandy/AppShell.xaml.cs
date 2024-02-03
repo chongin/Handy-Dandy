@@ -1,4 +1,4 @@
-﻿using Handy_Dandy.Views.Login;
+﻿using Handy_Dandy.Views;
 
 namespace Handy_Dandy;
 

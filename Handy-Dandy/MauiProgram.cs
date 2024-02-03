@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
-using Handy_Dandy.Views.Login;
-using Handy_Dandy.ViewModels.Login;
+using Handy_Dandy.Views;
+using Handy_Dandy.ViewModels;
 
 namespace Handy_Dandy;
 

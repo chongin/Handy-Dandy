@@ -1,5 +1,5 @@
-﻿namespace Handy_Dandy.Views.Login;
-using Handy_Dandy.ViewModels.Login;
+﻿namespace Handy_Dandy.Views;
+using Handy_Dandy.ViewModels;
 
 public partial class SignUpPage : ContentPage
 {

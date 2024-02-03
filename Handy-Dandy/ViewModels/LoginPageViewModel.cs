@@ -5,7 +5,7 @@ using CommunityToolkit.Mvvm.Input;
 using Handy_Dandy.Models;
 using Handy_Dandy.Views;
 
-namespace Handy_Dandy.ViewModels.Login
+namespace Handy_Dandy.ViewModels
 {
     public partial class LoginPageViewModel : BaseViewModel
 	{

@@ -2,7 +2,7 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 
-namespace Handy_Dandy.ViewModels.Login
+namespace Handy_Dandy.ViewModels
 {
 	public partial class SignUpPageViewModel: BaseViewModel
     {

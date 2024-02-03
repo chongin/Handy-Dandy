@@ -1,6 +1,6 @@
-﻿using Handy_Dandy.ViewModels.Login;
+﻿using Handy_Dandy.ViewModels;
 using Microsoft.Maui.Controls;
-namespace Handy_Dandy.Views.Login;
+namespace Handy_Dandy.Views;
 
 public partial class LoginPage : ContentPage
 {
