@@ -1,10 +1,22 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:mct="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              x:Class="Handy_Dandy.Views.LoginPage"
              Shell.NavBarIsVisible="False"
+             BindingContext="{Binding Source={RelativeSource Self}}"
              Title="LoginPage">
+
+        <ContentPage.Resources>
+        <Style x:Key="InvalidEntryStyle" TargetType="Entry">
+            <Setter Property="TextColor" Value="Red" />
+        </Style>
+        <Style x:Key="ValidEntryStyle"
+               TargetType="Entry">
+            <Setter Property="TextColor" Value="Green"/>
+        </Style>
+    </ContentPage.Resources>
+
     <VerticalStackLayout
         Spacing="25"
         Padding="30,0"
@@ -26,12 +38,19 @@
                 <Frame ZIndex="1" HasShadow="True" BorderColor="White" HeightRequest="56" WidthRequest="56" CornerRadius="28">
                     <Image Source="user.png" HeightRequest="20" WidthRequest="20" />
                 </Frame>
-
+                 
                 <Frame HeightRequest="45" Margin="-20,0,0,0" Padding="0" HasShadow="True" BorderColor="White" HorizontalOptions="FillAndExpand">
-                    <Entry Placeholder="User Name" Text="{Binding Email}" Margin="20,0,0,0" VerticalOptions="Center" Keyboard="Email">
+                    <Entry Placeholder="Email address" Text="{Binding Email}" Margin="20,0,0,0" VerticalOptions="Center" Keyboard="Email">
                         <Entry.Behaviors>
-                            <toolkit:EventToCommandBehavior EventName="TextChanged" Command="{Binding TextChangedCommand}"/>
+                            <mct:EventToCommandBehavior EventName="TextChanged" Command="{Binding TextChangedCommand}"/>
+                            <mct:EmailValidationBehavior
+                                x:Name="EmailValidator"
+                                Flags="ValidateOnValueChanged"
+                                DecorationFlags="Trim"
+                                ValidStyle="{StaticResource ValidEntryStyle}"
+                                />
                         </Entry.Behaviors>
+
                     </Entry>
                 </Frame>
             </StackLayout>
@@ -44,13 +63,38 @@
                 <Frame HeightRequest="45" Margin="-20,0,0,0" Padding="0" HasShadow="True" BorderColor="White" HorizontalOptions="FillAndExpand">
                     <Entry Placeholder="Password" Text="{Binding Password}" Margin="20,0,0,0" VerticalOptions="Center" IsPassword="True">
                         <Entry.Behaviors>
-                            <toolkit:EventToCommandBehavior EventName="TextChanged" Command="{Binding TextChangedCommand}"/>
+                           <mct:EventToCommandBehavior EventName="TextChanged" Command="{Binding TextChangedCommand}"/>
+                            <mct:MultiValidationBehavior x:Name="PasswordValidator"   
+                                                 ValidStyle="{StaticResource ValidEntryStyle}"
+                                                 Flags="ValidateOnValueChanged">
+                                <mct:CharactersValidationBehavior x:Name="DigitValidation" 
+                                                                  CharacterType="Digit" 
+                                                                  MinimumCharacterTypeCount="1" 
+                                                                  mct:MultiValidationBehavior.Error="At least 1 digit" 
+                                                                  RegexPattern=""/>
+                                <mct:CharactersValidationBehavior x:Name="UpperValidation" 
+                                                                  CharacterType="UppercaseLetter" 
+                                                                  MinimumCharacterTypeCount="1" 
+                                                                  mct:MultiValidationBehavior.Error="At least 1 uppercase letter" 
+                                                                  RegexPattern="" />
+                                <mct:CharactersValidationBehavior x:Name="SymbolValidation" 
+                                                                  CharacterType="NonAlphanumericSymbol" 
+                                                                  MinimumCharacterTypeCount="1" 
+                                                                  mct:MultiValidationBehavior.Error="At least 1 symbole" 
+                                                                  RegexPattern=""  />
+                                <mct:CharactersValidationBehavior x:Name="AnyValidation" 
+                                                                  CharacterType="Any" 
+                                                                  MinimumCharacterTypeCount="4" 
+                                                                  mct:MultiValidationBehavior.Error="At least 6 caractères" 
+                                                                  RegexPattern="" />
+                            </mct:MultiValidationBehavior>
                         </Entry.Behaviors>
                     </Entry>
                 </Frame>
             </StackLayout>
         </StackLayout>
-        
+
+
         <StackLayout Orientation="Horizontal">
             <CheckBox x:Name="RememberCB" Color="{StaticResource Primary}"/>
             <Label Text="Remember Me" Margin="-5,0,0,0" FontSize="12" VerticalOptions ="Center"/>
@@ -60,9 +104,9 @@
             </Label>
         </StackLayout>
 
-        <Button Text="LOGIN" x:Name="loginBtn" HeightRequest="40" VerticalOptions="End" HorizontalOptions="Fill"
+        <Button Text="SignIn" x:Name="loginBtn" HeightRequest="40" VerticalOptions="End" HorizontalOptions="Fill"
                 Margin="20,0,20,0" CornerRadius="10" Padding="0" FontAttributes="Bold"
-                Grid.Row="3" Background="{StaticResource Primary}" Command="{Binding LoginCommand}"/>
+                Grid.Row="3" Background="{StaticResource Primary}"  Clicked="OnLoginClicked" />
 
        
         <StackLayout Orientation="Horizontal" Margin="0,0,0,0" HorizontalOptions="Center">
