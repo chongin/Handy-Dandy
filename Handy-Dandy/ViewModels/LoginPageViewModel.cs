@@ -4,35 +4,72 @@ using CommunityToolkit.Mvvm.Input;
 
 using Handy_Dandy.Models;
 using Handy_Dandy.Views;
+using Handy_Dandy.Services;
 
 namespace Handy_Dandy.ViewModels
 {
     public partial class LoginPageViewModel : BaseViewModel
 	{
         [ObservableProperty]
-        private string _email;
+        private string email;
 
         [ObservableProperty]
-        private string _password;
+        private string password;
+
+        [ObservableProperty]
+        private string errorMessage;
+
+        [ObservableProperty]
+        private bool isVisableError;
 
         public IAsyncRelayCommand LoginCommand { get; }
-		public IAsyncRelayCommand SignUpCommand { get; }
-		public LoginPageViewModel()
+        public IAsyncRelayCommand SignUpCommand { get; }
+        public IAsyncRelayCommand TextChangedCommand { get; }
+
+        private readonly FireBaseService _fireBaseService;
+		public LoginPageViewModel(FireBaseService fireBaseService)
 		{
-			this.LoginCommand = new AsyncRelayCommand(Login);
-			SignUpCommand = new AsyncRelayCommand(SignUp);
+            this._fireBaseService = fireBaseService;
+
+			this.LoginCommand = new AsyncRelayCommand(OnLogin);
+			this.SignUpCommand = new AsyncRelayCommand(OnSignUp);
+            this.TextChangedCommand = new AsyncRelayCommand(OnTextChanged);
 		}
 
-		private async Task Login()
+		private async Task OnLogin()
 		{
-            //App.CurrentUser.Email = Email;
-            //App.CurrentUser.Password = Password;
-            await Shell.Current.GoToAsync("//MainPage");
+            var user = await this._fireBaseService.QueryUserByEmail(Email);
+            if (user == null)
+            {
+                ErrorMessage = "We can't seem to find your account.";
+                IsVisableError = true;
+                return;
+            }
+            if (user.Password != Password)
+            {
+                ErrorMessage = "Your password is not match your account.";
+                IsVisableError = true;
+                return;
+            }
+
+            else
+            {
+                Console.WriteLine("xxxxx");
+                await Shell.Current.GoToAsync("//MainPage");
+            }
+            
         }
 
-        public async Task SignUp()
+        private async Task OnSignUp()
         {
             await Shell.Current.GoToAsync("//SignUpPage");
+        }
+
+        private Task OnTextChanged()
+        {
+            ErrorMessage = string.Empty;
+            IsVisableError = false;
+            return Task.CompletedTask;
         }
     }
 }

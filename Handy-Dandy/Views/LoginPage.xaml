@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              x:Class="Handy_Dandy.Views.LoginPage"
              Shell.NavBarIsVisible="False"
              Title="LoginPage">
@@ -15,25 +16,41 @@
             <Image Source="login.png" Margin="0,40,0,0"  HeightRequest="100" WidthRequest="100" />
         </VerticalStackLayout>
 
-        <StackLayout Orientation="Horizontal">
-            <Frame ZIndex="1" HasShadow="True" BorderColor="White" HeightRequest="56" WidthRequest="56" CornerRadius="28">
-                <Image Source="user.png" HeightRequest="20" WidthRequest="20" />
-            </Frame>
+        
 
-            <Frame HeightRequest="45" Margin="-20,0,0,0" Padding="0" HasShadow="True" BorderColor="White" HorizontalOptions="FillAndExpand">
-                <Entry Placeholder="User Name" Text="{Binding Email}" Margin="20,0,0,0" VerticalOptions="Center" Keyboard="Email"/>
-            </Frame>
+        <StackLayout Orientation="Vertical">
+            <Label x:Name="ErrorLabel" TextColor="Red" Text="{Binding ErrorMessage}" IsVisible="{Binding isVisableError}"
+                   HorizontalOptions="Center"/>
+
+            <StackLayout Orientation="Horizontal">
+                <Frame ZIndex="1" HasShadow="True" BorderColor="White" HeightRequest="56" WidthRequest="56" CornerRadius="28">
+                    <Image Source="user.png" HeightRequest="20" WidthRequest="20" />
+                </Frame>
+
+                <Frame HeightRequest="45" Margin="-20,0,0,0" Padding="0" HasShadow="True" BorderColor="White" HorizontalOptions="FillAndExpand">
+                    <Entry Placeholder="User Name" Text="{Binding Email}" Margin="20,0,0,0" VerticalOptions="Center" Keyboard="Email">
+                        <Entry.Behaviors>
+                            <toolkit:EventToCommandBehavior EventName="TextChanged" Command="{Binding TextChangedCommand}"/>
+                        </Entry.Behaviors>
+                    </Entry>
+                </Frame>
+            </StackLayout>
+
+             <StackLayout Orientation="Horizontal" Margin="0, 15, 0,0">
+                <Frame ZIndex="1" HasShadow="True" BorderColor="White" HeightRequest="56" WidthRequest="56" CornerRadius="28">
+                    <Image Source="password.png" HeightRequest="20" WidthRequest="20" />
+                </Frame>
+
+                <Frame HeightRequest="45" Margin="-20,0,0,0" Padding="0" HasShadow="True" BorderColor="White" HorizontalOptions="FillAndExpand">
+                    <Entry Placeholder="Password" Text="{Binding Password}" Margin="20,0,0,0" VerticalOptions="Center" IsPassword="True">
+                        <Entry.Behaviors>
+                            <toolkit:EventToCommandBehavior EventName="TextChanged" Command="{Binding TextChangedCommand}"/>
+                        </Entry.Behaviors>
+                    </Entry>
+                </Frame>
+            </StackLayout>
         </StackLayout>
-
-         <StackLayout Orientation="Horizontal">
-            <Frame ZIndex="1" HasShadow="True" BorderColor="White" HeightRequest="56" WidthRequest="56" CornerRadius="28">
-                <Image Source="password.png" HeightRequest="20" WidthRequest="20" />
-            </Frame>
-
-            <Frame HeightRequest="45" Margin="-20,0,0,0" Padding="0" HasShadow="True" BorderColor="White" HorizontalOptions="FillAndExpand">
-                <Entry Placeholder="Password" Text="{Binding Password}" Margin="20,0,0,0" VerticalOptions="Center" IsPassword="True"/>
-            </Frame>
-        </StackLayout>
+        
         <StackLayout Orientation="Horizontal">
             <CheckBox x:Name="RememberCB" Color="{StaticResource Primary}"/>
             <Label Text="Remember Me" Margin="-5,0,0,0" FontSize="12" VerticalOptions ="Center"/>
