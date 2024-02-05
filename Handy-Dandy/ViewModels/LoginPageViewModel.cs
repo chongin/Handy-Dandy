@@ -28,8 +28,6 @@ namespace Handy_Dandy.ViewModels
         public IAsyncRelayCommand SignUpCommand { get; }
         public IAsyncRelayCommand TextChangedCommand { get; }
 
-        [ObservableProperty]
-        private EmailValidationBehavior emailValidator;
 
         private readonly FireBaseService _fireBaseService;
 		public LoginPageViewModel(FireBaseService fireBaseService)
@@ -39,24 +37,10 @@ namespace Handy_Dandy.ViewModels
 			this.LoginCommand = new AsyncRelayCommand(OnLogin);
 			this.SignUpCommand = new AsyncRelayCommand(OnSignUp);
             this.TextChangedCommand = new AsyncRelayCommand(OnTextChanged);
-            //PasswordValidator = new MultiValidationBehavior();
-
-            PropertyChanged += (sender, args) =>
-            {
-                if (args.PropertyName == nameof(emailValidator))
-                {
-                    Console.WriteLine("PasswordValidationBehavior changed!");
-                }
-            };
         }
 
 		private async Task OnLogin()
 		{
-            //if (EmailValidator.IsValid)
-            //{
-            //    var currentPage = Application.Current.MainPage;
-            //    await currentPage.DisplayAlert("Validation Failed", "Password is not valid.", "OK");
-            //}
             var user = await this._fireBaseService.QueryUserByEmail(Email);
             if (user == null)
             {
@@ -76,7 +60,6 @@ namespace Handy_Dandy.ViewModels
                 Console.WriteLine("xxxxx");
                 await Shell.Current.GoToAsync("//MainPage");
             }
-            
         }
 
         private async Task OnSignUp()

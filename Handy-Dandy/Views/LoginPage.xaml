@@ -8,14 +8,14 @@
              Title="LoginPage">
 
         <ContentPage.Resources>
-        <Style x:Key="InvalidEntryStyle" TargetType="Entry">
-            <Setter Property="TextColor" Value="Red" />
-        </Style>
-        <Style x:Key="ValidEntryStyle"
-               TargetType="Entry">
-            <Setter Property="TextColor" Value="Green"/>
-        </Style>
-    </ContentPage.Resources>
+            <Style x:Key="InvalidEntryStyle" TargetType="Entry">
+                <Setter Property="TextColor" Value="Red" />
+            </Style>
+            <Style x:Key="ValidEntryStyle"
+                   TargetType="Entry">
+                <Setter Property="TextColor" Value="Green"/>
+            </Style>
+        </ContentPage.Resources>
 
     <VerticalStackLayout
         Spacing="25"

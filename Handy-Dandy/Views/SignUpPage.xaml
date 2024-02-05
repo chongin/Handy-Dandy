@@ -1,26 +1,202 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:mct="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              BackgroundColor="{DynamicResource PageBackgroundColor}"
+             BindingContext="{Binding Source={RelativeSource Self}}"
              x:Class="Handy_Dandy.Views.SignUpPage"
              Title="SignUpPage">
 
-    <StackLayout Padding="20">
-        <Label Text="Sign Up" FontSize="24" HorizontalOptions="CenterAndExpand" Margin="0,0,0,20" />
+    <ContentPage.Resources>
+        <Style x:Key="InvalidEntryStyle" TargetType="Entry">
+            <Setter Property="TextColor" Value="Red" />
+        </Style>
+        <Style x:Key="ValidEntryStyle"
+                TargetType="Entry">
+            <Setter Property="TextColor" Value="Green"/>
+        </Style>
+    </ContentPage.Resources>
 
-        <Entry Placeholder="First Name" Text="{Binding FirstName}" />
-        <Entry Placeholder="Last Name" Text="{Binding LastName}" />
+    <VerticalStackLayout Padding="30" VerticalOptions="Center">
+        <Label Text="Good to see you!" FontSize="35" FontAttributes="Bold" TextColor ="Black" HorizontalTextAlignment="Center" Padding="0,30"/>
+        <Grid >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
 
-        <!-- Role Picker -->
-        <Label Text="Select Role" />
-        <Picker x:Name="RolePicker" ItemsSource="{Binding Roles}" SelectedItem="{Binding RoleID}" />
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
 
-        <Entry Placeholder="Address" Text="{Binding Address}" />
-        <Entry Placeholder="Email" Text="{Binding Email}" />
-        <Entry Placeholder="Phone" Text="{Binding Phone}" />
-        <Entry Placeholder="Password" IsPassword="True" Text="{Binding Password}" />
+            <!-- Name -->
+            <StackLayout Orientation="Horizontal" Grid.Row="0">
+                <Image Source="https://icons.veryicon.com/png/o/miscellaneous/administration/account-25.png" WidthRequest="20" HeightRequest="20" />
+                <StackLayout  Spacing="0" HorizontalOptions="FillAndExpand" Padding="5,0">
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="Start">
+                        <Label Text="* " TextColor="Red" FontSize="12" VerticalOptions="Center"/>
+                        <Label Text="Name" FontSize="12" TextColor="Black"/>
+                    </StackLayout>
+                    <Frame BorderColor="Black" CornerRadius="4" HasShadow="True" Padding="5,0" Margin="0,0,0,10">
+                        <Entry Placeholder="Enter Name" Text="{Binding UserName}" FontSize="12">
+                            <Entry.Behaviors>
+                                <mct:EventToCommandBehavior EventName="TextChanged" Command="{Binding TextChangedCommand}"/>
+                                <mct:TextValidationBehavior
+                                    x:Name="NameValidator"
+                                    Flags="ValidateOnValueChanged"
+                                    DecorationFlags="Trim"
+                                    ValidStyle="{StaticResource ValidEntryStyle}"
+                                    MinimumLength="1"
+                                    MaximumLength="10"
+                                    />
+                            </Entry.Behaviors>
+                        </Entry>
+                    </Frame>
+                </StackLayout>
+            </StackLayout>
 
-        <Button Text="Sign Up" Command="{Binding SignUpCommand}" HorizontalOptions="FillAndExpand" Margin="0,20,0,0" />
-    </StackLayout>
+            <!-- Email -->
+            <StackLayout Orientation="Horizontal" Grid.Row="1">
+                <Image Source="https://icons.veryicon.com/png/o/miscellaneous/administration/account-25.png" WidthRequest="20" HeightRequest="20" />
+                <StackLayout Spacing="0" HorizontalOptions="FillAndExpand" Padding="5,0">
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="Start">
+                        <Label Text="* " TextColor="Red" FontSize="12" VerticalOptions="Center"/>
+                        <Label Text="Email" FontSize="12" TextColor="Black"/>
+                    </StackLayout>
+                    <Frame BorderColor="Black" CornerRadius="4" HasShadow="True" Padding="5,0" Margin="0,0,0,10">
+                        <Entry Placeholder="Enter Email" Text="{Binding Email}" FontSize="12">
+                            <Entry.Behaviors>
+                                <mct:EventToCommandBehavior EventName="TextChanged" Command="{Binding TextChangedCommand}"/>
+                                <mct:EmailValidationBehavior
+                                    x:Name="EmailValidator"
+                                    Flags="ValidateOnValueChanged"
+                                    DecorationFlags="Trim"
+                                    ValidStyle="{StaticResource ValidEntryStyle}"
+                                    />
+                            </Entry.Behaviors>
+                        </Entry>
+                    </Frame>
+                </StackLayout>
+            </StackLayout>
+
+            <!-- Password -->
+             <StackLayout Orientation="Horizontal" Grid.Row="2">
+                <Image Source="https://icons.veryicon.com/png/o/miscellaneous/administration/account-25.png" WidthRequest="20" HeightRequest="20" />
+                <StackLayout Spacing="0" HorizontalOptions="FillAndExpand" Padding="5,0">
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="Start">
+                        <Label Text="* " TextColor="Red" FontSize="12" VerticalOptions="Center"/>
+                        <Label Text="Password" FontSize="12" TextColor="Black"/>
+                    </StackLayout>
+                    <Frame BorderColor="Black" CornerRadius="4" HasShadow="True" Padding="5,0" Margin="0,0,0,10">
+                        <Entry Placeholder="Enter password" Text="{Binding Password}" FontSize="12" IsPassword="True">
+                            <Entry.Behaviors>
+                                <mct:EventToCommandBehavior EventName="TextChanged" Command="{Binding TextChangedCommand}"/>
+                                 <mct:MultiValidationBehavior x:Name="PasswordValidator"   
+                                                     ValidStyle="{StaticResource ValidEntryStyle}"
+                                                     Flags="ValidateOnValueChanged">
+                                    <mct:CharactersValidationBehavior x:Name="DigitValidation" 
+                                                                      CharacterType="Digit" 
+                                                                      MinimumCharacterTypeCount="1" 
+                                                                      mct:MultiValidationBehavior.Error="At least 1 digit" 
+                                                                      RegexPattern=""/>
+                                    <mct:CharactersValidationBehavior x:Name="UpperValidation" 
+                                                                      CharacterType="UppercaseLetter" 
+                                                                      MinimumCharacterTypeCount="1" 
+                                                                      mct:MultiValidationBehavior.Error="At least 1 uppercase letter" 
+                                                                      RegexPattern="" />
+                                    <mct:CharactersValidationBehavior x:Name="SymbolValidation" 
+                                                                      CharacterType="NonAlphanumericSymbol" 
+                                                                      MinimumCharacterTypeCount="1" 
+                                                                      mct:MultiValidationBehavior.Error="At least 1 symbole" 
+                                                                      RegexPattern=""  />
+                                    <mct:CharactersValidationBehavior x:Name="AnyValidation" 
+                                                                      CharacterType="Any" 
+                                                                      MinimumCharacterTypeCount="4" 
+                                                                      mct:MultiValidationBehavior.Error="At least 6 caractères" 
+                                                                      RegexPattern="" />
+                                </mct:MultiValidationBehavior>
+                            </Entry.Behaviors>
+                        </Entry>
+                    </Frame>
+                </StackLayout>
+            </StackLayout>
+
+            <!-- Phone -->
+            <StackLayout Orientation="Horizontal" Grid.Row="3">
+                <Image Source="https://icons.veryicon.com/png/o/miscellaneous/administration/account-25.png" WidthRequest="20" HeightRequest="20" />
+                <StackLayout Spacing="0" HorizontalOptions="FillAndExpand" Padding="5,0">
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="Start">
+                        <Label Text="Phone(optional)" FontSize="12" TextColor="Black"/>
+                    </StackLayout>
+                    <Frame BorderColor="Black" CornerRadius="4" HasShadow="True" Padding="5,0" Margin="0,0,0,10">
+                        <Entry Placeholder="Enter Phone" Text="{Binding Phone}" FontSize="12">
+                            <Entry.Behaviors>
+                                <mct:EventToCommandBehavior EventName="TextChanged" Command="{Binding TextChangedCommand}"/>
+                                <mct:NumericValidationBehavior
+                                    x:Name="PhonelValidator"
+                                    Flags="ValidateOnValueChanged"
+                                    MinimumValue="1"
+                                    MaximumValue="10000000"
+                                    MaximumDecimalPlaces="0"
+                                    ValidStyle="{StaticResource ValidEntryStyle}"
+                                    />
+                            </Entry.Behaviors>
+                        </Entry>
+                    </Frame>
+                </StackLayout>
+            </StackLayout>
+
+            <!-- Address -->
+            <StackLayout Orientation="Horizontal" Grid.Row="5">
+                <Image Source="https://icons.veryicon.com/png/o/miscellaneous/administration/account-25.png" WidthRequest="20" HeightRequest="20" />
+                <StackLayout Spacing="0" HorizontalOptions="FillAndExpand" Padding="5,0">
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="Start">
+                        <Label Text="Address(optional)" FontSize="12" TextColor="Black"/>
+                    </StackLayout>
+                    <Frame BorderColor="Black" CornerRadius="4" HasShadow="True" Padding="5,0" Margin="0,0,0,10">
+                        <Entry Placeholder="Enter Address" Text="{Binding Address}" FontSize="12">
+                            <Entry.Behaviors>
+                                <mct:EventToCommandBehavior EventName="TextChanged" Command="{Binding TextChangedCommand}"/>
+                                <mct:TextValidationBehavior
+                                    x:Name="AdressValidator"
+                                    Flags="ValidateOnValueChanged"
+                                    DecorationFlags="Trim"
+                                    ValidStyle="{StaticResource ValidEntryStyle}"
+                                    MinimumLength="1"
+                                    MaximumLength="10"
+                                    />
+                            </Entry.Behaviors>
+                        </Entry>
+                    </Frame>
+                </StackLayout>
+            </StackLayout>
+        </Grid>
+
+
+        <!-- SignUp Button -->
+        <Button Text="SignUp" x:Name="loginBtn" HeightRequest="40" VerticalOptions="End" HorizontalOptions="Fill"
+                Margin="20,30,20,20" CornerRadius="10" Padding="0" FontAttributes="Bold"
+                Grid.Row="3" Background="{StaticResource Primary}"  Clicked="OnSignUpClicked" />
+
+        <Label Grid.Row="4" Padding="0,12,0,0" HorizontalOptions="Center" HorizontalTextAlignment="Center" FontSize="14"> 
+             <Label.FormattedText>
+                  <FormattedString>
+                        <Span Text="Already Have an account?   " />
+                        <Span Text="Login here" TextDecorations="Underline" TextColor="{DynamicResource Primary}"/>
+                  </FormattedString>
+             </Label.FormattedText>
+            <Label.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding SignUpCommand}" />
+            </Label.GestureRecognizers>
+        </Label>
+     </VerticalStackLayout>
+
+
+
+
+  
 
 </ContentPage>

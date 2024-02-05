@@ -10,23 +10,19 @@ namespace Handy_Dandy.ViewModels
 	public partial class SignUpPageViewModel: BaseViewModel
     {
         [ObservableProperty]
-        private string firstName;
-
-        [ObservableProperty]
-        private string lastName;
+        private string userName;
 
         [ObservableProperty]
         private string email;
+
+        [ObservableProperty]
+        private string password;
 
         [ObservableProperty]
         private string address;
 
         [ObservableProperty]
         private string phone;
-
-        [ObservableProperty]
-        private string password;
-
 
         public IAsyncRelayCommand SignUpCommand { get; }
         private readonly FireBaseService _fireBaseService;
@@ -41,8 +37,7 @@ namespace Handy_Dandy.ViewModels
         {
             User user = new User();
             user.Email = Email;
-            user.FirstName = FirstName;
-            user.LastName = LastName;
+            user.UserName = UserName;
             user.Phone = Phone;
             user.RoleID = UserRole.Client;
             user.Address = Address;
