@@ -1,12 +1,46 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModels="clr-namespace:Handy_Dandy.ViewModels"
+             xmlns:models="clr-namespace:Handy_Dandy.Models"
+              xmlns:mct="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              x:Class="Handy_Dandy.Views.HomePage"
-             Title="HomePage">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
+             Title="HomePage"
+             x:DataType="viewModels:HomePageViewModel">
+    <VerticalStackLayout Padding="10">
+       <Entry Placeholder="Search your service" HorizontalOptions="FillAndExpand"/>
+
+       <Grid Margin="10" RowDefinitions="*, Auto">
+           <CarouselView HorizontalOptions="FillAndExpand" Grid.Row="0"
+                         ItemsSource="{Binding IntroServices}"
+                         PositionChangedCommand="{Binding CarouselPositionChangedCommand}"
+                         PositionChangedCommandParameter="{Binding Source={RelativeSource Self}, Path=Position}">
+               <!--<CarouselView.Behaviors>
+                    <mct:EventToCommandBehavior EventName="CurrentItemChanged"
+                                                      Command="{Binding CarouselPositionChangedCommand}"/>
+               </CarouselView.Behaviors>-->
+                <CarouselView.ItemTemplate>
+                    <DataTemplate x:DataType="models:IntroduceServices">
+                        <Grid RowDefinitions="60*,30*">
+                            <Image Source="{Binding IntroImage}" Aspect="AspectFill" Grid.Row="0"/>
+
+                            <VerticalStackLayout Spacing="10" Grid.Row="0">
+                                <Label Text="{Binding IntroTitle}" FontSize="28" FontAttributes="Bold"/>
+                                <Label Text="{Binding IntroDescription}" FontSize="20" TextColor="Gray"/>
+                            </VerticalStackLayout>
+                        </Grid>
+                    </DataTemplate>
+
+                </CarouselView.ItemTemplate>
+            </CarouselView>
+
+        </Grid>
+
+        <StackLayout Orientation="Horizontal" Grid.Row="1">
+            <IndicatorView x:Name="indicatorView" VerticalOptions="Center"
+                           IndicatorSize="10" IndicatorColor="LightBlue"
+                           SelectedIndicatorColor="{x:StaticResource Primary}"/>
+
+        </StackLayout>
     </VerticalStackLayout>
 </ContentPage>

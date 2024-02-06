@@ -104,7 +104,7 @@
             </Label>
         </StackLayout>
 
-        <Button Text="SignIn" x:Name="loginBtn" HeightRequest="40" VerticalOptions="End" HorizontalOptions="Fill"
+        <Button Text="Sign In" x:Name="loginBtn" HeightRequest="40" VerticalOptions="End" HorizontalOptions="Fill"
                 Margin="20,0,20,0" CornerRadius="10" Padding="0" FontAttributes="Bold"
                 Grid.Row="3" Background="{StaticResource Primary}"  Clicked="OnLoginClicked" />
 

@@ -68,6 +68,9 @@
 	  <None Remove="Models\" />
 	  <None Remove="Controllers\" />
 	  <None Remove="Services\" />
+	  <None Remove="Resources\Images\cleaning.jpg" />
+	  <None Remove="Resources\Images\painting.jpg" />
+	  <None Remove="Resources\Images\repairing.jpg" />
 	</ItemGroup>
 	<ItemGroup>
 	  <Folder Include="Views\" />
@@ -80,5 +83,8 @@
 	  <BundleResource Include="Resources\Images\user.png" />
 	  <BundleResource Include="Resources\Images\password.png" />
 	  <BundleResource Include="Resources\Images\login.png" />
+	  <BundleResource Include="Resources\Images\cleaning.jpg" />
+	  <BundleResource Include="Resources\Images\painting.jpg" />
+	  <BundleResource Include="Resources\Images\repairing.jpg" />
 	</ItemGroup>
 </Project>
