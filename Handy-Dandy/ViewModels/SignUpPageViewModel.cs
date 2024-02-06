@@ -4,6 +4,7 @@ using CommunityToolkit.Mvvm.Input;
 
 using Handy_Dandy.Models;
 using Handy_Dandy.Services;
+using Handy_Dandy.Views;
 
 namespace Handy_Dandy.ViewModels
 {
@@ -35,14 +36,14 @@ namespace Handy_Dandy.ViewModels
 
         public async Task SignUp()
         {
-            User user = new User();
-            user.Email = Email;
-            user.UserName = UserName;
-            user.Phone = Phone;
-            user.RoleID = UserRole.Client;
-            user.Address = Address;
-            await this._fireBaseService.InserUser(user);
-            await Shell.Current.GoToAsync("//MainPage");
+            //User user = new User();
+            //user.Email = Email;
+            //user.UserName = UserName;
+            //user.Phone = Phone;
+            //user.RoleID = UserRole.Client;
+            //user.Address = Address;
+            //await this._fireBaseService.InserUser(user);
+            await Shell.Current.GoToAsync($"//{nameof(HomePage)}");
         }
     }
 }

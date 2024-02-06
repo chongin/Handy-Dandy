@@ -3,21 +3,45 @@
     x:Class="Handy_Dandy.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    Shell.FlyoutBehavior="Disabled"
-    xmlns:LoginPages="clr-namespace:Handy_Dandy.Views"
-    xmlns:MainPages="clr-namespace:Handy_Dandy">
+    xmlns:local="clr-namespace:Handy_Dandy.Views">
 
+    <Shell.FlyoutHeader>
+        <Image Source="dotnet_bot.svg" HeightRequest="100"/>
+    </Shell.FlyoutHeader>
+    
+    <ShellContent Title="Login Page" 
+            FlyoutItemIsVisible="False" Shell.FlyoutBehavior="Disabled"
+            ContentTemplate="{DataTemplate local:LoginPage}"
+            Route="LoginPage" />
 
-    <ShellContent Title="Login Page"
-        ContentTemplate="{DataTemplate LoginPages:LoginPage}"
-        Route="LoginPage" />
+    <ShellContent Title="SignUp Page"
+            FlyoutItemIsVisible="False" Shell.FlyoutBehavior="Disabled"
+            ContentTemplate="{DataTemplate local:SignUpPage}"
+            Route="SignUpPage" />
 
-    <ShellContent FlyoutItemIsVisible="False" Shell.FlyoutBehavior="Disabled"
-        ContentTemplate="{DataTemplate LoginPages:SignUpPage}" Route="SignUpPage" />
+    
+    <FlyoutItem Title="Dashboard" FlyoutDisplayOptions="AsMultipleItems">
+        <ShellContent Title="Home" Icon="home.png"
+            ContentTemplate="{DataTemplate local:HomePage}"
+            Route="HomePage" />
 
-    <ShellContent Title="Main Page"
-        ContentTemplate="{DataTemplate MainPages:MainPage}"
-        Route="MainPage" />
+         <ShellContent Title="Booking" Icon="home.png"
+            ContentTemplate="{DataTemplate local:OrderPage}"
+            Route="OrderPage" />
 
+         <ShellContent Title="Notification" Icon="home.png"
+            ContentTemplate="{DataTemplate local:NotificationPage}"
+            Route="NotificationPage" />
+
+         <ShellContent Title="Setting" Icon="home.png"
+            ContentTemplate="{DataTemplate local:SettingPage}"
+            Route="SettingPage" />
+    </FlyoutItem>
+    
+    <Shell.FlyoutFooter>
+        <StackLayout Padding="20">
+            <Button Text="Sign Out" Command="{Binding SignOutCommand}" />
+        </StackLayout>
+    </Shell.FlyoutFooter>
 </Shell>
 

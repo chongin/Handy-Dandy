@@ -189,7 +189,7 @@
                   </FormattedString>
              </Label.FormattedText>
             <Label.GestureRecognizers>
-                <TapGestureRecognizer Command="{Binding SignUpCommand}" />
+                <TapGestureRecognizer Command="{Binding LoginCommand}" />
             </Label.GestureRecognizers>
         </Label>
      </VerticalStackLayout>

@@ -28,7 +28,6 @@ namespace Handy_Dandy.ViewModels
         public IAsyncRelayCommand SignUpCommand { get; }
         public IAsyncRelayCommand TextChangedCommand { get; }
 
-
         private readonly FireBaseService _fireBaseService;
 		public LoginPageViewModel(FireBaseService fireBaseService)
 		{
@@ -58,14 +57,15 @@ namespace Handy_Dandy.ViewModels
             else
             {
                 Console.WriteLine("xxxxx");
-                await Shell.Current.GoToAsync("//MainPage");
+                await Shell.Current.GoToAsync($"//{nameof(HomePage)}");
             }
         }
 
         private async Task OnSignUp()
         {
-            await Shell.Current.GoToAsync("//SignUpPage");
+            await Shell.Current.GoToAsync($"//{nameof(SignUpPage)}");
         }
+
 
         private Task OnTextChanged()
         {

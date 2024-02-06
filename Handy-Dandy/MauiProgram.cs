@@ -27,13 +27,17 @@ public static class MauiProgram
 		//Views
 		builder.Services.AddSingleton<LoginPage>();
 		builder.Services.AddSingleton<SignUpPage>();
-        builder.Services.AddSingleton<MainPage>();
+        builder.Services.AddSingleton<HomePage>();
+        builder.Services.AddSingleton<OrderPage>();
+        builder.Services.AddSingleton<NotificationPage>();
+        builder.Services.AddSingleton<SettingPage>();
 
-		builder.Services.AddSingleton<FireBaseService>(_ => new FireBaseService("https://handy-dandy-1ce26-default-rtdb.firebaseio.com/"));
+        builder.Services.AddSingleton<FireBaseService>(_ => new FireBaseService("https://handy-dandy-1ce26-default-rtdb.firebaseio.com/"));
 
         //View Models
         builder.Services.AddSingleton<LoginPageViewModel>();
         builder.Services.AddSingleton<SignUpPageViewModel>();
+
         return builder.Build();
 	}
 }
