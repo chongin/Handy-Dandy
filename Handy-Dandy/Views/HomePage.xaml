@@ -9,6 +9,7 @@
              x:DataType="viewModels:HomePageViewModel">
     <ScrollView Padding="10">
        <VerticalStackLayout>
+           <!--Search-->
            <Frame BorderColor="Black" CornerRadius="4" HasShadow="True" Padding="5,0" Margin="0,0,0,10">
                <Grid>
                     <Grid.ColumnDefinitions>
@@ -26,49 +27,58 @@
             </Frame>
              
             <!--Promotion-->
-            <CollectionView ItemsLayout="HorizontalList" ItemsSource="{Binding IntroServices}"
-                            SelectionMode="Single" EmptyView="No promotions avaiable">
-             
-                <CollectionView.ItemTemplate>
-                    <DataTemplate x:DataType="models:IntroduceModel">
-                        <Frame Margin="10,15,10,10" Padding="20, 5">
-                            <VerticalStackLayout>
-                                <Image Source="{Binding IntroImage}" Aspect="AspectFill" WidthRequest="180" HeightRequest="100" />
-                                <Label Text="{Binding IntroDescription}" HorizontalOptions="Center" FontSize="12"/>
-                            </VerticalStackLayout>
-                      </Frame>
+            <CollectionView  ItemsSource="{Binding IntroServices}"
+                            SelectionMode="None" EmptyView="No promotions avaiable"
+                            SelectionChangedCommand="{Binding SelectionChangedCommand}"
+                            SelectionChangedCommandParameter="{Binding Path=SelectedItem, Source={RelativeSource Self}}"
+                            Margin="5,10,0,0" >
 
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Horizontal"
+                                       ItemSpacing="20" />
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate >
+                    <DataTemplate x:DataType="models:IntroduceModel">
+                         <Grid RowSpacing="5">
+                             <Grid.RowDefinitions>
+                                        <RowDefinition Height="auto"/>
+                                        <RowDefinition Height="auto"/>
+                                    </Grid.RowDefinitions>
+
+                             <Image Source="{Binding IntroImage}" Aspect="AspectFill" WidthRequest="320" HeightRequest="160" Grid.Row="0"/>
+                              <Label Text="{Binding IntroDescription}" HorizontalOptions="Center" FontSize="12" Grid.Row="1"/>
+                         </Grid>
+                       
                     </DataTemplate>
 
                 </CollectionView.ItemTemplate>
-
             </CollectionView>
+
             <!--Categories-->
-            <StackLayout>
-                 <!--Search VerticalList-->
-                <CollectionView ItemsLayout="VerticalGrid, 2" ItemsSource="{Binding Categories}"
-                                SelectionMode="Multiple" EmptyView="No categories available">
+            <StackLayout Padding="5, 20">
+                 
+                <CollectionView ItemsLayout="VerticalGrid, 3" ItemsSource="{Binding Categories}"
+                                SelectionMode="Single" EmptyView="No categories available">
                     <CollectionView.Header>
                         <Label Text="Categories" FontAttributes="Bold" FontSize="20" Margin="10,0,0,5"/>
                     </CollectionView.Header>
 
+
                     <CollectionView.ItemTemplate>
                         <DataTemplate x:DataType="models:CategoryModel">
-                            <Frame Margin="5">
-                                <Grid >
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width=".5*"/>
-                                        <ColumnDefinition Width=".5*"/>
-                                    </Grid.ColumnDefinitions>
+                            <Grid RowSpacing="5">
+                                    
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="auto"/>
+                                        <RowDefinition Height="auto"/>
+                                    </Grid.RowDefinitions>
                                 
-                                    <Image Source="{Binding CategoryImage}" Aspect="Fill" HeightRequest="50" 
-                                           Grid.Column="0" Grid.Row="0"/>
+                                    <Image Source="{Binding CategoryImage}" Aspect="AspectFill" HeightRequest="110" 
+                                            Grid.Row="0"/>
 
-                                    <Label Margin="5, 0,0,0" Text="{Binding Name}" FontSize="12" HorizontalOptions="Center" VerticalOptions="Center"
-                                           Grid.Column="1" Grid.Row="0"/>
+                                    <Label Text="{Binding Name}" FontSize="13" HorizontalOptions="Center" VerticalOptions="Center"
+                                            Grid.Row="1"/>
                                 </Grid>
-                           
-                            </Frame>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
                 </CollectionView>

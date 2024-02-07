@@ -15,25 +15,23 @@ namespace Handy_Dandy.ViewModels
 
         public ObservableCollection<CategoryModel> Categories { get; set; }
 
-        private string _buttonText = "Next";
-        public string ButtonText
-        {
-            get => _buttonText;
-            set => SetProperty(ref _buttonText, value);
-        }
+
 
         [ObservableProperty]
-        private int position;
+        private IntroduceModel selectedItem;
 
-        private int CurrentPosition = 0;
-
-        public IAsyncRelayCommand CarouselPositionChangedCommand { get; }
+        //private IntroduceModel _selectedItem;
+        //public IntroduceModel SelectedItem
+        //{
+        //    get => _selectedItem;
+        //    set => SetProperty(ref _selectedItem, value);
+        //}
+        public IAsyncRelayCommand SelectionChangedCommand { get; }
 
         public HomePageViewModel()
 		{
-            CarouselPositionChangedCommand = new AsyncRelayCommand<int>(
-                async (currentPosition) => await OnCarouselPositionChanged(currentPosition)
-            );
+            SelectionChangedCommand = new AsyncRelayCommand<IntroduceModel>(
+                async (currentItem) => await OnSelectionChanged(currentItem));
             this.IntroServices = new ObservableCollection<IntroduceModel>();
             this.Categories = new ObservableCollection<CategoryModel>();
 
@@ -46,9 +44,13 @@ namespace Handy_Dandy.ViewModels
             InitCategories();
         }
 
-        private async Task OnCarouselPositionChanged(int currentPosition)
+        private async Task OnSelectionChanged(IntroduceModel currentItem)
         {
-            Console.WriteLine($"current position: {currentPosition}");
+            if (currentItem != null)
+            {
+                string introDescription = currentItem.IntroDescription;
+                string introImage = currentItem.IntroImage;
+            }
             await Task.Yield();
         }
 
