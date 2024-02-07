@@ -1,9 +1,9 @@
 ﻿using System;
 namespace Handy_Dandy.Models
 {
-	public class User
+	public class UserModel
 	{
-		public User()
+		public UserModel()
 		{
 		}
 
@@ -15,7 +15,7 @@ namespace Handy_Dandy.Models
 		public string Phone { get; set; }
 
         public UserRole RoleID { get; set; }
-        public List<Order> Orders { get; set; }
+        public List<OrderModel> Orders { get; set; }
 	}
 
 	public enum UserRole

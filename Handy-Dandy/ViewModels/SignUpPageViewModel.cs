@@ -36,7 +36,7 @@ namespace Handy_Dandy.ViewModels
 
         public async Task SignUp()
         {
-            //User user = new User();
+            //UserModel user = new UserModel();
             //user.Email = Email;
             //user.UserName = UserName;
             //user.Phone = Phone;

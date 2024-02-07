@@ -14,7 +14,7 @@ namespace Handy_Dandy.Services
             _firebase = new FirebaseClient(firebaseUrl);
 		}
 
-		public async Task InserUser(User user)
+		public async Task InserUser(UserModel user)
 		{
 			var result = await this._firebase.Child(UserRootName).PostAsync(user);
 			if (result.Key != null)
@@ -27,18 +27,18 @@ namespace Handy_Dandy.Services
             }
 		}
 
-		public async Task UpdateUser(User user)
+		public async Task UpdateUser(UserModel user)
 		{
 			var userRef = this._firebase.Child(UserRootName).Child(user.UserID);
 			await userRef.PutAsync(user);
         }
 
-        public async Task<User> QueryUserByEmail(string email)
+        public async Task<UserModel> QueryUserByEmail(string email)
         {
             try
             {
                 var userRef = this._firebase.Child(UserRootName);
-                var userSnapshot = await userRef.OnceAsync<User>();
+                var userSnapshot = await userRef.OnceAsync<UserModel>();
 
                 var user = userSnapshot.FirstOrDefault(u => u.Object.Email == email);
 

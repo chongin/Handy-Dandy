@@ -1,9 +1,9 @@
 ﻿using System;
 namespace Handy_Dandy.Models
 {
-	public class IntroduceServices
+	public class IntroduceModel
 	{
-		public IntroduceServices()
+		public IntroduceModel()
 		{
 		}
 

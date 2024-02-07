@@ -7,40 +7,80 @@
              x:Class="Handy_Dandy.Views.HomePage"
              Title="HomePage"
              x:DataType="viewModels:HomePageViewModel">
-    <VerticalStackLayout Padding="10">
-       <Entry Placeholder="Search your service" HorizontalOptions="FillAndExpand"/>
+    <ScrollView Padding="10">
+       <VerticalStackLayout>
+           <Frame BorderColor="Black" CornerRadius="4" HasShadow="True" Padding="5,0" Margin="0,0,0,10">
+               <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
 
-       <Grid Margin="10" RowDefinitions="*, Auto">
-           <CarouselView HorizontalOptions="FillAndExpand" Grid.Row="0"
-                         ItemsSource="{Binding IntroServices}"
-                         PositionChangedCommand="{Binding CarouselPositionChangedCommand}"
-                         PositionChangedCommandParameter="{Binding Source={RelativeSource Self}, Path=Position}">
-               <!--<CarouselView.Behaviors>
-                    <mct:EventToCommandBehavior EventName="CurrentItemChanged"
-                                                      Command="{Binding CarouselPositionChangedCommand}"/>
-               </CarouselView.Behaviors>-->
-                <CarouselView.ItemTemplate>
-                    <DataTemplate x:DataType="models:IntroduceServices">
-                        <Grid RowDefinitions="60*,30*">
-                            <Image Source="{Binding IntroImage}" Aspect="AspectFill" Grid.Row="0"/>
+                    <Entry Placeholder="Search a service" />
+                    <Button Grid.Column="1" BackgroundColor="Transparent" HeightRequest="20">
+                        <Button.ImageSource>
+                            <FileImageSource File="home.png" />
+                        </Button.ImageSource>
+                    </Button>
+                </Grid>
+            </Frame>
+             
+            <!--Promotion-->
+            <Grid Margin="0,10, 0,0" RowDefinitions="*, Auto">
+               <CarouselView HorizontalOptions="FillAndExpand" Grid.Row="0"
+                             ItemsSource="{Binding IntroServices}"
+                             PositionChangedCommand="{Binding CarouselPositionChangedCommand}"
+                             PositionChangedCommandParameter="{Binding Source={RelativeSource Self}, Path=Position}">
+                    <CarouselView.ItemTemplate>
+                        <DataTemplate x:DataType="models:IntroduceModel">
+                            <Grid RowDefinitions="60*,30*">
+                                <Image Source="{Binding IntroImage}" Aspect="AspectFill" Grid.Row="0"/>
 
-                            <VerticalStackLayout Spacing="10" Grid.Row="0">
-                                <Label Text="{Binding IntroTitle}" FontSize="28" FontAttributes="Bold"/>
-                                <Label Text="{Binding IntroDescription}" FontSize="20" TextColor="Gray"/>
-                            </VerticalStackLayout>
-                        </Grid>
-                    </DataTemplate>
+                                <!--<VerticalStackLayout Spacing="10" Grid.Row="0">
+                                    <Label Text="{Binding IntroTitle}" FontSize="28" FontAttributes="Bold"/>
+                                    <Label Text="{Binding IntroDescription}" FontSize="20" TextColor="Gray"/>
+                                </VerticalStackLayout>-->
+                            </Grid>
+                        </DataTemplate>
 
-                </CarouselView.ItemTemplate>
-            </CarouselView>
+                    </CarouselView.ItemTemplate>
+                </CarouselView>
 
-        </Grid>
+               <StackLayout Orientation="Horizontal" Grid.Row="1">
+                    <IndicatorView x:Name="indicatorView" VerticalOptions="Center"
+                                   IndicatorSize="10" IndicatorColor="LightBlue"
+                                   SelectedIndicatorColor="{x:StaticResource Primary}"/>
 
-        <StackLayout Orientation="Horizontal" Grid.Row="1">
-            <IndicatorView x:Name="indicatorView" VerticalOptions="Center"
-                           IndicatorSize="10" IndicatorColor="LightBlue"
-                           SelectedIndicatorColor="{x:StaticResource Primary}"/>
+                </StackLayout>
+            </Grid>
+            <!--Categories-->
+            <StackLayout>
+                 <!--Search VerticalList-->
+                <Label Text="Categories" FontAttributes="Bold" FontSize="20" Margin="20,0,0,0"/>
+                <CollectionView ItemsLayout="VerticalGrid, 2" ItemsSource="{Binding Categories}"
+                                SelectionMode="Multiple" EmptyView="No categories available">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="models:CategoryModel">
+                            <Frame Margin="5">
+                                <Grid >
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width=".5*"/>
+                                        <ColumnDefinition Width=".5*"/>
+                                    </Grid.ColumnDefinitions>
+                                
+                                    <Image Source="{Binding CategoryImage}" Aspect="Fill" HeightRequest="50" 
+                                           Grid.Column="0" Grid.Row="0"/>
 
-        </StackLayout>
-    </VerticalStackLayout>
+                                    <Label Margin="5, 0,0,0" Text="{Binding Name}" FontSize="12" HorizontalOptions="Center" VerticalOptions="Center"
+                                           Grid.Column="1" Grid.Row="0"/>
+                                </Grid>
+                           
+                            </Frame>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </StackLayout>
+
+       </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>

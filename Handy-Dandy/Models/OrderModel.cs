@@ -1,9 +1,9 @@
 ﻿using System;
 namespace Handy_Dandy.Models
 {
-	public class Order
+	public class OrderModel
 	{
-		public Order()
+		public OrderModel()
 		{
 		}
 

@@ -8,9 +8,13 @@ using System.Windows.Input;
 
 namespace Handy_Dandy.ViewModels
 {
-	public partial class HomePageViewModel: ObservableObject
+	public partial class HomePageViewModel: BaseViewModel
     {
-		public ObservableCollection<IntroduceServices> IntroServices { get; set; }
+
+        public ObservableCollection<IntroduceModel> IntroServices { get; set; }
+
+        public ObservableCollection<CategoryModel> Categories { get; set; }
+
         private string _buttonText = "Next";
         public string ButtonText
         {
@@ -21,41 +25,50 @@ namespace Handy_Dandy.ViewModels
         [ObservableProperty]
         private int position;
 
-        private int PreviousPosition = 0;
         private int CurrentPosition = 0;
 
         public IAsyncRelayCommand CarouselPositionChangedCommand { get; }
 
-        public ICommand PositionChangedCommand => new Command<int>((position) =>
-        {
-            PreviousPosition = CurrentPosition;
-            CurrentPosition = position;
-        });
-
         public HomePageViewModel()
 		{
-			this.IntroServices = new ObservableCollection<IntroduceServices>();
-            
+            CarouselPositionChangedCommand = new AsyncRelayCommand<int>(
+                async (currentPosition) => await OnCarouselPositionChanged(currentPosition)
+            );
+            this.IntroServices = new ObservableCollection<IntroduceModel>();
+            this.Categories = new ObservableCollection<CategoryModel>();
+
             InitData();
-            CarouselPositionChangedCommand = new AsyncRelayCommand<int>(async (currentPosition) => await OnCarouselPositionChanged(currentPosition));
         }
 
 		public void InitData()
 		{
-			IntroServices.Add(new IntroduceServices {
-				IntroTitle ="Cleaning",
-				IntroDescription="Best Cleaning",
-				IntroImage="cleaning"
-			});
+            InitIntroServices();
+            InitCategories();
+        }
 
-            IntroServices.Add(new IntroduceServices
+        private async Task OnCarouselPositionChanged(int currentPosition)
+        {
+            Console.WriteLine($"current position: {currentPosition}");
+            await Task.Yield();
+        }
+
+        private void InitIntroServices()
+        {
+            IntroServices.Add(new IntroduceModel
+            {
+                IntroTitle = "Cleaning",
+                IntroDescription = "Best Cleaning",
+                IntroImage = "cleaning"
+            });
+
+            IntroServices.Add(new IntroduceModel
             {
                 IntroTitle = "Repairing",
                 IntroDescription = "Best Repairing",
                 IntroImage = "repairing"
             });
 
-            IntroServices.Add(new IntroduceServices
+            IntroServices.Add(new IntroduceModel
             {
                 IntroTitle = "Painting",
                 IntroDescription = "Best Painting",
@@ -63,16 +76,68 @@ namespace Handy_Dandy.ViewModels
             });
         }
 
-        private async Task OnCarouselPositionChanged(int currentPosition)
+        private void InitCategories()
         {
-            // UpdateButtonText();
-            Console.WriteLine($"current position: {currentPosition}");
-            await Task.Yield();
-        }
+            Categories.Add(new CategoryModel
+            {
+                CategoryID = "c1",
+                Name = "Repairing",
+                CategoryImage = "category_repairing",
+            });
 
-        private void UpdatePosition()
-        {
-            //
+            Categories.Add(new CategoryModel
+            {
+                CategoryID = "c2",
+                Name = "Cleaning",
+                CategoryImage = "category_cleaning",
+            });
+
+            Categories.Add(new CategoryModel
+            {
+                CategoryID = "c3",
+                Name = "Beauty",
+                CategoryImage = "category_beauty",
+            });
+            Categories.Add(new CategoryModel
+            {
+                CategoryID = "c11",
+                Name = "Repairing1",
+                CategoryImage = "category_repairing",
+            });
+
+            Categories.Add(new CategoryModel
+            {
+                CategoryID = "c21",
+                Name = "Cleaning1",
+                CategoryImage = "category_cleaning",
+            });
+
+            Categories.Add(new CategoryModel
+            {
+                CategoryID = "c31",
+                Name = "Beauty1",
+                CategoryImage = "category_beauty",
+            });
+            Categories.Add(new CategoryModel
+            {
+                CategoryID = "c12",
+                Name = "Repairing2",
+                CategoryImage = "category_repairing",
+            });
+
+            Categories.Add(new CategoryModel
+            {
+                CategoryID = "c22",
+                Name = "Cleaning2",
+                CategoryImage = "category_cleaning",
+            });
+
+            Categories.Add(new CategoryModel
+            {
+                CategoryID = "c32",
+                Name = "Beauty",
+                CategoryImage = "category_beauty",
+            });
         }
     }
 }
