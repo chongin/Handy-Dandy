@@ -3,10 +3,10 @@ using Handy_Dandy.ViewModels;
 
 public partial class SignUpPage : ContentPage
 {
-	public SignUpPage(SignUpPageViewModel SignUpPageViewModel)
+	public SignUpPage(SignUpPageViewModel viewModel)
 	{
 		InitializeComponent();
-        this.BindingContext = SignUpPageViewModel;
+        this.BindingContext = viewModel;
     }
 
     private void OnSignUpClicked(object sender, EventArgs e)

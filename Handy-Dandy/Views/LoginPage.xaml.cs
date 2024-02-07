@@ -1,13 +1,13 @@
 ﻿using Handy_Dandy.ViewModels;
 using Microsoft.Maui.Controls;
 namespace Handy_Dandy.Views;
-
+using Handy_Dandy.Services;
 public partial class LoginPage : ContentPage
 {
-	public LoginPage(LoginPageViewModel loginPageViewModel)
+	public LoginPage(LoginPageViewModel viewModel)
 	{
 		InitializeComponent();
-		this.BindingContext = loginPageViewModel;
+        this.BindingContext = viewModel;
     }
 
     private void OnLoginClicked(object sender, EventArgs e)

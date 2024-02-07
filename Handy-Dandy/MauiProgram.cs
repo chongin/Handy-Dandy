@@ -25,18 +25,20 @@ public static class MauiProgram
 #endif
 
 		//Views
-		builder.Services.AddSingleton<LoginPage>();
-		builder.Services.AddSingleton<SignUpPage>();
-        builder.Services.AddSingleton<HomePage>();
-        builder.Services.AddSingleton<OrderPage>();
-        builder.Services.AddSingleton<NotificationPage>();
-        builder.Services.AddSingleton<SettingPage>();
+		builder.Services.AddTransient<LoginPage>();
+		builder.Services.AddTransient<SignUpPage>();
+        builder.Services.AddTransient<HomePage>();
+        builder.Services.AddTransient<OrderPage>();
+        builder.Services.AddTransient<NotificationPage>();
+        builder.Services.AddTransient<SettingPage>();
 
-        builder.Services.AddSingleton<FireBaseService>(_ => new FireBaseService("https://handy-dandy-1ce26-default-rtdb.firebaseio.com/"));
+		builder.Services.AddTransient<ServicePage>();
+
+        builder.Services.AddTransient< IDatabaseService, FireBaseService >(_ => new FireBaseService("https://handy-dandy-1ce26-default-rtdb.firebaseio.com/"));
 
         //View Models
-        builder.Services.AddSingleton<LoginPageViewModel>();
-        builder.Services.AddSingleton<SignUpPageViewModel>();
+		builder.Services.AddTransient<LoginPageViewModel>();
+        builder.Services.AddTransient<SignUpPageViewModel>();
 
         return builder.Build();
 	}

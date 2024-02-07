@@ -5,7 +5,7 @@ using Handy_Dandy.Models;
 
 namespace Handy_Dandy.Services
 {
-	public class FireBaseService
+	public class FireBaseService: IDatabaseService
 	{
         private readonly FirebaseClient _firebase;
 		private static string UserRootName = "Clients";

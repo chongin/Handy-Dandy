@@ -34,9 +34,9 @@
                             Margin="5,10,0,0" >
 
                 <CollectionView.ItemsLayout>
-                    <LinearItemsLayout Orientation="Horizontal"
-                                       ItemSpacing="20" />
+                    <LinearItemsLayout Orientation="Horizontal" ItemSpacing="20" />
                 </CollectionView.ItemsLayout>
+
                 <CollectionView.ItemTemplate >
                     <DataTemplate x:DataType="models:IntroduceModel">
                          <Grid RowSpacing="5">
@@ -57,12 +57,15 @@
             <!--Categories-->
             <StackLayout Padding="5, 20">
                  
-                <CollectionView ItemsLayout="VerticalGrid, 3" ItemsSource="{Binding Categories}"
+                <CollectionView  ItemsSource="{Binding Categories}"
                                 SelectionMode="Single" EmptyView="No categories available">
                     <CollectionView.Header>
-                        <Label Text="Categories" FontAttributes="Bold" FontSize="20" Margin="10,0,0,5"/>
+                        <Label Text="Available Categories" FontAttributes="Bold" FontSize="20" Margin="10,0,0,2"/>
                     </CollectionView.Header>
 
+                    <CollectionView.ItemsLayout>
+                        <GridItemsLayout Orientation="Vertical" Span="3" VerticalItemSpacing="10" HorizontalItemSpacing="10"/>
+                    </CollectionView.ItemsLayout>
 
                     <CollectionView.ItemTemplate>
                         <DataTemplate x:DataType="models:CategoryModel">

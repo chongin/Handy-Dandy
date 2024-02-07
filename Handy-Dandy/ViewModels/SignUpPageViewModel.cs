@@ -26,11 +26,11 @@ namespace Handy_Dandy.ViewModels
         private string phone;
 
         public IAsyncRelayCommand SignUpCommand { get; }
-        private readonly FireBaseService _fireBaseService;
+        private readonly IDatabaseService _dataService;
 
-        public SignUpPageViewModel(FireBaseService fireBaseService)
+        public SignUpPageViewModel(IDatabaseService dataService)
 		{
-            this._fireBaseService = fireBaseService;
+            this._dataService = dataService;
             SignUpCommand = new AsyncRelayCommand(SignUp);
         }
 

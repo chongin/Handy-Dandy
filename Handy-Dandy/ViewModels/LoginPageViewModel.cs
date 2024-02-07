@@ -28,10 +28,10 @@ namespace Handy_Dandy.ViewModels
         public IAsyncRelayCommand SignUpCommand { get; }
         public IAsyncRelayCommand TextChangedCommand { get; }
 
-        private readonly FireBaseService _fireBaseService;
-		public LoginPageViewModel(FireBaseService fireBaseService)
+        private readonly IDatabaseService _dataService;
+		public LoginPageViewModel(IDatabaseService dataService)
 		{
-            this._fireBaseService = fireBaseService;
+            this._dataService = dataService;
 
 			this.LoginCommand = new AsyncRelayCommand(OnLogin);
 			this.SignUpCommand = new AsyncRelayCommand(OnSignUp);
@@ -40,7 +40,7 @@ namespace Handy_Dandy.ViewModels
 
 		private async Task OnLogin()
 		{
-            var user = await this._fireBaseService.QueryUserByEmail(Email);
+            var user = await this._dataService.QueryUserByEmail(Email);
             if (user == null)
             {
                 ErrorMessage = "We can't seem to find your account.";
