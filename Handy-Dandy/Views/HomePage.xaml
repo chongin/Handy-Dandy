@@ -26,39 +26,32 @@
             </Frame>
              
             <!--Promotion-->
-            <Grid Margin="0,10, 0,0" RowDefinitions="*, Auto">
-               <CarouselView HorizontalOptions="FillAndExpand" Grid.Row="0"
-                             ItemsSource="{Binding IntroServices}"
-                             PositionChangedCommand="{Binding CarouselPositionChangedCommand}"
-                             PositionChangedCommandParameter="{Binding Source={RelativeSource Self}, Path=Position}">
-                    <CarouselView.ItemTemplate>
-                        <DataTemplate x:DataType="models:IntroduceModel">
-                            <Grid RowDefinitions="60*,30*">
-                                <Image Source="{Binding IntroImage}" Aspect="AspectFill" Grid.Row="0"/>
+            <CollectionView ItemsLayout="HorizontalList" ItemsSource="{Binding IntroServices}"
+                            SelectionMode="Single" EmptyView="No promotions avaiable">
+             
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="models:IntroduceModel">
+                        <Frame Margin="10,15,10,10" Padding="20, 5">
+                            <VerticalStackLayout>
+                                <Image Source="{Binding IntroImage}" Aspect="AspectFill" WidthRequest="180" HeightRequest="100" />
+                                <Label Text="{Binding IntroDescription}" HorizontalOptions="Center" FontSize="12"/>
+                            </VerticalStackLayout>
+                      </Frame>
 
-                                <!--<VerticalStackLayout Spacing="10" Grid.Row="0">
-                                    <Label Text="{Binding IntroTitle}" FontSize="28" FontAttributes="Bold"/>
-                                    <Label Text="{Binding IntroDescription}" FontSize="20" TextColor="Gray"/>
-                                </VerticalStackLayout>-->
-                            </Grid>
-                        </DataTemplate>
+                    </DataTemplate>
 
-                    </CarouselView.ItemTemplate>
-                </CarouselView>
+                </CollectionView.ItemTemplate>
 
-               <StackLayout Orientation="Horizontal" Grid.Row="1">
-                    <IndicatorView x:Name="indicatorView" VerticalOptions="Center"
-                                   IndicatorSize="10" IndicatorColor="LightBlue"
-                                   SelectedIndicatorColor="{x:StaticResource Primary}"/>
-
-                </StackLayout>
-            </Grid>
+            </CollectionView>
             <!--Categories-->
             <StackLayout>
                  <!--Search VerticalList-->
-                <Label Text="Categories" FontAttributes="Bold" FontSize="20" Margin="20,0,0,0"/>
                 <CollectionView ItemsLayout="VerticalGrid, 2" ItemsSource="{Binding Categories}"
                                 SelectionMode="Multiple" EmptyView="No categories available">
+                    <CollectionView.Header>
+                        <Label Text="Categories" FontAttributes="Bold" FontSize="20" Margin="10,0,0,5"/>
+                    </CollectionView.Header>
+
                     <CollectionView.ItemTemplate>
                         <DataTemplate x:DataType="models:CategoryModel">
                             <Frame Margin="5">
