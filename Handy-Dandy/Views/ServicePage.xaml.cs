@@ -1,9 +1,11 @@
 ﻿namespace Handy_Dandy.Views;
+using Handy_Dandy.ViewModels;
 
 public partial class ServicePage : ContentPage
 {
-	public ServicePage()
+	public ServicePage(ServicePageViewModel viewModel)
 	{
 		InitializeComponent();
+		this.BindingContext = viewModel;
 	}
 }

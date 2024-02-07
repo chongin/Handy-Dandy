@@ -31,14 +31,16 @@ public static class MauiProgram
         builder.Services.AddTransient<OrderPage>();
         builder.Services.AddTransient<NotificationPage>();
         builder.Services.AddTransient<SettingPage>();
-
 		builder.Services.AddTransient<ServicePage>();
 
+		//services
         builder.Services.AddTransient< IDatabaseService, FireBaseService >(_ => new FireBaseService("https://handy-dandy-1ce26-default-rtdb.firebaseio.com/"));
 
         //View Models
 		builder.Services.AddTransient<LoginPageViewModel>();
         builder.Services.AddTransient<SignUpPageViewModel>();
+        builder.Services.AddTransient<HomePageViewModel>();
+        builder.Services.AddTransient<ServicePageViewModel>();
 
         return builder.Build();
 	}

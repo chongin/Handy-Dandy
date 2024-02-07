@@ -27,11 +27,15 @@ namespace Handy_Dandy.ViewModels
         //    set => SetProperty(ref _selectedItem, value);
         //}
         public IAsyncRelayCommand SelectionChangedCommand { get; }
-
+        public IAsyncRelayCommand TabCategoryCommand { get; }
         public HomePageViewModel()
 		{
             SelectionChangedCommand = new AsyncRelayCommand<IntroduceModel>(
                 async (currentItem) => await OnSelectionChanged(currentItem));
+
+            TabCategoryCommand = new AsyncRelayCommand<CategoryModel>(
+                async (model) => await OnTabCategory(model));
+
             this.IntroServices = new ObservableCollection<IntroduceModel>();
             this.Categories = new ObservableCollection<CategoryModel>();
 
@@ -51,6 +55,16 @@ namespace Handy_Dandy.ViewModels
                 string introDescription = currentItem.IntroDescription;
                 string introImage = currentItem.IntroImage;
             }
+            await Task.Yield();
+        }
+
+        private async Task OnTabCategory(CategoryModel category)
+        {
+            if (category != null)
+            {
+                string name = category.Name;
+            }
+
             await Task.Yield();
         }
 

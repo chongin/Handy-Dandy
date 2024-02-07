@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewModels="clr-namespace:Handy_Dandy.ViewModels"
              xmlns:models="clr-namespace:Handy_Dandy.Models"
-              xmlns:mct="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:mct="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              x:Class="Handy_Dandy.Views.HomePage"
              Title="HomePage"
              x:DataType="viewModels:HomePageViewModel">
@@ -57,31 +57,42 @@
             <!--Categories-->
             <StackLayout Padding="5, 20">
                  
-                <CollectionView  ItemsSource="{Binding Categories}"
-                                SelectionMode="Single" EmptyView="No categories available">
+                <CollectionView  ItemsSource="{Binding Categories}" BackgroundColor="Transparent"
+                                SelectionMode="None" EmptyView="No categories available">
                     <CollectionView.Header>
                         <Label Text="Available Categories" FontAttributes="Bold" FontSize="20" Margin="10,0,0,2"/>
                     </CollectionView.Header>
 
                     <CollectionView.ItemsLayout>
-                        <GridItemsLayout Orientation="Vertical" Span="3" VerticalItemSpacing="10" HorizontalItemSpacing="10"/>
+                        <GridItemsLayout Orientation="Vertical" Span="{OnIdiom Desktop=1, Default=3}" VerticalItemSpacing="10" HorizontalItemSpacing="10"/>
                     </CollectionView.ItemsLayout>
 
                     <CollectionView.ItemTemplate>
                         <DataTemplate x:DataType="models:CategoryModel">
-                            <Grid RowSpacing="5">
-                                    
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="auto"/>
-                                        <RowDefinition Height="auto"/>
-                                    </Grid.RowDefinitions>
-                                
-                                    <Image Source="{Binding CategoryImage}" Aspect="AspectFill" HeightRequest="110" 
-                                            Grid.Row="0"/>
+                            <Grid Padding="5">
+                                <Frame HeightRequest="120" Padding="0"  BorderColor="Transparent">
+                                    <Frame.GestureRecognizers>
+                                        <TapGestureRecognizer CommandParameter="{Binding .}"
+                                                              Command="{Binding Source={RelativeSource AncestorType={x:Type viewModels:HomePageViewModel}}, Path=TabCategoryCommand}"/>
 
-                                    <Label Text="{Binding Name}" FontSize="13" HorizontalOptions="Center" VerticalOptions="Center"
-                                            Grid.Row="1"/>
-                                </Grid>
+                                    </Frame.GestureRecognizers>
+
+                                    <Grid RowSpacing="0" Padding="5">
+                                    
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="auto"/>
+                                            <RowDefinition Height="auto"/>
+                                        </Grid.RowDefinitions>
+                                
+                                        <Image Source="{Binding CategoryImage}" Aspect="AspectFit" 
+                                                Grid.Row="0"/>
+
+                                        <Label Text="{Binding Name}" FontSize="12" HorizontalOptions="CenterAndExpand" VerticalOptions="Center"
+                                                Grid.Row="1" BackgroundColor="LightSkyBlue"/>
+                                    </Grid>
+                                </Frame>
+                            </Grid>
+                            
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
                 </CollectionView>

@@ -3,9 +3,9 @@ using Handy_Dandy.ViewModels;
 
 public partial class HomePage : ContentPage
 {
-	public HomePage()
+	public HomePage(HomePageViewModel viewModel)
 	{
 		InitializeComponent();
-		this.BindingContext = new HomePageViewModel();
+		this.BindingContext = viewModel;
 	}
 }
