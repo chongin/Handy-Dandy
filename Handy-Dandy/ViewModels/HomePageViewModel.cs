@@ -4,7 +4,7 @@ using CommunityToolkit.Mvvm.Input;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using Handy_Dandy.Models;
-using System.Windows.Input;
+using Handy_Dandy.Views;
 
 namespace Handy_Dandy.ViewModels
 {
@@ -60,12 +60,14 @@ namespace Handy_Dandy.ViewModels
 
         private async Task OnTabCategory(CategoryModel category)
         {
-            if (category != null)
-            {
-                string name = category.Name;
-            }
+            if (category is null)
+                return;
 
-            await Task.Yield();
+            await Shell.Current.GoToAsync($"{nameof(ServicePage)}", true,
+                new Dictionary<string, object>
+                {
+                    { "Category", category }
+                });
         }
 
         private void InitIntroServices()
@@ -94,66 +96,53 @@ namespace Handy_Dandy.ViewModels
 
         private void InitCategories()
         {
-            Categories.Add(new CategoryModel
+            for (int i = 0; i < 9; ++i)
             {
-                CategoryID = "c1",
-                Name = "Repairing",
-                CategoryImage = "category_repairing",
-            });
+                Categories.Add(CreateCategoryModel(i));
+            }
+        }
 
-            Categories.Add(new CategoryModel
+        private CategoryModel CreateCategoryModel(int index)
+        {
+            List<string> categoryImageNames = new List<string> { "category_cleaning", "category_repairing", "category_beauty" };
+            List<string> categoryName = new List<string> { "Cleaning", "Repairing", "Beauty" };
+            Random random = new Random();
+            int randomNameIndex = random.Next(categoryImageNames.Count);
+            CategoryModel category = new CategoryModel
             {
-                CategoryID = "c2",
-                Name = "Cleaning",
-                CategoryImage = "category_cleaning",
-            });
+                CategoryID = $"C{index}_{randomNameIndex}",
+                Name = $"{categoryName[randomNameIndex]}{index}",
+                CategoryImage = $"{categoryImageNames[randomNameIndex]}",
+                Services = new List<ServiceModel>()
+            };
 
-            Categories.Add(new CategoryModel
-            {
-                CategoryID = "c3",
-                Name = "Beauty",
-                CategoryImage = "category_beauty",
-            });
-            Categories.Add(new CategoryModel
-            {
-                CategoryID = "c11",
-                Name = "Repairing1",
-                CategoryImage = "category_repairing",
-            });
+            List<string> serviceImageNames = new List<string> { "sercie_clean_floor", "service_clean_ac", "service_clean_wall",
+                "service_laundry", "service_maintain_light", "service_repair_appliance"};
 
-            Categories.Add(new CategoryModel
-            {
-                CategoryID = "c21",
-                Name = "Cleaning1",
-                CategoryImage = "category_cleaning",
-            });
+            List<string> serviceNames = new List<string> { "Clean Floor", "Clean AC", "Clean Wall",
+                "Laundry", "Maintain Light", "Repair Appliance"};
 
-            Categories.Add(new CategoryModel
-            {
-                CategoryID = "c31",
-                Name = "Beauty1",
-                CategoryImage = "category_beauty",
-            });
-            Categories.Add(new CategoryModel
-            {
-                CategoryID = "c12",
-                Name = "Repairing2",
-                CategoryImage = "category_repairing",
-            });
+            int numberOfServices = random.Next(3, 11);
 
-            Categories.Add(new CategoryModel
+            for (int j = 0; j < numberOfServices; j++)
             {
-                CategoryID = "c22",
-                Name = "Cleaning2",
-                CategoryImage = "category_cleaning",
-            });
+                int randomIndex = random.Next(serviceNames.Count);
+                ServiceModel service = new ServiceModel
+                {
+                    ServiceID = $"{category.CategoryID}_S{j}",
+                    CategoryID = category.CategoryID,
+                    Name = $"{serviceNames[randomIndex]}",
+                    Description = $"Description of Service {serviceNames[randomIndex]}",
+                    ServiceCharge = random.Next(20, 100),
+                    Score = 3f + (float)random.NextDouble() * 2f,
+                    CompletedCount = random.Next(60, 199),
+                    ImageName = $"{serviceImageNames[randomIndex]}"
+                };
+                category.Services.Add(service);
+            }
 
-            Categories.Add(new CategoryModel
-            {
-                CategoryID = "c32",
-                Name = "Beauty",
-                CategoryImage = "category_beauty",
-            });
+
+            return category;
         }
     }
 }

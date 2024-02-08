@@ -11,9 +11,11 @@ namespace Handy_Dandy.Models
 		public string CategoryID { get; set; }
 		public string Name { get; set; }
 		public string Description { get; set; }
-		public float ServiceCharge { get; set; }
-		public int Discount { get; set; }
-		public int Likes { get; set; }
+        public string ImageName { get; set; }
+        public int ServiceCharge { get; set; }
+		public int CompletedCount { get; set; }
+		public float Score { get; set; }
+
 	}
 }
 

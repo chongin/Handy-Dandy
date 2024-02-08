@@ -77,6 +77,8 @@
 	  <None Remove="Resources\Images\repairing.jpg" />
 	  <None Remove="Resources\Images\" />
 	  <None Remove="Resources\Images\category_cleaning.jpg" />
+	  <None Remove="Resources\Images\score.png" />
+	  <None Remove="Resources\Images\goto.png" />
 	</ItemGroup>
 	<ItemGroup>
 	  <Folder Include="Views\" />
@@ -88,5 +90,7 @@
 	</ItemGroup>
 	<ItemGroup>
 	  <BundleResource Include="Resources\Images\category_cleaning.jpg" />
+	  <BundleResource Include="Resources\Images\score.png" />
+	  <BundleResource Include="Resources\Images\gotobtn.png" />
 	</ItemGroup>
 </Project>

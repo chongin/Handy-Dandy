@@ -1,12 +1,78 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:models="clr-namespace:Handy_Dandy.Models"
+             xmlns:viewModels="clr-namespace:Handy_Dandy.ViewModels"
              x:Class="Handy_Dandy.Views.ServicePage"
-             Title="ServicePage">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+             Title="{Binding Category.Name}">
+    <ScrollView Padding="10">
+        <VerticalStackLayout>
+            <Frame BorderColor="LightSkyBlue" CornerRadius="10" HasShadow="True" Padding="5,0" Margin="0,0,0,10" >
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+
+                    <Entry Placeholder="What are you looking for?" Grid.Column="0"/>
+                    <Button Grid.Column="1"  HeightRequest="20" BackgroundColor="Transparent">
+                        <Button.ImageSource>
+                            <FileImageSource File="home.png" />
+                        </Button.ImageSource>
+                    </Button>
+                </Grid>
+            </Frame>
+
+            <CollectionView ItemsSource="{Binding Category.Services}">
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout Orientation="Vertical" Span="1" VerticalItemSpacing="10" HorizontalItemSpacing="10"/>
+                </CollectionView.ItemsLayout>
+
+                <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="models:ServiceModel">
+                            <Grid Padding="5">
+                                <Frame HeightRequest="90"  Padding="0"  BorderColor="{StaticResource Primary}" HorizontalOptions="FillAndExpand">
+                                    <Frame.GestureRecognizers>
+                                        <TapGestureRecognizer CommandParameter="{Binding .}"
+                                                              Command="{Binding Source={RelativeSource AncestorType={x:Type viewModels:ServicePageViewModel}}, Path=TabServiceCommand}"/>
+
+                                    </Frame.GestureRecognizers>
+
+                                    <Grid ColumnSpacing="10" Padding="5">
+                                    
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="auto"/>
+                                            <ColumnDefinition Width=".9*"/>
+                                            <ColumnDefinition Width="auto"/>
+                                        </Grid.ColumnDefinitions>
+                                
+                                        <Image Source="{Binding ImageName}" Aspect="Fill" HorizontalOptions="Start"
+                                                Grid.Column="0"/>
+
+                                        <StackLayout Grid.Column="1" Spacing="10">
+                                            <StackLayout Orientation="Horizontal" Spacing="5">
+                                                <Image Source="score" HeightRequest="20"/>
+                                                <Label Text="{Binding Score}" />
+                                                <Label Text="{Binding CompletedCount}" />
+                                            </StackLayout>
+                                            <Label Text="{Binding Name}" FontSize="16" FontAttributes="Bold" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
+
+                                            <Label Text="{Binding ServiceCharge}" FontSize="16" TextColor="Blue"/>
+                                        </StackLayout>
+                                        
+
+                                        <Button ImageSource="gotobtn" HorizontalOptions="End" Grid.Column="2" HeightRequest="30" FontSize="8" Background="Transparent"/>
+                                    </Grid>
+                                </Frame>
+                            </Grid>
+                            
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+
+            </CollectionView>
+
+        </VerticalStackLayout>
+        
+
+    </ScrollView>
 </ContentPage>
