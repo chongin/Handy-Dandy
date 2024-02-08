@@ -26,8 +26,8 @@
             Route="HomePage" />
 
          <ShellContent Title="Booking" Icon="home.png"
-            ContentTemplate="{DataTemplate local:OrderPage}"
-            Route="OrderPage" />
+            ContentTemplate="{DataTemplate local:BookingPage}"
+            Route="BookingPage" />
 
          <ShellContent Title="Notification" Icon="home.png"
             ContentTemplate="{DataTemplate local:NotificationPage}"

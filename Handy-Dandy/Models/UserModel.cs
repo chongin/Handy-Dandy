@@ -15,7 +15,7 @@ namespace Handy_Dandy.Models
 		public string Phone { get; set; }
 
         public UserRole RoleID { get; set; }
-        public List<OrderModel> Orders { get; set; }
+        public List<BookingModel> Orders { get; set; }
 	}
 
 	public enum UserRole

@@ -1,9 +1,9 @@
 ﻿using System;
 namespace Handy_Dandy.Models
 {
-	public class OrderModel
+	public class BookingModel
 	{
-		public OrderModel()
+		public BookingModel()
 		{
 		}
 
@@ -15,10 +15,10 @@ namespace Handy_Dandy.Models
 		public string EndTime { get; set; }
 		public float TotalPrice { get; set; }
 		public string Description { get; set; }
-		public OrderState state { get; set; }
+		public BookingState state { get; set; }
 	}
 
-	public enum OrderState
+	public enum BookingState
 	{
 		Opened = 1,
 		Confirmed,

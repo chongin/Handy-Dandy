@@ -27,7 +27,7 @@
             </Frame>
              
             <!--Promotion-->
-            <CollectionView  ItemsSource="{Binding IntroServices}"
+            <CollectionView  ItemsSource="{Binding Promotions}"
                             SelectionMode="None" EmptyView="No promotions avaiable"
                             SelectionChangedCommand="{Binding SelectionChangedCommand}"
                             SelectionChangedCommandParameter="{Binding Path=SelectedItem, Source={RelativeSource Self}}"
@@ -38,15 +38,15 @@
                 </CollectionView.ItemsLayout>
 
                 <CollectionView.ItemTemplate >
-                    <DataTemplate x:DataType="models:IntroduceModel">
+                    <DataTemplate x:DataType="models:PromotionModel">
                          <Grid RowSpacing="5">
                              <Grid.RowDefinitions>
                                         <RowDefinition Height="auto"/>
                                         <RowDefinition Height="auto"/>
                                     </Grid.RowDefinitions>
 
-                             <Image Source="{Binding IntroImage}" Aspect="AspectFill" WidthRequest="320" HeightRequest="160" Grid.Row="0"/>
-                              <Label Text="{Binding IntroDescription}" HorizontalOptions="Center" FontSize="12" Grid.Row="1"/>
+                             <Image Source="{Binding ImageName}" Aspect="AspectFill" WidthRequest="320" HeightRequest="160" Grid.Row="0"/>
+                              <Label Text="{Binding Description}" HorizontalOptions="Center" FontSize="12" Grid.Row="1"/>
                          </Grid>
                        
                     </DataTemplate>

@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:models="clr-namespace:Handy_Dandy.Models"
+             xmlns:viewmodels="clr-namespace:Handy_Dandy.ViewModels"
+             x:Class="Handy_Dandy.Views.BookingPage"
+             Title="BookingPage">
+    <ScrollView Padding="10">
+        <VerticalStackLayout>
+            <CollectionView ItemsSource="{Binding User.Bookings}">
+                <CollectionView.EmptyView>
+                    <StackLayout>
+                        <Label Text="No Appointment"/>
+                        <Label Text=" Booked"/>
+                        <Label Text="You have not booked any appointment yet"/>
+                        <Button Text="Book Now"/>
+                    </StackLayout>
+
+                </CollectionView.EmptyView>
+            </CollectionView>
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

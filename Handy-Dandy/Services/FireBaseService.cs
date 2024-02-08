@@ -14,7 +14,8 @@ namespace Handy_Dandy.Services
             _firebase = new FirebaseClient(firebaseUrl);
 		}
 
-		public async Task InserUser(UserModel user)
+        #region User
+        public async Task InserUser(UserModel user)
 		{
 			var result = await this._firebase.Child(UserRootName).PostAsync(user);
 			if (result.Key != null)
@@ -58,6 +59,94 @@ namespace Handy_Dandy.Services
                 return null;
             }
         }
+        #endregion
+
+
+        #region Categories
+        public async Task<List<CategoryModel>> GetCategories()
+        {
+            List<CategoryModel> categories = new List<CategoryModel>();
+            for (int i = 0; i < 9; ++i)
+            {
+                categories.Add(CreateCategoryModel(i));
+            }
+
+            //await Task.Yield();
+            return categories;
+        }
+
+        private CategoryModel CreateCategoryModel(int index)
+        {
+            List<string> categoryImageNames = new List<string> { "category_cleaning", "category_repairing", "category_beauty" };
+            List<string> categoryName = new List<string> { "Cleaning", "Repairing", "Beauty" };
+            Random random = new Random();
+            int randomNameIndex = random.Next(categoryImageNames.Count);
+            CategoryModel category = new CategoryModel
+            {
+                CategoryID = $"C{index}_{randomNameIndex}",
+                Name = $"{categoryName[randomNameIndex]}{index}",
+                CategoryImage = $"{categoryImageNames[randomNameIndex]}",
+                Services = new List<ServiceModel>()
+            };
+
+            List<string> serviceImageNames = new List<string> { "sercie_clean_floor", "service_clean_ac", "service_clean_wall",
+                "service_laundry", "service_maintain_light", "service_repair_appliance"};
+
+            List<string> serviceNames = new List<string> { "Clean Floor", "Clean AC", "Clean Wall",
+                "Laundry", "Maintain Light", "Repair Appliance"};
+
+            int numberOfServices = random.Next(3, 11);
+
+            for (int j = 0; j < numberOfServices; j++)
+            {
+                int randomIndex = random.Next(serviceNames.Count);
+                ServiceModel service = new ServiceModel
+                {
+                    ServiceID = $"{category.CategoryID}_S{j}",
+                    CategoryID = category.CategoryID,
+                    Name = $"{serviceNames[randomIndex]}",
+                    Description = $"Description of Service {serviceNames[randomIndex]}",
+                    ServiceCharge = random.Next(20, 100),
+                    Score = 3f + (float)random.NextDouble() * 2f,
+                    CompletedCount = random.Next(60, 199),
+                    ImageName = $"{serviceImageNames[randomIndex]}"
+                };
+                category.Services.Add(service);
+            }
+
+
+            return category;
+        }
+        #endregion
+
+        #region Promotions
+        public async Task<List<PromotionModel>> GetPromotions()
+        {
+            List<PromotionModel> promotionModels = new List<PromotionModel>();
+            promotionModels.Add(new PromotionModel
+            {
+                Title = "Cleaning",
+                Description = "Best Cleaning",
+                ImageName = "cleaning"
+            });
+
+            promotionModels.Add(new PromotionModel
+            {
+                Title = "Repairing",
+                Description = "Best Repairing",
+                ImageName = "repairing"
+            });
+
+            promotionModels.Add(new PromotionModel
+            {
+                Title = "Painting",
+                Description = "Best Painting",
+                ImageName = "painting"
+            });
+
+            return promotionModels;
+        }
+        #endregion
     }
 }
 
