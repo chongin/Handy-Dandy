@@ -2,6 +2,8 @@
 using Firebase.Database;
 using Firebase.Database.Query;
 using Handy_Dandy.Models;
+using Handy_Dandy.ViewModels;
+using Bogus;
 
 namespace Handy_Dandy.Services
 {
@@ -97,6 +99,7 @@ namespace Handy_Dandy.Services
 
             int numberOfServices = random.Next(3, 11);
 
+            var faker = new Faker();
             for (int j = 0; j < numberOfServices; j++)
             {
                 int randomIndex = random.Next(serviceNames.Count);
@@ -104,11 +107,11 @@ namespace Handy_Dandy.Services
                 {
                     ServiceID = $"{category.CategoryID}_S{j}",
                     CategoryID = category.CategoryID,
-                    Name = $"{serviceNames[randomIndex]}",
+                    Name = $"{category.Name}.{serviceNames[randomIndex]}",
                     Description = $"Description of Service {serviceNames[randomIndex]}",
                     ServiceCharge = random.Next(20, 100),
-                    Score = 3f + (float)random.NextDouble() * 2f,
-                    CompletedCount = random.Next(60, 199),
+                    Score = (float)Math.Round(faker.Random.Double(3, 5), 1),
+                    CompletedCount = random.Next(80, 999),
                     ImageName = $"{serviceImageNames[randomIndex]}"
                 };
                 category.Services.Add(service);
@@ -145,6 +148,55 @@ namespace Handy_Dandy.Services
             });
 
             return promotionModels;
+        }
+        #endregion
+
+        #region Bookings
+
+        public async Task<List<BookingModel>> GetBookingsByState(string state)
+        {
+            var faker = new Faker();
+            int count = faker.Random.Int(3, 10);
+            List<BookingModel> models = new List<BookingModel>();
+            for (int i = 0; i < count; ++i)
+            {
+                var bookingModel = new BookingModel();
+                bookingModel.BookingID = faker.Random.AlphaNumeric(10);
+                bookingModel.ServiceID = faker.Random.AlphaNumeric(10);
+                bookingModel.ClientID = faker.Random.AlphaNumeric(10);
+                bookingModel.WorkderID = faker.Random.AlphaNumeric(10);
+
+                bookingModel.StartDate = faker.Date.Between(DateTime.Today, DateTime.Today.AddDays(7)).ToString();
+                TimeSpan startTime = faker.Date.Timespan();
+
+                bookingModel.StartTime = $"{startTime.Hours:D2}:{startTime.Minutes:D2}";
+                bookingModel.WorkingHours = faker.Random.Int(1, 5);
+                bookingModel.Description = faker.Lorem.Sentences(3);
+                bookingModel.state = BookingModel.ConvertBookingState(state);
+
+                models.Add(bookingModel);
+            }
+
+            return models;
+
+        }
+        #endregion
+
+
+        #region Workders
+        public async Task<WorkerModel> GetWorkersByID(string workerID)
+        {
+            var faker = new Faker();
+            WorkerModel workerModel = new WorkerModel();
+            workerModel.WorkerID = workerID;
+            workerModel.RoleID = UserRole.Workder;
+            workerModel.Name = faker.Name.FullName();
+            workerModel.Email = faker.Internet.Email();
+            workerModel.Phone = faker.Phone.PhoneNumber();
+            workerModel.Address = faker.Address.FullAddress();
+            workerModel.Score = (float)Math.Round(faker.Random.Double(3, 5), 1);
+            workerModel.ratings = faker.Random.Int(80, 999);
+            return workerModel;
         }
         #endregion
     }
