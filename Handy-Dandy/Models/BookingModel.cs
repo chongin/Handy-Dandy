@@ -29,9 +29,17 @@ namespace Handy_Dandy.Models
 		public int WorkingHours { get; set; }
 		public float TotalPrice { get; set; }
 		public string Description { get; set; }
-		public BookingState state { get; set; }
+		public BookingState State { get; set; }
 
-		 
+
+        public string StateName
+        {
+            get
+            {
+                return State.ToString();
+            }
+        }
+
 		public int Year
 		{
 			get

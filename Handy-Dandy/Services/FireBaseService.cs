@@ -11,10 +11,24 @@ namespace Handy_Dandy.Services
 	{
         private readonly FirebaseClient _firebase;
 		private static string UserRootName = "Clients";
+        private List<string> serviceImageNames;
+        private List<string> serviceNames;
+        List<string> categoryImageNames;
+        List<string> categoryName;
         public FireBaseService(string firebaseUrl)
 		{
             _firebase = new FirebaseClient(firebaseUrl);
-		}
+
+            categoryImageNames = new List<string> { "category_cleaning", "category_repairing", "category_beauty" };
+            categoryName = new List<string> { "Cleaning", "Repairing", "Beauty" };
+
+            serviceImageNames = new List<string> { "sercie_clean_floor", "service_clean_ac", "service_clean_wall",
+                "service_laundry", "service_maintain_light", "service_repair_appliance"};
+
+            serviceNames = new List<string> { "Clean Floor", "Clean AC", "Clean Wall",
+                "Laundry", "Maintain Light", "Repair Appliance"};
+
+        }
 
         #region User
         public async Task InserUser(UserModel user)
@@ -79,8 +93,6 @@ namespace Handy_Dandy.Services
 
         private CategoryModel CreateCategoryModel(int index)
         {
-            List<string> categoryImageNames = new List<string> { "category_cleaning", "category_repairing", "category_beauty" };
-            List<string> categoryName = new List<string> { "Cleaning", "Repairing", "Beauty" };
             Random random = new Random();
             int randomNameIndex = random.Next(categoryImageNames.Count);
             CategoryModel category = new CategoryModel
@@ -91,11 +103,7 @@ namespace Handy_Dandy.Services
                 Services = new List<ServiceModel>()
             };
 
-            List<string> serviceImageNames = new List<string> { "sercie_clean_floor", "service_clean_ac", "service_clean_wall",
-                "service_laundry", "service_maintain_light", "service_repair_appliance"};
-
-            List<string> serviceNames = new List<string> { "Clean Floor", "Clean AC", "Clean Wall",
-                "Laundry", "Maintain Light", "Repair Appliance"};
+            
 
             int numberOfServices = random.Next(3, 11);
 
@@ -151,6 +159,23 @@ namespace Handy_Dandy.Services
         }
         #endregion
 
+        #region Service
+        public async Task<ServiceModel> GetServiceByID(string serviceID)
+        {
+            var faker = new Faker();
+            ServiceModel model = new ServiceModel();
+            model.ServiceID = serviceID;
+            model.CategoryID = faker.Random.AlphaNumeric(10);
+            model.Name = serviceNames[faker.Random.Int(0, serviceNames.Count - 1)];
+            model.ImageName = serviceImageNames[faker.Random.Int(0, serviceImageNames.Count - 1)];
+            model.ServiceCharge = faker.Random.Int(20, 100);
+            model.CompletedCount = faker.Random.Int(50, 200);
+            model.Score = (float)Math.Round(faker.Random.Double(3, 5), 1);
+            return model;
+        }
+
+        #endregion
+
         #region Bookings
 
         public async Task<List<BookingModel>> GetBookingsByState(string state)
@@ -171,8 +196,9 @@ namespace Handy_Dandy.Services
 
                 bookingModel.StartTime = $"{startTime.Hours:D2}:{startTime.Minutes:D2}";
                 bookingModel.WorkingHours = faker.Random.Int(1, 5);
-                bookingModel.Description = faker.Lorem.Sentences(3);
-                bookingModel.state = BookingModel.ConvertBookingState(state);
+                bookingModel.Description = faker.Lorem.Sentences(2);
+                bookingModel.TotalPrice = faker.Random.Int(30, 150);
+                bookingModel.State = BookingModel.ConvertBookingState(state);
 
                 models.Add(bookingModel);
             }
@@ -184,7 +210,7 @@ namespace Handy_Dandy.Services
 
 
         #region Workders
-        public async Task<WorkerModel> GetWorkersByID(string workerID)
+        public async Task<WorkerModel> GetWorkerByID(string workerID)
         {
             var faker = new Faker();
             WorkerModel workerModel = new WorkerModel();

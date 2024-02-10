@@ -12,9 +12,10 @@ namespace Handy_Dandy.ViewModels
     {
         public BookingModel BookingModel { get; set; }
         public WorkerModel WorkerModel { get; set; }
+        public ServiceModel ServiceModel { get; set; }
     }
 
-    public class BookingViewModel: BaseViewModel
+    public partial class BookingViewModel: BaseViewModel
 	{
 		private IDatabaseService _databaseService;
 
@@ -22,13 +23,27 @@ namespace Handy_Dandy.ViewModels
 		public List<CombineBookingModel> ActiveCombineBookingModels { get; set; }
         public List<CombineBookingModel> SuccessCombineBookingModels { get; set; }
         public List<CombineBookingModel> CancelCombineBookingModels { get; set; }
-        public List<CombineBookingModel> CurrentCombineBookingModels { get; set; }
+
+        private List<CombineBookingModel> _currentCombineBookingModels;
+        public List<CombineBookingModel> CurrentCombineBookingModels
+        {
+            get => _currentCombineBookingModels;
+            set => SetProperty(ref _currentCombineBookingModels, value);
+        }
 
         public int CurrentPage { get; set; }
 
+        public IAsyncRelayCommand ActiveCommand { get; }
+        public IAsyncRelayCommand SuccessCommand { get; }
+        public IAsyncRelayCommand CancelledCommand { get; }
+
         public BookingViewModel(IDatabaseService databaseService)
 		{
-			this._databaseService = databaseService;
+            ActiveCommand = new AsyncRelayCommand(OnClickActive);
+            SuccessCommand = new AsyncRelayCommand(OnClickSuccess);
+            CancelledCommand = new AsyncRelayCommand(OnClickCancelled);
+
+            this._databaseService = databaseService;
             CurrentCombineBookingModels = new List<CombineBookingModel>();
             CurrentPage = 1;
             InitData();
@@ -37,9 +52,6 @@ namespace Handy_Dandy.ViewModels
 		private async void InitData()
 		{
 			ActiveCombineBookingModels = await GetCombineBookingModel("Active");
-            SuccessCombineBookingModels = await GetCombineBookingModel("Success");
-            CancelCombineBookingModels = await GetCombineBookingModel("Cancelled");
-
             CurrentCombineBookingModels.Clear();
             foreach (var model in ActiveCombineBookingModels)
             {
@@ -54,14 +66,37 @@ namespace Handy_Dandy.ViewModels
             var bookingModels = await this._databaseService.GetBookingsByState(state);
             foreach (var bookingModel in bookingModels)
             {
-                var workerModel = await this._databaseService.GetWorkersByID(bookingModel.WorkderID);
+                var workerModel = await this._databaseService.GetWorkerByID(bookingModel.WorkderID);
+                var serviceModel = await this._databaseService.GetServiceByID(bookingModel.ServiceID);
+
                 CombineBookingModel combineModel = new CombineBookingModel();
                 combineModel.BookingModel = bookingModel;
                 combineModel.WorkerModel = workerModel;
-
+                combineModel.ServiceModel = serviceModel;
                 combineModels.Add(combineModel);
             }
 			return combineModels;
+        }
+
+        public async Task OnClickActive()
+        {
+            CurrentPage = 1;
+            ActiveCombineBookingModels = await GetCombineBookingModel("Active");
+            CurrentCombineBookingModels = ActiveCombineBookingModels;
+        }
+
+        public async Task OnClickSuccess()
+        {
+            CurrentPage = 2;
+            SuccessCombineBookingModels = await GetCombineBookingModel("Success");
+            CurrentCombineBookingModels = SuccessCombineBookingModels;
+        }
+
+        public async Task OnClickCancelled()
+        {
+            CurrentPage = 3;
+            CancelCombineBookingModels = await GetCombineBookingModel("Cancelled");
+            CurrentCombineBookingModels = CancelCombineBookingModels;
         }
     }
 }

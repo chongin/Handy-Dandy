@@ -10,7 +10,8 @@ namespace Handy_Dandy.Services
 		Task<List<CategoryModel>> GetCategories();
         Task<List<PromotionModel>> GetPromotions();
 		Task<List<BookingModel>> GetBookingsByState(string state);
-		Task<WorkerModel> GetWorkersByID(string workerID);
+		Task<WorkerModel> GetWorkerByID(string workerID);
+		Task<ServiceModel> GetServiceByID(string serviceID);
     }
 }
 
