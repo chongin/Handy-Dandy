@@ -191,7 +191,7 @@ namespace Handy_Dandy.Services
                 bookingModel.ClientID = faker.Random.AlphaNumeric(10);
                 bookingModel.WorkderID = faker.Random.AlphaNumeric(10);
 
-                bookingModel.StartDate = faker.Date.Between(DateTime.Today, DateTime.Today.AddDays(7)).ToString();
+                bookingModel.StartDate = faker.Date.Between(DateTime.Today, DateTime.Today.AddDays(7)).ToString("yyyy-MM-dd");
                 TimeSpan startTime = faker.Date.Timespan();
 
                 bookingModel.StartTime = $"{startTime.Hours:D2}:{startTime.Minutes:D2}";

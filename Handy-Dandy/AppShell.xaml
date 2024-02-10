@@ -5,11 +5,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:Handy_Dandy.Views">
 
-    <Shell.FlyoutHeader>
-        <Image Source="dotnet_bot.svg" HeightRequest="100"/>
-    </Shell.FlyoutHeader>
-    
-    <ShellContent Title="Login Page" 
+    <!--<ShellContent Title="Login Page" 
             FlyoutItemIsVisible="False" Shell.FlyoutBehavior="Disabled"
             ContentTemplate="{DataTemplate local:LoginPage}"
             Route="LoginPage" />
@@ -19,6 +15,48 @@
             ContentTemplate="{DataTemplate local:SignUpPage}"
             Route="SignUpPage" />
 
+    <TabBar>
+        <Tab Title="Home" Icon="home.png">
+            <ShellContent Title="Home"
+                          ContentTemplate="{DataTemplate local:HomePage}"
+                          Route="HomePage"/>
+        </Tab>
+        <Tab Title="Booking" Icon="home.png">
+            <ShellContent Title="Active"
+                          ContentTemplate="{DataTemplate local:BookingPage}"
+                          Route="BookingPage"/>
+            <ShellContent Title="Success"
+                          ContentTemplate="{DataTemplate local:NotificationPage}"
+                          Route="NotificationPage"/>
+            <ShellContent Title="Cancelled"
+                          ContentTemplate="{DataTemplate local:NotificationPage}"
+                          Route="NotificationPage"/>
+        </Tab>
+        <Tab Title="Notification" Icon="home.png">
+            <ShellContent Title="Notification"
+                          ContentTemplate="{DataTemplate local:NotificationPage}"
+                          Route="NotificationPage"/>
+        </Tab>
+        <Tab Title="Setting" Icon="home.png">
+            <ShellContent Title="Setting"
+                          ContentTemplate="{DataTemplate local:SettingPage}"
+                          Route="SettingPage"/>
+        </Tab>
+    </TabBar>-->
+
+    <Shell.FlyoutHeader>
+        <Image Source="dotnet_bot.svg" HeightRequest="100"/>
+    </Shell.FlyoutHeader>
+
+     <ShellContent Title="Login Page" 
+            FlyoutItemIsVisible="False" Shell.FlyoutBehavior="Disabled"
+            ContentTemplate="{DataTemplate local:LoginPage}"
+            Route="LoginPage" />
+
+    <ShellContent Title="SignUp Page"
+            FlyoutItemIsVisible="False" Shell.FlyoutBehavior="Disabled"
+            ContentTemplate="{DataTemplate local:SignUpPage}"
+            Route="SignUpPage" />
     
     <FlyoutItem Title="Dashboard" FlyoutDisplayOptions="AsMultipleItems">
         <ShellContent Title="Home" Icon="home.png"

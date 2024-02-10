@@ -84,8 +84,7 @@
                                             <RowDefinition Height="auto"/>
                                         </Grid.RowDefinitions>
                                 
-                                        <Image Source="{Binding CategoryImage}" Aspect="AspectFit" 
-                                                Grid.Row="0"/>
+                                        <Image Source="{Binding CategoryImage}" Aspect="AspectFit" Grid.Row="0"/>
 
                                         <Label Text="{Binding Name}" FontSize="12" HorizontalOptions="CenterAndExpand" VerticalOptions="Center"
                                                 Grid.Row="1" BackgroundColor="LightSkyBlue"/>

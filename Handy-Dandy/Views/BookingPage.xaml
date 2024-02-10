@@ -3,82 +3,118 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:models="clr-namespace:Handy_Dandy.Models"
              xmlns:viewmodels="clr-namespace:Handy_Dandy.ViewModels"
+             xmlns:displaymodels="clr-namespace:Handy_Dandy.ViewModels.DisplayModels"
              x:Class="Handy_Dandy.Views.BookingPage"
              Shell.NavBarIsVisible="False"
              Title="BookingPage">
 
-    <ScrollView Padding="10,0,10,10">
-        <VerticalStackLayout >
+    <ScrollView>
+        <VerticalStackLayout>
            <StackLayout Orientation="Horizontal" Spacing="1" >
-                <Button x:Name="ActiveTab" Text="Active"  HorizontalOptions="FillAndExpand" Command="{Binding ActiveCommand}"/>
-                <Button x:Name="SuccessTab" Text="Success"  HorizontalOptions="FillAndExpand" Command="{Binding SuccessCommand}"/>
-                <Button x:Name="CancelledTab" Text="Cancelled" HorizontalOptions="FillAndExpand" Command="{Binding CancelledCommand}"/>
+                <Button x:Name="ActiveTab" Text="Active"  HorizontalOptions="FillAndExpand" Command="{Binding ActiveCommand}"
+                        CornerRadius="0" BackgroundColor="{Binding ActiveButtonColor}"/>
+                <Button x:Name="SuccessTab" Text="Success"  HorizontalOptions="FillAndExpand" Command="{Binding SuccessCommand}"
+                        CornerRadius="0" BackgroundColor="{Binding SuccessButtonColor}"/>
+                <Button x:Name="CancelledTab" Text="Cancelled" HorizontalOptions="FillAndExpand" Command="{Binding CancelledCommand}"
+                        CornerRadius="0" BackgroundColor="{Binding CancelledButtonColor}"/>
             </StackLayout>
 
-            <StackLayout x:Name="ActiveContent" IsVisible="True">
-                <CollectionView x:Name="ActiveListView" ItemsSource="{Binding CurrentCombineBookingModels}">
+            <StackLayout Margin="10">
+                <CollectionView x:Name="ActiveListView" ItemsSource="{Binding CurrentBookingModels}">
                     <CollectionView.ItemsLayout>
-                        <GridItemsLayout Orientation="Vertical" Span="1" />
+                        <LinearItemsLayout Orientation="Vertical" ItemSpacing="10"/>
                     </CollectionView.ItemsLayout>
 
                     <CollectionView.ItemTemplate>
-                        <DataTemplate x:DataType="viewmodels:CombineBookingModel">
-                            <VerticalStackLayout>
-                                <Grid RowSpacing="20" Padding="10">
-                                    <Frame HorizontalOptions="FillAndExpand" >
-                                        <Grid>
-                                            <Grid.RowDefinitions>
-                                                <RowDefinition Height="*"/>
-                                                <RowDefinition Height="auto"/>
-                                            </Grid.RowDefinitions>
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="*"/>
-                                                <ColumnDefinition Width="auto"/>
-                                            </Grid.ColumnDefinitions>
+                        <DataTemplate x:DataType="displaymodels:BookingDisplayModel">
+                            <Frame HorizontalOptions="FillAndExpand">
+                                <VerticalStackLayout>
+                                    <Grid x:Name="bookinggrid">
+                                        
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="auto"/>
+                                        </Grid.ColumnDefinitions>
 
-                                            <StackLayout Grid.Row="0" Grid.Column="0" Orientation="Vertical" Spacing="5">
-                                                <Label Text="{Binding BookingModel.BookingID}" TextColor="Blue" FontAttributes="Bold"/>
-                                                <Label Text="{Binding ServiceModel.Name}" FontAttributes="Bold" />
-                                                <Label Text="{Binding BookingModel.StartDate}"/>
-                                            </StackLayout>
+                                        <StackLayout Grid.Row="0" Grid.Column="0" Orientation="Vertical" Spacing="5">
+                                            <Label Text="{Binding BookingModel.BookingID}" TextColor="Blue" FontAttributes="Bold"/>
+                                            <Label Text="{Binding ServiceModel.Name}" FontAttributes="Bold" />
+                                            <Label Text="{Binding BookingModel.StartDate}"/>
+                                        </StackLayout>
 
-                                            <StackLayout Grid.Row="0" Grid.Column="1" Orientation="Vertical" HorizontalOptions="End" VerticalOptions="Center" Spacing="5">
-                                                <Label Text="{Binding BookingModel.StateName}"  TextColor="Blue" FontAttributes="Bold"/>
+                                        <StackLayout Grid.Row="0" Grid.Column="1" Orientation="Vertical" HorizontalOptions="End" VerticalOptions="Center" Spacing="5">
+                                            <Label Text="{Binding BookingModel.StateName}"  TextColor="Blue" FontAttributes="Bold"/>
+                                            <StackLayout Orientation="Horizontal" HorizontalOptions="End">
+                                                <Label Text="$" FontAttributes="Bold"/>
                                                 <Label Text="{Binding BookingModel.TotalPrice}" FontAttributes="Bold" />
                                             </StackLayout>
+                                        </StackLayout>
+                                    </Grid>
 
+                                    <Label HeightRequest="1" BackgroundColor="Gray"/>
 
-                                            <StackLayout Grid.Row="1" Grid.Column="0" Orientation="Vertical" Spacing="5" Padding="0, 10">
-                                                <Label Text="{Binding WorkerModel.Name}" FontAttributes="Bold" />
-                                                <Label Text="{Binding WorkerModel.Score}"/>
+                                    <Grid x:Name="workergrid">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <StackLayout Grid.Row="1" Grid.Column="0" Orientation="Vertical" Spacing="5" Padding="0, 10">
+                                            <Label Text="{Binding WorkerModel.Name}" FontAttributes="Bold" />
+                                            <StackLayout Orientation="Horizontal">
+                                                <Image Source="score.png" HeightRequest="18"/>
+                                                <Label Text="{Binding WorkerModel.Score}" TextColor="Blue"/>
+                                                <Label Text="   "/>
+                                                <Label Text="{Binding WorkerModel.ratings}"/>
+                                                <Label Text=" "/>
+                                                <Label Text="Ratings"/>
                                             </StackLayout>
-
-                                            <Label Grid.Row="1" Grid.Column="1" Text="{Binding WorkerModel.Name}" FontAttributes="Bold" Padding="0, 20"/>
-                                        </Grid>
-                                    </Frame>
-                                    
-                                </Grid>
-                                <!--<Button Text="Cancel Booking" TextColor="Red"/>-->
-                            </VerticalStackLayout>
+                                        </StackLayout>
+                                         <Image Grid.Row="1" Grid.Column="1" Source="worker.png" Aspect="AspectFit" HeightRequest="32"/>
+                                    </Grid>
+                                </VerticalStackLayout>
+                              
+                            </Frame>
                         </DataTemplate>
 
                     </CollectionView.ItemTemplate>
                 </CollectionView>
-            </StackLayout>
 
-            <StackLayout x:Name="SuccessContent" IsVisible="False">
-                <Label Text="Successful Bookings" FontSize="Large" />
-                <ListView x:Name="SuccessListView">
-                </ListView>
             </StackLayout>
+           
 
-            <StackLayout x:Name="CancelledContent" IsVisible="False">
-                <!-- Content for Cancelled bookings -->
-                <Label Text="Cancelled Bookings" FontSize="Large" />
-                <ListView x:Name="CancelledListView">
-
-                </ListView>
-            </StackLayout>
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>
+
+<!--
+
+  <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="auto"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="auto"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <StackLayout Grid.Row="0" Grid.Column="0" Orientation="Vertical" Spacing="5">
+                                        <Label Text="{Binding BookingModel.BookingID}" TextColor="Blue" FontAttributes="Bold"/>
+                                        <Label Text="{Binding ServiceModel.Name}" FontAttributes="Bold" />
+                                        <Label Text="{Binding BookingModel.StartDate}"/>
+                                    </StackLayout>
+
+                                    <StackLayout Grid.Row="0" Grid.Column="1" Orientation="Vertical" HorizontalOptions="End" VerticalOptions="Center" Spacing="5">
+                                        <Label Text="{Binding BookingModel.StateName}"  TextColor="Blue" FontAttributes="Bold"/>
+                                        <Label Text="{Binding BookingModel.TotalPrice}" FontAttributes="Bold" />
+                                    </StackLayout>
+
+
+                                    <StackLayout Grid.Row="1" Grid.Column="0" Orientation="Vertical" Spacing="5" Padding="0, 10">
+                                        <Label Text="{Binding WorkerModel.Name}" FontAttributes="Bold" />
+                                        <Label Text="{Binding WorkerModel.Score}"/>
+                                    </StackLayout>
+
+                                    <Image Grid.Row="1" Grid.Column="1" Source="worker.png" Aspect="AspectFit" HeightRequest="32"/>
+                                </Grid>
+-->

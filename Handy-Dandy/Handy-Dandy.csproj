@@ -80,6 +80,8 @@
 	  <None Remove="Resources\Images\category_cleaning.jpg" />
 	  <None Remove="Resources\Images\score.png" />
 	  <None Remove="Resources\Images\goto.png" />
+	  <None Remove="ViewModels\DisplayModels\" />
+	  <None Remove="Resources\Images\worker.png" />
 	</ItemGroup>
 	<ItemGroup>
 	  <Folder Include="Views\" />
@@ -88,10 +90,12 @@
 	  <Folder Include="Controllers\" />
 	  <Folder Include="Services\" />
 	  <Folder Include="Resources\Images\" />
+	  <Folder Include="ViewModels\DisplayModels\" />
 	</ItemGroup>
 	<ItemGroup>
 	  <BundleResource Include="Resources\Images\category_cleaning.jpg" />
 	  <BundleResource Include="Resources\Images\score.png" />
 	  <BundleResource Include="Resources\Images\gotobtn.png" />
+	  <BundleResource Include="Resources\Images\worker.png" />
 	</ItemGroup>
 </Project>
