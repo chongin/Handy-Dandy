@@ -20,14 +20,19 @@ namespace Handy_Dandy.ViewModels
 		private List<TimeDisplayModel> startWorkTimes = new List<TimeDisplayModel>();
 
 		public IAsyncRelayCommand TabTimeCommand { get; }
+        public IAsyncRelayCommand TabDateCommand { get; }
 
-		private int currentSelectTimeIndex = 0;
+        private int currentSelectTimeIndex = 0;
+		private int currentSelectDateIndex = 0;
 
 		private IDatabaseService _databaseService { get; set; }
 		public BookingDetailViewModel(IDatabaseService databaseService)
 		{
 			TabTimeCommand = new AsyncRelayCommand<TimeDisplayModel>(
 				async (arg) => await OnTabTime(arg));
+
+            TabDateCommand = new AsyncRelayCommand<DateDisplayModel>(
+                async (arg) => await OnTabDate(arg));
 
             this._databaseService = databaseService;
 			InitDates();
@@ -39,7 +44,7 @@ namespace Handy_Dandy.ViewModels
 			DateTime currentDate = DateTime.Today;
             Next7Dates.Add(new DateDisplayModel(currentDate));
 
-			for (int i = 1; i < 7; i++)
+			for (int i = 1; i < 10; i++)
 			{
 				DateTime nextDate = currentDate.AddDays(i);
                 Next7Dates.Add(new DateDisplayModel(nextDate));
@@ -58,13 +63,24 @@ namespace Handy_Dandy.ViewModels
 		private async Task OnTabTime(TimeDisplayModel timeModel)
 		{
             var preTime = StartWorkTimes[currentSelectTimeIndex];
-            preTime.CurrentColor = Color.FromRgb(135, 206, 250);
+            preTime.CurrentColor = Color.FromArgb("#00000000");
 
             int currentIndex = StartWorkTimes.IndexOf(timeModel);
-			timeModel.CurrentColor = Color.FromRgb(0, 0, 230);
+			timeModel.CurrentColor = Color.FromRgb(35, 206, 250);
 
-			currentSelectTimeIndex = currentIndex;
+            currentSelectTimeIndex = currentIndex;
         }
-	}
+
+        private async Task OnTabDate(DateDisplayModel dateModel)
+        {
+			var preDate = Next7Dates[currentSelectDateIndex];
+            preDate.CurrentColor = Color.FromArgb("#00000000");
+
+			int currentIndex = Next7Dates.IndexOf(dateModel);
+            dateModel.CurrentColor = Color.FromRgb(35, 206, 250);
+
+			currentSelectDateIndex = currentIndex;
+		}
+    }
 }
 

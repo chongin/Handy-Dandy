@@ -15,8 +15,8 @@ namespace Handy_Dandy.ViewModels.DisplayModels
 
 		public TimeDisplayModel(int hour)
 		{
-            _currentColor = Color.FromRgb(135, 206, 250);
-			Time = hour < 12 ? $"{hour}:00 AM" : $"{hour}:00 PM";
+            _currentColor = Color.FromArgb("#00000000");
+            Time = hour < 12 ? $"{hour}:00 AM" : $"{hour}:00 PM";
         }
 	}
 }

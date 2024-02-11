@@ -7,16 +7,37 @@
              Shell.NavBarIsVisible="False"
              Title="BookingDetail">
     <ScrollView>
-        <VerticalStackLayout>
-            <CollectionView>
-                <CollectionView.Header>
-                    <Label Text="Date and Time"/>
-                </CollectionView.Header>
+        <VerticalStackLayout Padding="10">
+            <VerticalStackLayout>
+                <Label Text="Date and Time" FontAttributes="Bold"/>
+                <CollectionView ItemsSource="{Binding Next7Dates}">
+                    <CollectionView.ItemsLayout>
+                        <LinearItemsLayout Orientation="Horizontal" ItemSpacing="10"/>
+                    </CollectionView.ItemsLayout>
 
-            </CollectionView>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="displaymodels:DateDisplayModel">
+                            <Frame Padding="15,8" BackgroundColor="{Binding CurrentColor}">
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer CommandParameter="{Binding .}"
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:BookingDetailViewModel}}, Path=TabDateCommand}"/>
+                                </Frame.GestureRecognizers>
+
+                                <VerticalStackLayout>
+                                    <Label Text="{Binding DateOfWeek}"/>
+                                    <Label Text="{Binding Day}" FontAttributes="Bold" FontSize="20"/>
+                                    <Label Text="{Binding Month}"/>
+                                </VerticalStackLayout>
+                            </Frame>
+
+                        </DataTemplate>
+
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </VerticalStackLayout>
 
             <!--Time-->
-            <CollectionView ItemsSource="{Binding StartWorkTimes}">
+            <CollectionView ItemsSource="{Binding StartWorkTimes}" Margin="0,10,0,0">
                 <CollectionView.ItemsLayout>
                     <LinearItemsLayout Orientation="Horizontal" ItemSpacing="20"/>
                 </CollectionView.ItemsLayout>

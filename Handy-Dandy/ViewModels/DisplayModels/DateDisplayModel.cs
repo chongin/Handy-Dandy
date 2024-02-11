@@ -1,12 +1,22 @@
 ﻿using System;
+using CommunityToolkit.Mvvm.ComponentModel;
+
 namespace Handy_Dandy.ViewModels.DisplayModels
 {
-	public class DateDisplayModel
-	{
+	public class DateDisplayModel : ObservableObject
+    {
 		public DateTime DateTime;
-		public DateDisplayModel(DateTime dateTime)
+        private Color _currentColor;
+        public Color CurrentColor
+        {
+            get => _currentColor;
+            set => SetProperty(ref _currentColor, value);
+        }
+
+        public DateDisplayModel(DateTime dateTime)
 		{
-			this.DateTime = dateTime;
+            _currentColor = Color.FromArgb("#00000000");
+            this.DateTime = dateTime;
 		}
 
 		public string Month
