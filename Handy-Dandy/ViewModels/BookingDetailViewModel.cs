@@ -21,9 +21,10 @@ namespace Handy_Dandy.ViewModels
 
 		public IAsyncRelayCommand TabTimeCommand { get; }
         public IAsyncRelayCommand TabDateCommand { get; }
-
+		public IAsyncRelayCommand TabWorkerCommand { get; set; }
         private int currentSelectTimeIndex = 0;
 		private int currentSelectDateIndex = 0;
+		private int currentSelectWorkerIndex = 0;
 
 		private IDatabaseService _databaseService { get; set; }
 		public BookingDetailViewModel(IDatabaseService databaseService)
@@ -34,6 +35,9 @@ namespace Handy_Dandy.ViewModels
 
             TabDateCommand = new AsyncRelayCommand<DateDisplayModel>(
                 async (arg) => await OnTabDate(arg));
+
+            TabWorkerCommand = new AsyncRelayCommand<WorkerModel>(
+                async (arg) => await OnTabWorker(arg));
 
             this._databaseService = databaseService;
 
@@ -46,6 +50,7 @@ namespace Handy_Dandy.ViewModels
 		private async void InitModel()
 		{
             BookingDetailDisplay.ServiceModel = await this._databaseService.GetServiceByID("MockServiceID");
+			BookingDetailDisplay.Workers = await this._databaseService.GetWorkersByServiceID(BookingDetailDisplay.ServiceModel.ServiceID);
 		}
 		private void InitDates()
 		{
@@ -89,6 +94,17 @@ namespace Handy_Dandy.ViewModels
 
 			currentSelectDateIndex = currentIndex;
 		}
+
+        private async Task OnTabWorker(WorkerModel workerModel)
+        {
+            var preWorker = BookingDetailDisplay.Workers[currentSelectWorkerIndex];
+           // preWorker.CurrentColor = Color.FromArgb("#00000000");
+
+            int currentIndex = BookingDetailDisplay.Workers.IndexOf(workerModel);
+           // dateModel.CurrentColor = Color.FromRgb(35, 206, 250);
+
+            currentSelectWorkerIndex = currentIndex;
+        }
     }
 }
 

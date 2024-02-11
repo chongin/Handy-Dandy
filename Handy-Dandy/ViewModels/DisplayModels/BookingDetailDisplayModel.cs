@@ -12,6 +12,7 @@ namespace Handy_Dandy.ViewModels.DisplayModels
 
 		public BookingModel BookingModel { get; set; }
 		public ServiceModel ServiceModel { get; set; }
+		public List<WorkerModel> Workers { get; set; }
 
 		public string ServiceCharge
 		{

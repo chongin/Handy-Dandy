@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:displaymodels="clr-namespace:Handy_Dandy.ViewModels.DisplayModels"
              xmlns:viewmodels="clr-namespace:Handy_Dandy.ViewModels"
+             xmlns:models="clr-namespace:Handy_Dandy.Models"
              x:Class="Handy_Dandy.Views.BookingDetailPage"
              Shell.NavBarIsVisible="False"
              Title="BookingDetail">
@@ -16,7 +17,7 @@
                     </Grid.ColumnDefinitions>
                     <StackLayout Orientation="Vertical" Grid.Row="0" Grid.Column="0" BackgroundColor="Transparent"
                                  HorizontalOptions="FillAndExpand" Spacing="5">
-                        <Label Text="{Binding BookingDetailDisplay.ServiceModel.Name}" FontAttributes="Bold"/>
+                        <Label Text="{Binding BookingDetailDisplay.ServiceModel.Name}" FontAttributes="Bold" FontSize="24"/>
                         <StackLayout Orientation="Horizontal" Spacing="3">
                             <Label Text="{Binding BookingDetailDisplay.ServiceCharge}" FontSize="20" TextColor="Blue" FontAttributes="Bold"/>
                             <Label Text="/h" TextColor="Gray" FontSize="20"/>
@@ -42,7 +43,7 @@
             </Frame>
 
             <VerticalStackLayout>
-                <Label Text="Date and Time" FontAttributes="Bold"/>
+                <Label Text="Date and Time" FontAttributes="Bold" Margin="0,0,0,8"/>
                 <CollectionView ItemsSource="{Binding Next7Dates}">
                     <CollectionView.ItemsLayout>
                         <LinearItemsLayout Orientation="Horizontal" ItemSpacing="10"/>
@@ -70,7 +71,7 @@
             </VerticalStackLayout>
 
             <!--Time-->
-            <CollectionView ItemsSource="{Binding StartWorkTimes}" >
+            <CollectionView ItemsSource="{Binding StartWorkTimes}">
                 <CollectionView.ItemsLayout>
                     <GridItemsLayout Orientation="Vertical"  Span="3" HorizontalItemSpacing="20"/>
                 </CollectionView.ItemsLayout>
@@ -93,11 +94,85 @@
                 </CollectionView.ItemTemplate>
             </CollectionView>
 
-            <Label Text="Workder" />
             <!--Workder-->
-            <CollectionView>
+            <CollectionView ItemsSource="{Binding BookingDetailDisplay.Workers}">
+                <CollectionView.Header>
+                    <Label Text="Worker" FontAttributes="Bold"/>
+                </CollectionView.Header>
+
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Vertical" ItemSpacing ="8"/>
+                </CollectionView.ItemsLayout>
+
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="models:WorkerModel">
+                        <Frame Padding="15">
+                             <Frame.GestureRecognizers>
+                                <TapGestureRecognizer CommandParameter="{Binding .}"
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:BookingDetailViewModel}}, Path=TabWorkerCommand}"/>
+                            </Frame.GestureRecognizers>
+
+                            <StackLayout Orientation="Horizontal" Spacing="10">
+                                <Image Source="{Binding ImageName}" />
+
+                                <Grid HorizontalOptions="FillAndExpand">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="auto"/>
+                                        <RowDefinition Height="auto"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="7*"/>
+                                        <ColumnDefinition Width="3*"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <VerticalStackLayout Grid.Row="0" Grid.Column="0">
+                                        <Label Text="{Binding Name}" FontAttributes="Bold"/>
+                                    </VerticalStackLayout>
+                                  
+
+                                    <StackLayout Orientation="Horizontal" Grid.Row="1" Grid.Column="0" Spacing="5">
+                                        <Image Source="score.png" HeightRequest="14"/>
+                                        <Label Text="{Binding Score}" FontSize="14" VerticalOptions="Center"/>
+                                        <Label Text="{Binding RatingsStr}" VerticalOptions="Center"/>
+                                    </StackLayout>
+                                    <StackLayout Orientation="Horizontal" Grid.Row="1" Grid.Column="1">
+                                        <Label Text="{Binding LaborCostStr}" HorizontalOptions="CenterAndExpand" FontAttributes="Bold" FontSize="20"/>
+                                        <Label Text="per hour" VerticalOptions="Center"/>
+                                    </StackLayout>
+                                </Grid>
+                            </StackLayout>
+                        </Frame>
+                        
+
+                    </DataTemplate>
+
+                </CollectionView.ItemTemplate>
             </CollectionView>
 
+            <VerticalStackLayout>
+                <Label Text="Summary" FontAttributes="Bold"/>
+                <StackLayout Orientation="Horizontal" Spacing="10">
+                    <Grid HorizontalOptions="FillAndExpand">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Label Text="SubTotal" HorizontalOptions="Start" VerticalOptions="Center" Grid.Row="0" Grid.Column="0"/>
+                        <Label Text="$156.0" Grid.Row="0" Grid.Column="1" FontAttributes="Bold"/>
+                        <Label Text="Est.Tax" VerticalOptions="Center" HorizontalOptions="Start" Grid.Row="1" Grid.Column="0"/>
+                        <Label Text="$13.5" Grid.Row="1" Grid.Column="1" FontAttributes="Bold"/>
+                    </Grid>
+
+
+                    
+                    <Button Text="Book Now" />
+                </StackLayout>
+            </VerticalStackLayout>
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

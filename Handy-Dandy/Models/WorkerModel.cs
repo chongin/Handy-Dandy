@@ -15,11 +15,29 @@ namespace Handy_Dandy.Models
         public string Phone { get; set; }
 
         public float Score { get; set; }
-        public int ratings { get; set; }
+        public int Ratings { get; set; }
+        public int LaborCost { get; set; }
+        public string ImageName { get; set; }
 
-        public List<string> ServiceIds { get; set; }
+        public List<string> ServiceIDs { get; set; }
         public UserRole RoleID { get; set; }
-        
+
+
+        public string LaborCostStr
+        {
+            get
+            {
+                return $"{LaborCost}";
+            }
+        }
+
+        public string RatingsStr
+        {
+            get
+            {
+                return $"({Ratings})";
+            }
+        }
     }
 }
 

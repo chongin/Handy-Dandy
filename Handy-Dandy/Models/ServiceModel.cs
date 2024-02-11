@@ -15,7 +15,7 @@ namespace Handy_Dandy.Models
         public int ServiceCharge { get; set; }
 		public int CompletedCount { get; set; }
 		public float Score { get; set; }
-
+		public List<string> WorkerIDs { get; set; }
 	}
 }
 

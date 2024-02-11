@@ -64,7 +64,7 @@
                                                 <Image Source="score.png" HeightRequest="18"/>
                                                 <Label Text="{Binding WorkerModel.Score}" TextColor="Blue"/>
                                                 <Label Text="   "/>
-                                                <Label Text="{Binding WorkerModel.ratings}"/>
+                                                <Label Text="{Binding WorkerModel.Ratings}"/>
                                                 <Label Text=" "/>
                                                 <Label Text="Ratings"/>
                                             </StackLayout>

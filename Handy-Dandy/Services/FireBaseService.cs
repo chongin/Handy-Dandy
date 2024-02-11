@@ -221,8 +221,26 @@ namespace Handy_Dandy.Services
             workerModel.Phone = faker.Phone.PhoneNumber();
             workerModel.Address = faker.Address.FullAddress();
             workerModel.Score = (float)Math.Round(faker.Random.Double(3, 5), 1);
-            workerModel.ratings = faker.Random.Int(80, 999);
+            workerModel.Ratings = faker.Random.Int(80, 999);
+            workerModel.ImageName = "worker";
+            workerModel.ServiceIDs = new List<string>();
+            workerModel.LaborCost = faker.Random.Int(20, 99);
             return workerModel;
+        }
+
+        public async Task<List<WorkerModel>> GetWorkersByServiceID(string serviceID)
+        {
+            List<WorkerModel> workerModels = new List<WorkerModel>();
+            var faker = new Faker();
+            int count = faker.Random.Int(2, 10);
+            for (int i = 0; i < count; ++i)
+            {
+                WorkerModel workerModel = await GetWorkerByID(faker.Random.AlphaNumeric(10));
+                workerModel.ServiceIDs.Add(serviceID);
+                workerModels.Add(workerModel);
+            }
+            
+            return workerModels;
         }
         #endregion
     }
