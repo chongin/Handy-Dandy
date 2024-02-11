@@ -11,7 +11,7 @@ namespace Handy_Dandy.ViewModels
 	{
 
 		[ObservableProperty]
-		private BookingDetailDisplayModel bookingDetailDisplayModel;
+		private BookingDetailDisplayModel bookingDetailDisplay;
 
 		[ObservableProperty]
 		private List<DateDisplayModel> next7Dates = new List<DateDisplayModel>();
@@ -28,6 +28,7 @@ namespace Handy_Dandy.ViewModels
 		private IDatabaseService _databaseService { get; set; }
 		public BookingDetailViewModel(IDatabaseService databaseService)
 		{
+			BookingDetailDisplay = new BookingDetailDisplayModel();
 			TabTimeCommand = new AsyncRelayCommand<TimeDisplayModel>(
 				async (arg) => await OnTabTime(arg));
 
@@ -35,10 +36,17 @@ namespace Handy_Dandy.ViewModels
                 async (arg) => await OnTabDate(arg));
 
             this._databaseService = databaseService;
-			InitDates();
+
+
+			InitModel();
+            InitDates();
 			InitTimes();
         }
 
+		private async void InitModel()
+		{
+            BookingDetailDisplay.ServiceModel = await this._databaseService.GetServiceByID("MockServiceID");
+		}
 		private void InitDates()
 		{
 			DateTime currentDate = DateTime.Today;

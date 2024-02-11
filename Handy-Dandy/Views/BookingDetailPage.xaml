@@ -7,7 +7,40 @@
              Shell.NavBarIsVisible="False"
              Title="BookingDetail">
     <ScrollView>
-        <VerticalStackLayout Padding="10">
+        <VerticalStackLayout Padding="10" Spacing="20">
+            <Frame Padding="10">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="3*"/>
+                        <ColumnDefinition Width="5*"/>
+                    </Grid.ColumnDefinitions>
+                    <StackLayout Orientation="Vertical" Grid.Row="0" Grid.Column="0" BackgroundColor="Transparent"
+                                 HorizontalOptions="FillAndExpand" Spacing="5">
+                        <Label Text="{Binding BookingDetailDisplay.ServiceModel.Name}" FontAttributes="Bold"/>
+                        <StackLayout Orientation="Horizontal" Spacing="3">
+                            <Label Text="{Binding BookingDetailDisplay.ServiceCharge}" FontSize="20" TextColor="Blue" FontAttributes="Bold"/>
+                            <Label Text="/h" TextColor="Gray" FontSize="20"/>
+                        </StackLayout>
+
+                        <StackLayout Orientation="Horizontal" Spacing="5">
+                            <CollectionView ItemsSource="{Binding BookingDetailDisplay.ScoreImages}" ItemsLayout="HorizontalList">
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate x:DataType="x:String">
+                                        <Image Source="{Binding .}" HeightRequest="12"/>
+                                    </DataTemplate>
+
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+
+                            <Label Text="{Binding BookingDetailDisplay.CompletedCount}"/>
+                        </StackLayout>
+                    </StackLayout>
+                    <Image Source="{Binding BookingDetailDisplay.ServiceModel.ImageName}" Grid.Row="0" Grid.Column="1"
+                           HeightRequest="60" BackgroundColor="Red" HorizontalOptions="FillAndExpand"
+                           Aspect="Fill"/>
+                </Grid>
+            </Frame>
+
             <VerticalStackLayout>
                 <Label Text="Date and Time" FontAttributes="Bold"/>
                 <CollectionView ItemsSource="{Binding Next7Dates}">
@@ -37,28 +70,30 @@
             </VerticalStackLayout>
 
             <!--Time-->
-            <CollectionView ItemsSource="{Binding StartWorkTimes}" Margin="0,10,0,0">
+            <CollectionView ItemsSource="{Binding StartWorkTimes}" >
                 <CollectionView.ItemsLayout>
-                    <LinearItemsLayout Orientation="Horizontal" ItemSpacing="20"/>
+                    <GridItemsLayout Orientation="Vertical"  Span="3" HorizontalItemSpacing="20"/>
                 </CollectionView.ItemsLayout>
 
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="displaymodels:TimeDisplayModel">
                         <Frame Padding="3" CornerRadius="4" BorderColor="LightGray"
-                               BackgroundColor="{Binding CurrentColor}">
+                            BackgroundColor="{Binding CurrentColor}" HeightRequest="30" Margin="3">
                             <Frame.GestureRecognizers>
                                 <TapGestureRecognizer CommandParameter="{Binding .}"
                                     Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:BookingDetailViewModel}}, Path=TabTimeCommand}"/>
                             </Frame.GestureRecognizers>
 
-                            <Label Text="{Binding Time}" FontSize="14"/>
+                            <Label Text="{Binding Time}" FontSize="14" HorizontalOptions="Center" VerticalOptions="Center"/>
                         </Frame>
+                        
 
                     </DataTemplate>
 
                 </CollectionView.ItemTemplate>
             </CollectionView>
 
+            <Label Text="Workder" />
             <!--Workder-->
             <CollectionView>
             </CollectionView>
