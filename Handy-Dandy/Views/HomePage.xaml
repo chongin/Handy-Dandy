@@ -6,7 +6,8 @@
              xmlns:mct="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              x:Class="Handy_Dandy.Views.HomePage"
              Title="HomePage"
-             x:DataType="viewModels:HomePageViewModel">
+             x:DataType="viewModels:HomePageViewModel"
+             Shell.NavBarIsVisible="False">
     <ScrollView Padding="10">
        <VerticalStackLayout>
            <!--Search-->

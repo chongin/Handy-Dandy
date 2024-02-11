@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:displaymodels="clr-namespace:Handy_Dandy.ViewModels.DisplayModels"
+             xmlns:viewmodels="clr-namespace:Handy_Dandy.ViewModels"
+             x:Class="Handy_Dandy.Views.BookingDetailPage"
+             Shell.NavBarIsVisible="False"
+             Title="BookingDetail">
+    <ScrollView>
+        <VerticalStackLayout>
+            <CollectionView>
+                <CollectionView.Header>
+                    <Label Text="Date and Time"/>
+                </CollectionView.Header>
+
+            </CollectionView>
+
+            <!--Time-->
+            <CollectionView ItemsSource="{Binding StartWorkTimes}">
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Horizontal" ItemSpacing="20"/>
+                </CollectionView.ItemsLayout>
+
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="displaymodels:TimeDisplayModel">
+                        <Frame Padding="3" CornerRadius="4" BorderColor="LightGray"
+                               BackgroundColor="{Binding CurrentColor}">
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer CommandParameter="{Binding .}"
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:BookingDetailViewModel}}, Path=TabTimeCommand}"/>
+                            </Frame.GestureRecognizers>
+
+                            <Label Text="{Binding Time}" FontSize="14"/>
+                        </Frame>
+
+                    </DataTemplate>
+
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <!--Workder-->
+            <CollectionView>
+            </CollectionView>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

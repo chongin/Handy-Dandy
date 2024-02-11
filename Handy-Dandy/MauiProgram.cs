@@ -32,8 +32,9 @@ public static class MauiProgram
         builder.Services.AddTransient<NotificationPage>();
         builder.Services.AddTransient<SettingPage>();
 		builder.Services.AddTransient<ServicePage>();
+        builder.Services.AddTransient<BookingDetailPage>();
 
-		//services
+        //services
         builder.Services.AddTransient< IDatabaseService, FireBaseService >(_ => new FireBaseService("https://handy-dandy-1ce26-default-rtdb.firebaseio.com/"));
 
         //View Models
@@ -42,6 +43,7 @@ public static class MauiProgram
         builder.Services.AddTransient<HomePageViewModel>();
         builder.Services.AddTransient<ServicePageViewModel>();
         builder.Services.AddTransient<BookingViewModel>();
+        builder.Services.AddTransient<BookingDetailViewModel>();
 
         return builder.Build();
 	}
