@@ -22,12 +22,17 @@ namespace Handy_Dandy.ViewModels
         [ObservableProperty]
         private PromotionDto selectedItem;
 
+        public IAsyncRelayCommand CarouselPositionChangedCommand { get; }
+
         public IAsyncRelayCommand SelectionChangedCommand { get; }
         public IAsyncRelayCommand TabCategoryCommand { get; }
         private IDatabaseService _databaseService;
         public HomePageViewModel(IDatabaseService databaseService)
 		{
             this._databaseService = databaseService;
+            CarouselPositionChangedCommand = new AsyncRelayCommand<int>(async (currentPosition) => await OnCarouselPositionChanged(currentPosition));
+        
+
             SelectionChangedCommand = new AsyncRelayCommand<PromotionDto>(
                 async (currentItem) => await OnSelectionChanged(currentItem));
 
@@ -64,6 +69,13 @@ namespace Handy_Dandy.ViewModels
                     { "Category", category }
                 });
         }
+
+    private async Task OnCarouselPositionChanged(int currentPosition)
+    {
+        // UpdateButtonText();
+        Console.WriteLine($"current position: {currentPosition}");
+        await Task.Yield();
     }
+}
 }
 

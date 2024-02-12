@@ -27,37 +27,31 @@
                     </Button>
                 </Grid>
             </Frame>
-             
-            <!--Promotion-->
-            <CollectionView  ItemsSource="{Binding Promotions}"
-                            SelectionMode="None" EmptyView="No promotions avaiable"
-                            SelectionChangedCommand="{Binding SelectionChangedCommand}"
-                            SelectionChangedCommandParameter="{Binding Path=SelectedItem, Source={RelativeSource Self}}"
-                            Margin="5,10,0,0" >
 
-                <CollectionView.ItemsLayout>
-                    <LinearItemsLayout Orientation="Horizontal" ItemSpacing="20" />
-                </CollectionView.ItemsLayout>
+           <VerticalStackLayout>
+               <!--Promotion-->
+                <CarouselView HorizontalOptions="FillAndExpand" IndicatorView="promotion_indicatorview"
+                    ItemsSource="{Binding Promotions}"
+                    PositionChangedCommand="{Binding CarouselPositionChangedCommand}"
+                    PositionChangedCommandParameter="{Binding Source={RelativeSource Self}, Path=Position}" >
 
-                <CollectionView.ItemTemplate >
-                    <DataTemplate x:DataType="displaymodels:PromotionDto">
-                         <Grid RowSpacing="5">
-                             <Grid.RowDefinitions>
-                                        <RowDefinition Height="auto"/>
-                                        <RowDefinition Height="auto"/>
-                                    </Grid.RowDefinitions>
+                    <CarouselView.ItemTemplate>
+                        <DataTemplate x:DataType="displaymodels:PromotionDto">
+                            <VerticalStackLayout>
+                                <Image Source="{Binding ImageName}" Aspect="AspectFill" Grid.Row="0" HeightRequest="240"/>
+                                <Label Text="{Binding Description}"  HorizontalOptions="Center" FontSize="20" TextColor="Gray"/>
+                            </VerticalStackLayout>
+                            
+                        </DataTemplate>
 
-                             <Image Source="{Binding ImageName}" Aspect="AspectFill" WidthRequest="320" HeightRequest="160" Grid.Row="0"/>
-                              <Label Text="{Binding Description}" HorizontalOptions="Center" FontSize="12" Grid.Row="1"/>
-                         </Grid>
-                       
-                    </DataTemplate>
-
-                </CollectionView.ItemTemplate>
-            </CollectionView>
+                    </CarouselView.ItemTemplate>
+                </CarouselView>
+               <IndicatorView x:Name="promotion_indicatorview" Margin="5" HorizontalOptions="Center" IndicatorColor="LightBlue" SelectedIndicatorColor="Red"/>
+            </VerticalStackLayout>
+            
 
             <!--Categories-->
-            <StackLayout Padding="5, 20">
+            <StackLayout Padding="5, 0">
                  
                 <CollectionView  ItemsSource="{Binding Categories}" BackgroundColor="Transparent"
                                 SelectionMode="None" EmptyView="No categories available">
