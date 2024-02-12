@@ -10,15 +10,15 @@ namespace Handy_Dandy.ViewModels.DisplayModels
 		{
 		}
 
-		public BookingModel BookingModel { get; set; }
-		public ServiceModel ServiceModel { get; set; }
-		public List<WorkerModel> Workers { get; set; }
+		public BookingDto BookingDto { get; set; }
+		public ServiceDto ServiceDto { get; set; }
+		public List<WorkerDto> WorkerDtos { get; set; }
 
 		public string ServiceCharge
 		{
 			get
 			{
-				return $"${ServiceModel.ServiceCharge}";
+				return $"${ServiceDto.ServiceCharge}";
 			}
 		}
 
@@ -26,7 +26,7 @@ namespace Handy_Dandy.ViewModels.DisplayModels
 		{
 			get
 			{
-				return $"({ServiceModel.CompletedCount})";
+				return $"({ServiceDto.CompletedCount})";
 			}
 		}
 		public List<string> ScoreImages
@@ -34,7 +34,7 @@ namespace Handy_Dandy.ViewModels.DisplayModels
 			get
 			{
 				List<string> imageNames = new List<string>();
-				for (int i = 0; i < (int)ServiceModel.Score; ++i)
+				for (int i = 0; i < (int)ServiceDto.Score; ++i)
 				{
 					imageNames.Add("score");
 				}

@@ -36,7 +36,7 @@ namespace Handy_Dandy.ViewModels
             TabDateCommand = new AsyncRelayCommand<DateDisplayModel>(
                 async (arg) => await OnTabDate(arg));
 
-            TabWorkerCommand = new AsyncRelayCommand<WorkerModel>(
+            TabWorkerCommand = new AsyncRelayCommand<WorkerDto>(
                 async (arg) => await OnTabWorker(arg));
 
             this._databaseService = databaseService;
@@ -49,9 +49,9 @@ namespace Handy_Dandy.ViewModels
 
 		private async void InitModel()
 		{
-            BookingDetailDisplay.ServiceModel = await this._databaseService.GetServiceByID("MockServiceID");
-			BookingDetailDisplay.Workers = await this._databaseService.GetWorkersByServiceID(BookingDetailDisplay.ServiceModel.ServiceID);
-		}
+            BookingDetailDisplay.ServiceDto = new ServiceDto(await this._databaseService.GetServiceByID("MockServiceID"));
+			BookingDetailDisplay.WorkerDtos = ConvertDto.ConvertToWorkerDtoList(await this._databaseService.GetWorkersByServiceID(BookingDetailDisplay.ServiceDto.ServiceID));
+        }
 		private void InitDates()
 		{
 			DateTime currentDate = DateTime.Today;
@@ -95,13 +95,13 @@ namespace Handy_Dandy.ViewModels
 			currentSelectDateIndex = currentIndex;
 		}
 
-        private async Task OnTabWorker(WorkerModel workerModel)
+        private async Task OnTabWorker(WorkerDto workerDto)
         {
-            var preWorker = BookingDetailDisplay.Workers[currentSelectWorkerIndex];
-           // preWorker.CurrentColor = Color.FromArgb("#00000000");
+            var preWorker = BookingDetailDisplay.WorkerDtos[currentSelectWorkerIndex];
+            preWorker.CurrentColor = Color.FromArgb("#00000000");
 
-            int currentIndex = BookingDetailDisplay.Workers.IndexOf(workerModel);
-           // dateModel.CurrentColor = Color.FromRgb(35, 206, 250);
+            int currentIndex = BookingDetailDisplay.WorkerDtos.IndexOf(workerDto);
+            workerDto.CurrentColor = Color.FromRgb(35, 206, 250);
 
             currentSelectWorkerIndex = currentIndex;
         }

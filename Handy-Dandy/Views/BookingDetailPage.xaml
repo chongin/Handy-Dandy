@@ -12,12 +12,12 @@
             <Frame Padding="10">
                 <Grid>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="3*"/>
+                        <ColumnDefinition Width="5*"/>
                         <ColumnDefinition Width="5*"/>
                     </Grid.ColumnDefinitions>
                     <StackLayout Orientation="Vertical" Grid.Row="0" Grid.Column="0" BackgroundColor="Transparent"
                                  HorizontalOptions="FillAndExpand" Spacing="5">
-                        <Label Text="{Binding BookingDetailDisplay.ServiceModel.Name}" FontAttributes="Bold" FontSize="24"/>
+                        <Label Text="{Binding BookingDetailDisplay.ServiceDto.Name}" FontAttributes="Bold" FontSize="22" HorizontalOptions="StartAndExpand"/>
                         <StackLayout Orientation="Horizontal" Spacing="3">
                             <Label Text="{Binding BookingDetailDisplay.ServiceCharge}" FontSize="20" TextColor="Blue" FontAttributes="Bold"/>
                             <Label Text="/h" TextColor="Gray" FontSize="20"/>
@@ -36,8 +36,8 @@
                             <Label Text="{Binding BookingDetailDisplay.CompletedCount}"/>
                         </StackLayout>
                     </StackLayout>
-                    <Image Source="{Binding BookingDetailDisplay.ServiceModel.ImageName}" Grid.Row="0" Grid.Column="1"
-                           HeightRequest="60" BackgroundColor="Red" HorizontalOptions="FillAndExpand"
+                    <Image Source="{Binding BookingDetailDisplay.ServiceDto.ImageName}" Grid.Row="0" Grid.Column="1"
+                           HeightRequest="60"  HorizontalOptions="FillAndExpand"
                            Aspect="Fill"/>
                 </Grid>
             </Frame>
@@ -95,7 +95,7 @@
             </CollectionView>
 
             <!--Workder-->
-            <CollectionView ItemsSource="{Binding BookingDetailDisplay.Workers}">
+            <CollectionView ItemsSource="{Binding BookingDetailDisplay.WorkerDtos}">
                 <CollectionView.Header>
                     <Label Text="Worker" FontAttributes="Bold"/>
                 </CollectionView.Header>
@@ -105,8 +105,8 @@
                 </CollectionView.ItemsLayout>
 
                 <CollectionView.ItemTemplate>
-                    <DataTemplate x:DataType="models:WorkerModel">
-                        <Frame Padding="15">
+                    <DataTemplate x:DataType="displaymodels:WorkerDto">
+                        <Frame Padding="15" BackgroundColor="{Binding CurrentColor}">
                              <Frame.GestureRecognizers>
                                 <TapGestureRecognizer CommandParameter="{Binding .}"
                                     Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:BookingDetailViewModel}}, Path=TabWorkerCommand}"/>

@@ -21,23 +21,6 @@ namespace Handy_Dandy.Models
 
         public List<string> ServiceIDs { get; set; }
         public UserRole RoleID { get; set; }
-
-
-        public string LaborCostStr
-        {
-            get
-            {
-                return $"{LaborCost}";
-            }
-        }
-
-        public string RatingsStr
-        {
-            get
-            {
-                return $"({Ratings})";
-            }
-        }
     }
 }
 

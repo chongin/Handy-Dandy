@@ -23,7 +23,7 @@ namespace Handy_Dandy.Models
         public string BookingID { get; set; }
 		public string ServiceID { get; set; }
 		public string ClientID { get; set; }
-		public string WorkderID { get; set; }
+		public string WorkerID { get; set; }
 		public string StartDate { get; set; }
 		public string StartTime { get; set; }
 		public int WorkingHours { get; set; }
