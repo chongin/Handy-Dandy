@@ -2,7 +2,7 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using Handy_Dandy.Models;
 
-namespace Handy_Dandy.ViewModels.DisplayModels
+namespace Handy_Dandy.ViewModels.Dtos
 {
 	public class PromotionDto : ObservableObject
     {

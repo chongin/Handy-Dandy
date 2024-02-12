@@ -6,20 +6,21 @@ using System.Collections.ObjectModel;
 using Handy_Dandy.Models;
 using Handy_Dandy.Views;
 using Handy_Dandy.Services;
+using Handy_Dandy.ViewModels.Dtos;
 
 namespace Handy_Dandy.ViewModels
 {
 	public partial class HomePageViewModel: BaseViewModel
     {
 
-        public List<PromotionModel> Promotions { get; set; }
+        public List<PromotionDto> Promotions { get; set; }
 
-        public List<CategoryModel> Categories { get; set; }
+        public List<CategoryDto> Categories { get; set; }
 
 
 
         [ObservableProperty]
-        private PromotionModel selectedItem;
+        private PromotionDto selectedItem;
 
         public IAsyncRelayCommand SelectionChangedCommand { get; }
         public IAsyncRelayCommand TabCategoryCommand { get; }
@@ -27,10 +28,10 @@ namespace Handy_Dandy.ViewModels
         public HomePageViewModel(IDatabaseService databaseService)
 		{
             this._databaseService = databaseService;
-            SelectionChangedCommand = new AsyncRelayCommand<PromotionModel>(
+            SelectionChangedCommand = new AsyncRelayCommand<PromotionDto>(
                 async (currentItem) => await OnSelectionChanged(currentItem));
 
-            TabCategoryCommand = new AsyncRelayCommand<CategoryModel>(
+            TabCategoryCommand = new AsyncRelayCommand<CategoryDto>(
                 async (model) => await OnTabCategory(model));
 
             InitData();
@@ -38,11 +39,11 @@ namespace Handy_Dandy.ViewModels
 
 		public async void InitData()
 		{
-            this.Promotions = await this._databaseService.GetPromotions();
-            this.Categories = await this._databaseService.GetCategories();
+            this.Promotions = ConvertDto.ConvertToPromotionDtoList(await this._databaseService.GetPromotions());
+            this.Categories = ConvertDto.ConvertToCategoryDtoDtoList(await this._databaseService.GetCategories());
         }
 
-        private async Task OnSelectionChanged(PromotionModel currentItem)
+        private async Task OnSelectionChanged(PromotionDto currentItem)
         {
             if (currentItem != null)
             {
@@ -52,7 +53,7 @@ namespace Handy_Dandy.ViewModels
             await Task.Yield();
         }
 
-        private async Task OnTabCategory(CategoryModel category)
+        private async Task OnTabCategory(CategoryDto category)
         {
             if (category is null)
                 return;

@@ -2,7 +2,7 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Handy_Dandy.Models;
-using Handy_Dandy.ViewModels.DisplayModels;
+using Handy_Dandy.ViewModels.Dtos;
 using Handy_Dandy.Services;
 
 namespace Handy_Dandy.ViewModels
@@ -11,7 +11,7 @@ namespace Handy_Dandy.ViewModels
 	{
 
 		[ObservableProperty]
-		private BookingDetailDisplayModel bookingDetailDisplay;
+		private BookingDetailDto bookingDetailDisplay;
 
 		[ObservableProperty]
 		private List<DateDisplayModel> next7Dates = new List<DateDisplayModel>();
@@ -29,7 +29,7 @@ namespace Handy_Dandy.ViewModels
 		private IDatabaseService _databaseService { get; set; }
 		public BookingDetailViewModel(IDatabaseService databaseService)
 		{
-			BookingDetailDisplay = new BookingDetailDisplayModel();
+			BookingDetailDisplay = new BookingDetailDto();
 			TabTimeCommand = new AsyncRelayCommand<TimeDisplayModel>(
 				async (arg) => await OnTabTime(arg));
 

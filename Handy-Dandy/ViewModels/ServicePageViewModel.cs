@@ -4,6 +4,7 @@ using CommunityToolkit.Mvvm.Input;
 using Handy_Dandy.Models;
 using Handy_Dandy.Views;
 using Handy_Dandy.Services;
+using Handy_Dandy.ViewModels.Dtos;
 
 namespace Handy_Dandy.ViewModels
 {
@@ -11,18 +12,18 @@ namespace Handy_Dandy.ViewModels
 	public partial class ServicePageViewModel: BaseViewModel
 	{
 		[ObservableProperty]
-		CategoryModel category;
+		CategoryDto category;
 
         public IAsyncRelayCommand TabServiceCommand { get; }
         private readonly IDatabaseService _dataService;
         public ServicePageViewModel(IDatabaseService dataService)
 		{
             this._dataService = dataService;
-            this.TabServiceCommand = new AsyncRelayCommand<ServiceModel>(
+            this.TabServiceCommand = new AsyncRelayCommand<ServiceDto>(
                 async model => await OnTabService(model));
 		}
 
-        private async Task OnTabService(ServiceModel service)
+        private async Task OnTabService(ServiceDto service)
         {
             if (service is null)
                 return;

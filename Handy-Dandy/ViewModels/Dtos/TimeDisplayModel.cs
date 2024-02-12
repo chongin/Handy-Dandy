@@ -1,7 +1,7 @@
 ﻿using System;
 using CommunityToolkit.Mvvm.ComponentModel;
 
-namespace Handy_Dandy.ViewModels.DisplayModels
+namespace Handy_Dandy.ViewModels.Dtos
 {
 	public class TimeDisplayModel: ObservableObject
     {

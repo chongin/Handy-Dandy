@@ -72,7 +72,6 @@
 	  <None Remove="Resources\Images\login.png" />
 	  <None Remove="Models\" />
 	  <None Remove="Controllers\" />
-	  <None Remove="Services\" />
 	  <None Remove="Resources\Images\cleaning.jpg" />
 	  <None Remove="Resources\Images\painting.jpg" />
 	  <None Remove="Resources\Images\repairing.jpg" />
@@ -80,7 +79,6 @@
 	  <None Remove="Resources\Images\category_cleaning.jpg" />
 	  <None Remove="Resources\Images\score.png" />
 	  <None Remove="Resources\Images\goto.png" />
-	  <None Remove="ViewModels\DisplayModels\" />
 	  <None Remove="Resources\Images\worker.png" />
 	</ItemGroup>
 	<ItemGroup>
@@ -88,9 +86,7 @@
 	  <Folder Include="ViewModels\" />
 	  <Folder Include="Models\" />
 	  <Folder Include="Controllers\" />
-	  <Folder Include="Services\" />
 	  <Folder Include="Resources\Images\" />
-	  <Folder Include="ViewModels\DisplayModels\" />
 	</ItemGroup>
 	<ItemGroup>
 	  <BundleResource Include="Resources\Images\category_cleaning.jpg" />

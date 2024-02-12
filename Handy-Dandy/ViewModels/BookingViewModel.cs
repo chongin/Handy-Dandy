@@ -5,7 +5,7 @@ using CommunityToolkit.Mvvm.Input;
 using Handy_Dandy.Models;
 using Handy_Dandy.ViewModels;
 using Handy_Dandy.Services;
-using Handy_Dandy.ViewModels.DisplayModels;
+using Handy_Dandy.ViewModels.Dtos;
 
 namespace Handy_Dandy.ViewModels
 {
@@ -16,12 +16,12 @@ namespace Handy_Dandy.ViewModels
         private IDatabaseService _databaseService;
 
 
-        public List<BookingDisplayModel> ActiveBookingModels { get; set; }
-        public List<BookingDisplayModel> SuccessBookingModels { get; set; }
-        public List<BookingDisplayModel> CancelBookingModels { get; set; }
+        public List<BookingDisplayDto> ActiveBookingModels { get; set; }
+        public List<BookingDisplayDto> SuccessBookingModels { get; set; }
+        public List<BookingDisplayDto> CancelBookingModels { get; set; }
 
-        private List<BookingDisplayModel> _currentBookingModels;
-        public List<BookingDisplayModel> CurrentBookingModels
+        private List<BookingDisplayDto> _currentBookingModels;
+        public List<BookingDisplayDto> CurrentBookingModels
         {
             get => _currentBookingModels;
             set => SetProperty(ref _currentBookingModels, value);
@@ -47,7 +47,7 @@ namespace Handy_Dandy.ViewModels
             CancelledCommand = new AsyncRelayCommand(OnClickCancelled);
 
             this._databaseService = databaseService;
-            CurrentBookingModels = new List<BookingDisplayModel>();
+            CurrentBookingModels = new List<BookingDisplayDto>();
             CurrentPage = 1;
             InitData();
 		}
@@ -59,19 +59,19 @@ namespace Handy_Dandy.ViewModels
             updateButtonColor();
         }
 
-		private async Task<List<BookingDisplayModel>> GetBookingModel(string state)
+		private async Task<List<BookingDisplayDto>> GetBookingModel(string state)
 		{
-			List<BookingDisplayModel> Models = new List<BookingDisplayModel>();
+			List<BookingDisplayDto> Models = new List<BookingDisplayDto>();
             var bookingModels = await this._databaseService.GetBookingsByState(state);
             foreach (var bookingModel in bookingModels)
             {
                 var workerModel = await this._databaseService.GetWorkerByID(bookingModel.WorkerID);
                 var serviceModel = await this._databaseService.GetServiceByID(bookingModel.ServiceID);
 
-                BookingDisplayModel model = new BookingDisplayModel();
-                model.BookingModel = bookingModel;
-                model.WorkerModel = workerModel;
-                model.ServiceModel = serviceModel;
+                BookingDisplayDto model = new BookingDisplayDto();
+                model.BookingDto = new BookingDto(bookingModel);
+                model.WorkerDto = new WorkerDto(workerModel);
+                model.ServiceDto = new ServiceDto(serviceModel);
                 Models.Add(model);
             }
 			return Models;

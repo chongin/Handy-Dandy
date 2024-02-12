@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:displaymodels="clr-namespace:Handy_Dandy.ViewModels.DisplayModels"
+             xmlns:displaymodels="clr-namespace:Handy_Dandy.ViewModels.Dtos"
              xmlns:viewmodels="clr-namespace:Handy_Dandy.ViewModels"
              xmlns:models="clr-namespace:Handy_Dandy.Models"
              x:Class="Handy_Dandy.Views.BookingDetailPage"
