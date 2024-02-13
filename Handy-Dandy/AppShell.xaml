@@ -42,8 +42,7 @@
                           ContentTemplate="{DataTemplate local:SettingPage}"
                           Route="SettingPage"/>
         </Tab>
-    </TabBar>-->
-
+    </TabBar>-->     
     <Shell.FlyoutHeader>
         <Image Source="dotnet_bot.svg" HeightRequest="100"/>
     </Shell.FlyoutHeader>
@@ -66,10 +65,6 @@
         <ShellContent Title="Booking" Icon="home.png"
             ContentTemplate="{DataTemplate local:BookingPage}"
             Route="BookingPage" />
-
-        <ShellContent Title="BookingDetail" Icon="home.png"
-            ContentTemplate="{DataTemplate local:BookingDetailPage}"
-            Route="BookingDetailPage" />
 
         <ShellContent Title="Notification" Icon="home.png"
             ContentTemplate="{DataTemplate local:NotificationPage}"

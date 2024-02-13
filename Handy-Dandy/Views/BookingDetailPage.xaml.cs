@@ -8,4 +8,9 @@ public partial class BookingDetailPage : ContentPage
 		InitializeComponent();
 		this.BindingContext = viewModel;
 	}
+
+    protected override void OnNavigatedTo(NavigatedToEventArgs args)
+    {
+        base.OnNavigatedTo(args);
+    }
 }

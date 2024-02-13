@@ -4,13 +4,18 @@ using CommunityToolkit.Mvvm.Input;
 using Handy_Dandy.Models;
 using Handy_Dandy.ViewModels.Dtos;
 using Handy_Dandy.Services;
+using Handy_Dandy.Views;
 
 namespace Handy_Dandy.ViewModels
 {
-	public partial class BookingDetailViewModel: BaseViewModel
+    [QueryProperty("Category", "Category")]
+    public partial class BookingDetailViewModel: BaseViewModel
 	{
 
-		[ObservableProperty]
+        [ObservableProperty]
+        CategoryDto category;
+
+        [ObservableProperty]
 		private BookingDetailDto bookingDetailDisplay;
 
 		[ObservableProperty]
@@ -21,15 +26,18 @@ namespace Handy_Dandy.ViewModels
 
 		public IAsyncRelayCommand TabTimeCommand { get; }
         public IAsyncRelayCommand TabDateCommand { get; }
-		public IAsyncRelayCommand TabWorkerCommand { get; set; }
+		public IAsyncRelayCommand TabWorkerCommand { get; }
+		public IAsyncRelayCommand BackCommand { get; }
+
         private int currentSelectTimeIndex = 0;
 		private int currentSelectDateIndex = 0;
 		private int currentSelectWorkerIndex = 0;
 
 		private IDatabaseService _databaseService { get; set; }
+		private readonly INavigation _navigation;
 		public BookingDetailViewModel(IDatabaseService databaseService)
 		{
-			BookingDetailDisplay = new BookingDetailDto();
+            BookingDetailDisplay = new BookingDetailDto();
 			TabTimeCommand = new AsyncRelayCommand<TimeDisplayModel>(
 				async (arg) => await OnTabTime(arg));
 
@@ -39,6 +47,7 @@ namespace Handy_Dandy.ViewModels
             TabWorkerCommand = new AsyncRelayCommand<WorkerDto>(
                 async (arg) => await OnTabWorker(arg));
 
+			BackCommand = new AsyncRelayCommand(OnBackPressed);
             this._databaseService = databaseService;
 
 
@@ -104,6 +113,14 @@ namespace Handy_Dandy.ViewModels
             workerDto.CurrentColor = Color.FromRgb(35, 206, 250);
 
             currentSelectWorkerIndex = currentIndex;
+        }
+
+        private async Task OnBackPressed()
+        {
+            await Shell.Current.GoToAsync($"{nameof(ServicePage)}", true,
+                new Dictionary<string, object>{
+                    { "Category", Category }
+                });
         }
     }
 }

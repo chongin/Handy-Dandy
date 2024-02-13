@@ -3,8 +3,14 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:models="clr-namespace:Handy_Dandy.Models"
              xmlns:viewModels="clr-namespace:Handy_Dandy.ViewModels"
+             xmlns:displaymodels="clr-namespace:Handy_Dandy.ViewModels.Dtos"
              x:Class="Handy_Dandy.Views.ServicePage"
              Title="{Binding Category.Name}">
+
+    <Shell.BackButtonBehavior>
+        <BackButtonBehavior Command="{Binding BackCommand}" />
+    </Shell.BackButtonBehavior>
+
     <ScrollView Padding="10">
         <VerticalStackLayout>
             <Frame BorderColor="LightSkyBlue" CornerRadius="10" HasShadow="True" Padding="5,0" Margin="0,0,0,10" >
@@ -29,7 +35,7 @@
                 </CollectionView.ItemsLayout>
 
                 <CollectionView.ItemTemplate>
-                        <DataTemplate x:DataType="models:ServiceModel">
+                        <DataTemplate x:DataType="displaymodels:ServiceDto">
                             <Grid Padding="5">
                                 <Frame HeightRequest="90"  Padding="0"  BorderColor="{StaticResource Primary}" HorizontalOptions="FillAndExpand">
                                     <Frame.GestureRecognizers>
@@ -61,7 +67,9 @@
                                         </StackLayout>
                                         
 
-                                        <Button ImageSource="gotobtn" HorizontalOptions="End" Grid.Column="2" HeightRequest="30" FontSize="8" Background="Transparent"/>
+                                        <Button ImageSource="gotobtn" HorizontalOptions="End" Grid.Column="2" HeightRequest="30" FontSize="8" Background="Transparent"
+                                            Command="{Binding Source={RelativeSource AncestorType={x:Type viewModels:ServicePageViewModel}}, Path=TabBookingDetailCommand }"
+                                            CommandParameter="{Binding .}"/>
                                     </Grid>
                                 </Frame>
                             </Grid>

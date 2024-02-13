@@ -5,6 +5,7 @@ using Handy_Dandy.Models;
 using Handy_Dandy.Views;
 using Handy_Dandy.Services;
 using Handy_Dandy.ViewModels.Dtos;
+using static Microsoft.Maui.LifecycleEvents.AndroidLifecycle;
 
 namespace Handy_Dandy.ViewModels
 {
@@ -14,13 +15,21 @@ namespace Handy_Dandy.ViewModels
 		[ObservableProperty]
 		CategoryDto category;
 
+        private ServiceDto selectServiceDto = null; 
         public IAsyncRelayCommand TabServiceCommand { get; }
+        public IAsyncRelayCommand TabBookingDetailCommand { get; }
+        public IAsyncRelayCommand BackCommand { get; }
+
         private readonly IDatabaseService _dataService;
+
         public ServicePageViewModel(IDatabaseService dataService)
 		{
             this._dataService = dataService;
             this.TabServiceCommand = new AsyncRelayCommand<ServiceDto>(
                 async model => await OnTabService(model));
+
+            BackCommand = new AsyncRelayCommand(OnBackPressed);
+            this.TabBookingDetailCommand = new AsyncRelayCommand(OnClcikGoToBookingDetail);
 		}
 
         private async Task OnTabService(ServiceDto service)
@@ -28,8 +37,27 @@ namespace Handy_Dandy.ViewModels
             if (service is null)
                 return;
 
+            selectServiceDto = service;
+
             await Task.Yield();
-           // await Shell.Current.GoToAsync($"{nameof(LoginPage)}");
+        }
+
+        private async Task OnClcikGoToBookingDetail()
+        {
+            if (selectServiceDto is null) {
+                return;
+            }
+
+           // await Shell.Current.Navigation.PushAsync(new ServicePage(this));
+            await Shell.Current.GoToAsync($"{nameof(BookingDetailPage)}", true,
+                new Dictionary<string, Object>{
+                    { "Category",  Category }
+                });
+        }
+
+        private async Task OnBackPressed()
+        {
+            await Shell.Current.GoToAsync($"//{nameof(HomePage)}", true);
         }
     }
 }

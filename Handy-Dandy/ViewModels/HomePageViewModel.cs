@@ -10,7 +10,8 @@ using Handy_Dandy.ViewModels.Dtos;
 
 namespace Handy_Dandy.ViewModels
 {
-	public partial class HomePageViewModel: BaseViewModel
+    [QueryProperty("User", "user")]
+    public partial class HomePageViewModel: BaseViewModel
     {
 
         public List<PromotionDto> Promotions { get; set; }
@@ -70,12 +71,12 @@ namespace Handy_Dandy.ViewModels
                 });
         }
 
-    private async Task OnCarouselPositionChanged(int currentPosition)
-    {
-        // UpdateButtonText();
-        Console.WriteLine($"current position: {currentPosition}");
-        await Task.Yield();
+        private async Task OnCarouselPositionChanged(int currentPosition)
+        {
+            // UpdateButtonText();
+            Console.WriteLine($"current position: {currentPosition}");
+            await Task.Yield();
+        }
     }
-}
 }
 

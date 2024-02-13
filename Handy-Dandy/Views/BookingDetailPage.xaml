@@ -5,8 +5,12 @@
              xmlns:viewmodels="clr-namespace:Handy_Dandy.ViewModels"
              xmlns:models="clr-namespace:Handy_Dandy.Models"
              x:Class="Handy_Dandy.Views.BookingDetailPage"
-             Shell.NavBarIsVisible="False"
+
              Title="BookingDetail">
+    <Shell.BackButtonBehavior>
+        <BackButtonBehavior Command="{Binding BackCommand}" />
+    </Shell.BackButtonBehavior>
+
     <ScrollView>
         <VerticalStackLayout Padding="10" Spacing="20">
             <Frame Padding="10">
