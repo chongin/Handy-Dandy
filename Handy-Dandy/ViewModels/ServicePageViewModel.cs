@@ -29,7 +29,8 @@ namespace Handy_Dandy.ViewModels
                 async model => await OnTabService(model));
 
             BackCommand = new AsyncRelayCommand(OnBackPressed);
-            this.TabBookingDetailCommand = new AsyncRelayCommand(OnClcikGoToBookingDetail);
+            this.TabBookingDetailCommand = new AsyncRelayCommand<ServiceDto>(
+                async model => await OnClcikGoToBookingDetail(model));
 		}
 
         private async Task OnTabService(ServiceDto service)
@@ -39,11 +40,15 @@ namespace Handy_Dandy.ViewModels
 
             selectServiceDto = service;
 
-            await Task.Yield();
+            await Shell.Current.GoToAsync($"{nameof(BookingDetailPage)}", true,
+               new Dictionary<string, Object>{
+                    { "Category",  Category }
+               });
         }
 
-        private async Task OnClcikGoToBookingDetail()
+        private async Task OnClcikGoToBookingDetail(ServiceDto service)
         {
+            selectServiceDto = service;
             if (selectServiceDto is null) {
                 return;
             }
