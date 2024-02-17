@@ -52,7 +52,6 @@ namespace Handy_Dandy.ViewModels
                 return;
             }
 
-           // await Shell.Current.Navigation.PushAsync(new ServicePage(this));
             await Shell.Current.GoToAsync($"{nameof(BookingDetailPage)}", true,
                 new Dictionary<string, Object>{
                     { "Category",  Category }
