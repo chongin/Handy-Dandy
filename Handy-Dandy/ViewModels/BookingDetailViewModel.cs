@@ -34,7 +34,6 @@ namespace Handy_Dandy.ViewModels
 		private int currentSelectWorkerIndex = 0;
 
 		private IDatabaseService _databaseService { get; set; }
-		private readonly INavigation _navigation;
 		public BookingDetailViewModel(IDatabaseService databaseService)
 		{
             BookingDetailDisplay = new BookingDetailDto();
