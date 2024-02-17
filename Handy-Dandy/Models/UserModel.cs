@@ -13,7 +13,10 @@ namespace Handy_Dandy.Models
         public string Password { get; set; }
 		public string Address { get; set; }
 		public string Phone { get; set; }
-
+        public string Avatar { get; set; }
+        public bool IsMember { get; set; }
+		public string City { get; set; }
+		public int Balance { get; set; }
         public UserRole RoleID { get; set; }
         public List<BookingModel> Orders { get; set; }
 	}

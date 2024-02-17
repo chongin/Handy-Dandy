@@ -13,6 +13,7 @@ namespace Handy_Dandy.Services
 		Task<WorkerModel> GetWorkerByID(string workerID);
 		Task<ServiceModel> GetServiceByID(string serviceID);
 		Task<List<WorkerModel>> GetWorkersByServiceID(string serviceID);
+		Task<UserModel> GetUserById(string userId);
     }
 }
 

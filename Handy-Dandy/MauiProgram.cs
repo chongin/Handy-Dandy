@@ -30,7 +30,7 @@ public static class MauiProgram
         builder.Services.AddTransient<HomePage>();
         builder.Services.AddTransient<BookingPage>();
         builder.Services.AddTransient<NotificationPage>();
-        builder.Services.AddTransient<SettingPage>();
+        builder.Services.AddTransient<ProfilePage>();
 		builder.Services.AddTransient<ServicePage>();
         builder.Services.AddTransient<BookingDetailPage>();
 
@@ -44,6 +44,7 @@ public static class MauiProgram
         builder.Services.AddTransient<ServicePageViewModel>();
         builder.Services.AddTransient<BookingViewModel>();
         builder.Services.AddTransient<BookingDetailViewModel>();
+        builder.Services.AddTransient<ProfilePageViewModel>();
 
         return builder.Build();
 	}

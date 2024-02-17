@@ -5,7 +5,6 @@ using Handy_Dandy.Models;
 using Handy_Dandy.Views;
 using Handy_Dandy.Services;
 using Handy_Dandy.ViewModels.Dtos;
-using static Microsoft.Maui.LifecycleEvents.AndroidLifecycle;
 
 namespace Handy_Dandy.ViewModels
 {

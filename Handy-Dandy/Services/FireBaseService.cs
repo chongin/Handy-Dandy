@@ -75,6 +75,25 @@ namespace Handy_Dandy.Services
                 return null;
             }
         }
+
+ 
+        public async Task<UserModel> GetUserById(string userId)
+        {
+            var faker = new Faker();
+            UserModel model = new UserModel();
+            model.UserID = userId;
+            model.UserName = faker.Name.FullName();
+            model.Email = $"{model.UserName}@gmail.com";
+            model.Password = faker.Random.AlphaNumeric(10);
+            model.Address = faker.Address.FullAddress();
+            model.Phone = faker.Phone.PhoneNumber();
+            model.IsMember = false;
+            model.RoleID = UserRole.Client;
+            model.Avatar = "dotnet_bot";
+            model.City = faker.Address.City();
+            model.Balance = faker.Random.Int(0, 100);
+            return model;
+        }
         #endregion
 
 

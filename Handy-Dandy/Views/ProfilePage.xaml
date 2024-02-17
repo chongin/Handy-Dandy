@@ -1,0 +1,114 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmode="clr-namespace:Handy_Dandy.ViewModels"
+             x:Class="Handy_Dandy.Views.ProfilePage"
+             Title="ProfilePage">
+    <ContentPage.Resources>
+        <Style x:Key="ButtonStyle" TargetType="Button">
+            <Setter Property="TextColor" Value="Black" /> 
+        </Style>
+    </ContentPage.Resources>
+
+    <ScrollView>
+        <VerticalStackLayout>
+            <Frame Background="DarkBlue" CornerRadius="0">
+                <Frame Padding="30,10,30,10" HorizontalOptions="Center" >
+                    <StackLayout Orientation="Horizontal" Spacing="30" HeightRequest="150">
+                        <Image Source="{Binding User.Avatar}" HeightRequest="100"/>
+                        <VerticalStackLayout VerticalOptions="Center" Spacing="5" >
+                            <Label Text="{Binding User.UserName}" HorizontalOptions="Center" FontSize="22" FontAttributes="Bold"/>
+
+                            <StackLayout Orientation="Horizontal" Spacing="10">
+                                <Image Source="address.png" Aspect="AspectFit"/>
+                                <Label Text="{Binding User.City}" HorizontalOptions="Center" FontAttributes="Bold" VerticalOptions="Center"/>
+                            </StackLayout>
+
+                            <Frame HeightRequest="30" Padding="0" WidthRequest="100" Background="Yellow">
+                                <StackLayout Orientation="Horizontal" VerticalOptions="Center" HorizontalOptions="Center" Spacing="10">
+                                    <Image Source="money.png"/>
+                                    <Label Text="{Binding User.Balance}" HorizontalOptions="Center" FontAttributes="Bold" VerticalTextAlignment="Center" HeightRequest="20"/>
+                                </StackLayout>
+                            </Frame>
+                        </VerticalStackLayout>
+                    </StackLayout>
+                </Frame>
+            </Frame>
+
+            <VerticalStackLayout VerticalOptions="CenterAndExpand" >
+                <VerticalStackLayout HeightRequest="60">
+                    <Label Text="" HeightRequest="1" Background="Black"/>
+                    <HorizontalStackLayout  Padding="10,0,10,0" Spacing="10">
+                        <Image Source="address.png"/>
+                        <Button Text="Profile Details" Background="White" Style="{StaticResource ButtonStyle}" FontSize="18" FontAttributes="Bold" HorizontalOptions="Center" VerticalOptions="Center" CornerRadius="0"/>
+                    </HorizontalStackLayout>
+                    <Label Text="" HeightRequest="1" Background="Black"/>
+                </VerticalStackLayout>
+
+                <VerticalStackLayout HeightRequest="60">
+                    <HorizontalStackLayout  Padding="10,0,10,0" Spacing="10">
+                        <Image Source="address.png"/>
+                        <Button Text="Membership" Background="White" Style="{StaticResource ButtonStyle}" FontSize="18" FontAttributes="Bold" HorizontalOptions="Center" VerticalOptions="Center" CornerRadius="0"/>
+                    </HorizontalStackLayout>
+                    <Label Text="" HeightRequest="1" Background="Black"/>
+                </VerticalStackLayout>
+
+                <VerticalStackLayout HeightRequest="60">
+                    <HorizontalStackLayout  Padding="10,0,10,0" Spacing="10">
+                        <Image Source="address.png"/>
+                        <Button Text="Notifications" Background="White" Style="{StaticResource ButtonStyle}" FontSize="18" FontAttributes="Bold" HorizontalOptions="Center" VerticalOptions="Center" CornerRadius="0"/>
+                    </HorizontalStackLayout>
+                    <Label Text="" HeightRequest="1" Background="Black"/>
+                </VerticalStackLayout>
+
+                <VerticalStackLayout HeightRequest="60">
+                    <HorizontalStackLayout  Padding="10,0,10,0" Spacing="10">
+                        <Image Source="address.png"/>
+                        <Button Text="Jobs" Background="White" Style="{StaticResource ButtonStyle}" FontSize="18" FontAttributes="Bold" HorizontalOptions="Center" VerticalOptions="Center" CornerRadius="0"/>
+                    </HorizontalStackLayout>
+                    <Label Text="" HeightRequest="1" Background="Black"/>
+                </VerticalStackLayout>
+
+                <VerticalStackLayout HeightRequest="60">
+                    <HorizontalStackLayout  Padding="10,0,10,0" Spacing="10">
+                        <Image Source="address.png"/>
+                        <Button Text="Credits" Background="White" Style="{StaticResource ButtonStyle}" FontSize="18" FontAttributes="Bold" HorizontalOptions="Center" VerticalOptions="Center" CornerRadius="0"/>
+                    </HorizontalStackLayout>
+                    <Label Text="" HeightRequest="1" Background="Black"/>
+                </VerticalStackLayout>
+
+                <VerticalStackLayout HeightRequest="60">
+                    <HorizontalStackLayout  Padding="10,0,10,0" Spacing="10">
+                        <Image Source="address.png"/>
+                        <Button Text="Payment Details" Background="White" Style="{StaticResource ButtonStyle}" FontSize="18" FontAttributes="Bold" HorizontalOptions="Center" VerticalOptions="Center" CornerRadius="0"/>
+                    </HorizontalStackLayout>
+                    <Label Text="" HeightRequest="1" Background="Black"/>
+                </VerticalStackLayout>
+
+                <VerticalStackLayout HeightRequest="60">
+                    <HorizontalStackLayout  Padding="10,0,10,0" Spacing="10">
+                        <Image Source="address.png"/>
+                        <Button Text="Address Details" Background="White" Style="{StaticResource ButtonStyle}" FontSize="18" FontAttributes="Bold" HorizontalOptions="Center" VerticalOptions="Center" CornerRadius="0"/>
+                    </HorizontalStackLayout>
+                    <Label Text="" HeightRequest="1" Background="Black"/>
+                </VerticalStackLayout>
+
+                <VerticalStackLayout HeightRequest="60">
+                    <HorizontalStackLayout  Padding="10,0,10,0" Spacing="10">
+                        <Image Source="address.png"/>
+                        <Button Text="Help Center" Background="White" Style="{StaticResource ButtonStyle}" FontSize="18" FontAttributes="Bold" HorizontalOptions="Center" VerticalOptions="Center" CornerRadius="0"/>
+                    </HorizontalStackLayout>
+                    <Label Text="" HeightRequest="1" Background="Black"/>
+                </VerticalStackLayout>
+
+                <VerticalStackLayout HeightRequest="60">
+                    <HorizontalStackLayout  Padding="10,0,10,0" Spacing="10">
+                        <Image Source="address.png"/>
+                        <Button Text="Log Out" Background="White" Style="{StaticResource ButtonStyle}" FontSize="18" FontAttributes="Bold" HorizontalOptions="Center" VerticalOptions="Center" CornerRadius="0"/>
+                    </HorizontalStackLayout>
+                    <Label Text="" HeightRequest="1" Background="Black"/>
+                </VerticalStackLayout>
+            </VerticalStackLayout>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

@@ -12,7 +12,10 @@ namespace Handy_Dandy.ViewModels.Dtos
         public string Password { get; }
         public string Address { get; }
         public string Phone { get; }
-
+        public string Avatar { get; }
+        public bool IsMember { get; }
+        public string City { get; }
+        public int Balance { get; }
         public UserRole RoleID { get; }
         public List<BookingModel> Bookings { get; }
 
@@ -25,6 +28,10 @@ namespace Handy_Dandy.ViewModels.Dtos
             Address = model.Address;
             Phone = model.Phone;
             RoleID = model.RoleID;
+            IsMember = model.IsMember;
+            Avatar = model.Avatar;
+            City = model.City;
+            Balance = model.Balance;
         }
 	}
 }

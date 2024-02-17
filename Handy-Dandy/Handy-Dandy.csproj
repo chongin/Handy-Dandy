@@ -80,6 +80,8 @@
 	  <None Remove="Resources\Images\score.png" />
 	  <None Remove="Resources\Images\goto.png" />
 	  <None Remove="Resources\Images\worker.png" />
+	  <None Remove="Resources\Images\money.png" />
+	  <None Remove="Resources\Images\address.png" />
 	</ItemGroup>
 	<ItemGroup>
 	  <Folder Include="Views\" />
@@ -93,5 +95,7 @@
 	  <BundleResource Include="Resources\Images\score.png" />
 	  <BundleResource Include="Resources\Images\gotobtn.png" />
 	  <BundleResource Include="Resources\Images\worker.png" />
+	  <BundleResource Include="Resources\Images\money.png" />
+	  <BundleResource Include="Resources\Images\address.png" />
 	</ItemGroup>
 </Project>

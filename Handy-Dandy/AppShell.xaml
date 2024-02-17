@@ -37,10 +37,10 @@
                           ContentTemplate="{DataTemplate local:NotificationPage}"
                           Route="NotificationPage"/>
         </Tab>
-        <Tab Title="Setting" Icon="home.png">
-            <ShellContent Title="Setting"
-                          ContentTemplate="{DataTemplate local:SettingPage}"
-                          Route="SettingPage"/>
+        <Tab Title="Profile" Icon="home.png">
+            <ShellContent Title="Profile"
+                          ContentTemplate="{DataTemplate local:ProfilePage}"
+                          Route="ProfilePage"/>
         </Tab>
     </TabBar>-->     
     <Shell.FlyoutHeader>
@@ -70,9 +70,9 @@
             ContentTemplate="{DataTemplate local:NotificationPage}"
             Route="NotificationPage" />
 
-         <ShellContent Title="Setting" Icon="home.png"
-            ContentTemplate="{DataTemplate local:SettingPage}"
-            Route="SettingPage" />
+         <ShellContent Title="Profile" Icon="home.png"
+            ContentTemplate="{DataTemplate local:ProfilePage}"
+            Route="ProfilePage" />
     </FlyoutItem>
     
     <Shell.FlyoutFooter>
