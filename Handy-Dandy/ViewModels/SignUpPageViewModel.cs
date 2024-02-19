@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 
@@ -34,17 +34,32 @@ namespace Handy_Dandy.ViewModels
             SignUpCommand = new AsyncRelayCommand(SignUp);
         }
 
+
         public async Task SignUp()
         {
-            //UserModel user = new UserModel();
-            //user.Email = Email;
-            //user.UserName = UserName;
-            //user.Phone = Phone;
-            //user.RoleID = UserRole.Client;
-            //user.Address = Address;
-            //await this._fireBaseService.InserUser(user);
-            await Shell.Current.GoToAsync($"//{nameof(HomePage)}");
+            var existUser = await this._dataService.QueryUserByEmail(Email);
+            if (existUser != null)
+            {
+                await Shell.Current.CurrentPage.DisplayAlert("Alert", "Oops! It seems that email is already taken.", "OK");
+                return;
+            }
+            UserModel user = new UserModel();
+            user.UserID = Guid.NewGuid().ToString();
+            user.Email = Email;
+            user.UserName = UserName;
+            user.Phone = Phone;
+            user.RoleID = UserRole.Client;
+            user.Address = Address;
+            user.Password = Password;
+            user.City = "Sudbury";
+            user.Avatar = "dotnet_bot";
+ 
+            await this._dataService.InserUser(user);
+
+            await Shell.Current.CurrentPage.DisplayAlert("Info", "Congratulations, your signup was successful!", "OK");
+            await Shell.Current.GoToAsync($"//{nameof(LoginPage)}");
         }
     }
 }
+
 
