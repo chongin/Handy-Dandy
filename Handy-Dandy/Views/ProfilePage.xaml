@@ -88,7 +88,8 @@
                 <VerticalStackLayout HeightRequest="60">
                     <HorizontalStackLayout  Padding="10,0,10,0" Spacing="10">
                         <Image Source="address.png"/>
-                        <Button Text="Address Details" Background="White" Style="{StaticResource ButtonStyle}" FontSize="18" FontAttributes="Bold" HorizontalOptions="Center" VerticalOptions="Center" CornerRadius="0"/>
+                        <Button Text="Address Details" Background="White" Style="{StaticResource ButtonStyle}" FontSize="18" FontAttributes="Bold" HorizontalOptions="Center"
+                                VerticalOptions="Center" CornerRadius="0" Command="{Binding AddressCommand}"/>
                     </HorizontalStackLayout>
                     <Label Text="" HeightRequest="1" Background="Black"/>
                 </VerticalStackLayout>

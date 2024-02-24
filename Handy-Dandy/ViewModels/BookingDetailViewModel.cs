@@ -121,6 +121,11 @@ namespace Handy_Dandy.ViewModels
                     { "Category", Category }
                 });
         }
+
+        private async Task OnConfirmed()
+        {
+
+        }
     }
 }
 

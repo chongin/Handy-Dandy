@@ -5,7 +5,6 @@
              xmlns:viewmodels="clr-namespace:Handy_Dandy.ViewModels"
              xmlns:models="clr-namespace:Handy_Dandy.Models"
              x:Class="Handy_Dandy.Views.BookingDetailPage"
-
              Title="BookingDetail">
     <Shell.BackButtonBehavior>
         <BackButtonBehavior Command="{Binding BackCommand}" />
@@ -174,7 +173,7 @@
 
 
                     
-                    <Button Text="Book Now" />
+                    <Button Text="Book Now" Command="{Binding}"/>
                 </StackLayout>
             </VerticalStackLayout>
         </VerticalStackLayout>

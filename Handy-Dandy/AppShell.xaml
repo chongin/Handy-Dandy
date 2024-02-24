@@ -56,8 +56,14 @@
             FlyoutItemIsVisible="False" Shell.FlyoutBehavior="Disabled"
             ContentTemplate="{DataTemplate local:SignUpPage}"
             Route="SignUpPage" />
-    
+
+    <ShellContent Title="Map Page"
+            FlyoutItemIsVisible="True" Shell.FlyoutBehavior="Disabled"
+            ContentTemplate="{DataTemplate local:MapPage}"
+            Route="MapPage" />
+
     <FlyoutItem Title="Dashboard" FlyoutDisplayOptions="AsMultipleItems">
+        <Tab></Tab>
         <ShellContent Title="Home" Icon="home.png"
             ContentTemplate="{DataTemplate local:HomePage}"
             Route="HomePage" />
