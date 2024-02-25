@@ -13,18 +13,19 @@ namespace Handy_Dandy.ViewModels
     {
         private IDatabaseService _databaseService;
         public ObservableCollection<CountryModel> CountryList { get; set; }
-        public IAsyncRelayCommand BackCommand { get; }
-
-        public MapViewModel(IDatabaseService databaseService)
+        //public IAsyncRelayCommand BackCommand { get; }
+        private INavigation _navigation;
+        public MapViewModel(IDatabaseService databaseService, INavigation navigation)
 		{
 			this._databaseService = databaseService;
-            BackCommand = new AsyncRelayCommand(OnBackPressed);
+            this._navigation = navigation;
+           // BackCommand = new AsyncRelayCommand(OnBackPressed);
         }
 
-        private async Task OnBackPressed()
-        {
-            await Shell.Current.GoToAsync($"{nameof(ProfilePage)}", true);
-        }
+        //private async Task OnBackPressed()
+        //{
+        //    await _navigation.PopAsync();
+        //}
     }
 }
 

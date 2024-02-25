@@ -25,9 +25,9 @@ public static class MauiProgram
 #if DEBUG
 		builder.Logging.AddDebug();
 #endif
-
-		//Views
-		builder.Services.AddTransient<LoginPage>();
+        builder.Services.AddSingleton<INavigation>(provider => Application.Current.MainPage.Navigation);
+        //Views
+        builder.Services.AddTransient<LoginPage>();
 		builder.Services.AddTransient<SignUpPage>();
         builder.Services.AddTransient<HomePage>();
         builder.Services.AddTransient<BookingPage>();
@@ -49,6 +49,9 @@ public static class MauiProgram
         builder.Services.AddTransient<BookingDetailViewModel>();
         builder.Services.AddTransient<ProfilePageViewModel>();
         builder.Services.AddTransient<MapViewModel>();
+
+        // add navigation service
+        builder.Services.AddSingleton<INavigation>(provider => Application.Current.MainPage.Navigation);
 
         return builder.Build();
 	}

@@ -5,7 +5,6 @@ using Handy_Dandy.Models;
 using Handy_Dandy.Services;
 using Handy_Dandy.ViewModels.Dtos;
 using Handy_Dandy.Views;
-using static Microsoft.Maui.LifecycleEvents.AndroidLifecycle;
 
 namespace Handy_Dandy.ViewModels
 {
@@ -17,12 +16,18 @@ namespace Handy_Dandy.ViewModels
         private UserDto user;
 
         public IAsyncRelayCommand AddressCommand { get; }
+        public IAsyncRelayCommand LogoutCommand { get; }
 
-        public ProfilePageViewModel(IDatabaseService databaseService)
+        private INavigation _navigation;
+
+        public ProfilePageViewModel(IDatabaseService databaseService, INavigation navigation)
 		{
-			this._databaseService = databaseService;
+            _navigation = navigation;
+
+            this._databaseService = databaseService;
 			InitData();
-            AddressCommand = new AsyncRelayCommand(OnClickAdress);
+            AddressCommand = new AsyncRelayCommand(OnClickAddress);
+            LogoutCommand = new AsyncRelayCommand(OnLogout);
         }
 
 		private async void InitData()
@@ -30,9 +35,15 @@ namespace Handy_Dandy.ViewModels
 			User = new UserDto(await this._databaseService.GetUserById("mockUserID"));
 		}
 
-        private async Task OnClickAdress()
+        private async Task OnClickAddress()
         {
-            await Shell.Current.GoToAsync($"//{nameof(MapPage)}");
+            //   await Shell.Current.GoToAsync($"//{nameof(MapPage)}");
+            await Application.Current.MainPage.Navigation.PushAsync(new MapPage(new MapViewModel(_databaseService, _navigation)));
+        }
+
+        private async Task OnLogout()
+        {
+            await Shell.Current.GoToAsync($"//{nameof(LoginPage)}");
         }
     }
 }

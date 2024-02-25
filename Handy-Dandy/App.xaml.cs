@@ -6,7 +6,7 @@ public partial class App : Application
 	public static UserModel CurrentUser;
 	public App()
 	{
-		InitializeComponent();
+		InitializeComponent();	
 
 		MainPage = new AppShell();
 	}

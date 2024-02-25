@@ -40,25 +40,26 @@ namespace Handy_Dandy.ViewModels
 
 		private async Task OnLogin()
 		{
-            var user = await this._dataService.QueryUserByEmail(Email);
-            if (user == null)
-            {
-                ErrorMessage = "We can't seem to find your account.";
-                IsVisableError = true;
-                return;
-            }
-            if (user.Password != Password)
-            {
-                ErrorMessage = "Your password is not match your account.";
-                IsVisableError = true;
-                return;
-            }
+            //var user = await this._dataService.QueryUserByEmail(Email);
+            //if (user == null)
+            //{
+            //    ErrorMessage = "We can't seem to find your account.";
+            //    IsVisableError = true;
+            //    return;
+            //}
+            //if (user.Password != Password)
+            //{
+            //    ErrorMessage = "Your password is not match your account.";
+            //    IsVisableError = true;
+            //    return;
+            //}
 
-            else
-            {
-                Console.WriteLine("xxxxx");
-                await Shell.Current.GoToAsync($"//{nameof(HomePage)}");
-            }
+            //else
+            //{
+            //    Console.WriteLine("xxxxx");
+            //    await Shell.Current.GoToAsync($"//{nameof(HomePage)}");
+            //}
+            await Shell.Current.GoToAsync($"//{nameof(HomePage)}");
         }
 
         private async Task OnSignUp()

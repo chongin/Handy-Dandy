@@ -57,10 +57,10 @@
             ContentTemplate="{DataTemplate local:SignUpPage}"
             Route="SignUpPage" />
 
-    <ShellContent Title="Map Page"
+    <!--<ShellContent Title="Map Page"
             FlyoutItemIsVisible="True" Shell.FlyoutBehavior="Disabled"
             ContentTemplate="{DataTemplate local:MapPage}"
-            Route="MapPage" />
+            Route="MapPage" />-->
 
     <FlyoutItem Title="Dashboard" FlyoutDisplayOptions="AsMultipleItems">
         <Tab></Tab>
