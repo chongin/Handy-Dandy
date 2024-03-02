@@ -1,0 +1,588 @@
+{
+    "categories": [
+        {
+            "category_id": "c1",
+            "name": "AC Repair",
+            "category_image": "category_ac_repair",
+            "services": [
+                {
+                    "service_id": "c1_s1",
+                    "category_id": "c1",
+                    "name": "AC Checkup",
+                    "description": "Check and repair AC",
+                    "image_name": "service_repair_ac",
+                    "service_charge": 48,
+                    "completed_count": 60,
+                    "score": 4.7
+                },
+                {
+                    "service_id": "c1_s2",
+                    "category_id": "c1",
+                    "name": "AC Cleaning",
+                    "description": "Regular clean AC",
+                    "image_name": "service_clean_ac",
+                    "service_charge": 28,
+                    "completed_count": 93,
+                    "score": 4.6
+                },
+                {
+                    "service_id": "c1_s3",
+                    "category_id": "c1",
+                    "name": "AC Installation",
+                    "description": "Install new AC units",
+                    "image_name": "service_install_ac",
+                    "service_charge": 75,
+                    "completed_count": 120,
+                    "score": 4.8
+                },
+                {
+                    "service_id": "c1_s4",
+                    "category_id": "c1",
+                    "name": "AC Repair - Ductwork",
+                    "description": "Repair ductwork for AC",
+                    "image_name": "service_repair_ductwork",
+                    "service_charge": 60,
+                    "completed_count": 80,
+                    "score": 4.5
+                },
+                {
+                    "service_id": "c1_s5",
+                    "category_id": "c1",
+                    "name": "AC Tune-Up",
+                    "description": "Perform routine AC maintenance",
+                    "image_name": "service_tune_up_ac",
+                    "service_charge": 35,
+                    "completed_count": 110,
+                    "score": 4.9
+                },
+                {
+                    "service_id": "c1_s6",
+                    "category_id": "c1",
+                    "name": "AC Compressor Replacement",
+                    "description": "Replace AC compressor",
+                    "image_name": "service_replace_compressor",
+                    "service_charge": 90,
+                    "completed_count": 140,
+                    "score": 4.7
+                }
+            ]
+        },
+        {
+            "category_id": "c2",
+            "name": "Plumbing",
+            "category_image": "category_plumbing",
+            "services": [
+                {
+                    "service_id": "c2_s1",
+                    "category_id": "c2",
+                    "name": "Pipe Leak Repair",
+                    "description": "Fix leaking pipes",
+                    "image_name": "service_pipe_leak",
+                    "service_charge": 35,
+                    "completed_count": 45,
+                    "score": 4.5
+                },
+                {
+                    "service_id": "c2_s2",
+                    "category_id": "c2",
+                    "name": "Toilet Installation",
+                    "description": "Install new toilets",
+                    "image_name": "service_install_toilet",
+                    "service_charge": 55,
+                    "completed_count": 75,
+                    "score": 4.4
+                },
+                {
+                    "service_id": "c2_s3",
+                    "category_id": "c2",
+                    "name": "Drain Cleaning",
+                    "description": "Clean clogged drains",
+                    "image_name": "service_clean_drain",
+                    "service_charge": 40,
+                    "completed_count": 100,
+                    "score": 4.7
+                },
+                {
+                    "service_id": "c2_s4",
+                    "category_id": "c2",
+                    "name": "Water Heater Installation",
+                    "description": "Install new water heaters",
+                    "image_name": "service_install_water_heater",
+                    "service_charge": 70,
+                    "completed_count": 80,
+                    "score": 4.6
+                },
+                {
+                    "service_id": "c2_s5",
+                    "category_id": "c2",
+                    "name": "Faucet Repair",
+                    "description": "Repair leaky faucets",
+                    "image_name": "service_repair_faucet",
+                    "service_charge": 25,
+                    "completed_count": 120,
+                    "score": 4.8
+                }
+            ]
+        },
+        {
+            "category_id": "c3",
+            "name": "Electrical Services",
+            "category_image": "category_electrical",
+            "services": [
+                {
+                    "service_id": "c3_s1",
+                    "category_id": "c3",
+                    "name": "Wiring Installation",
+                    "description": "Install electrical wiring",
+                    "image_name": "service_install_wiring",
+                    "service_charge": 65,
+                    "completed_count": 80,
+                    "score": 4.6
+                },
+                {
+                    "service_id": "c3_s2",
+                    "category_id": "c3",
+                    "name": "Light Fixture Repair",
+                    "description": "Repair faulty light fixtures",
+                    "image_name": "service_repair_light",
+                    "service_charge": 45,
+                    "completed_count": 110,
+                    "score": 4.8
+                },
+                {
+                    "service_id": "c3_s3",
+                    "category_id": "c3",
+                    "name": "Electric Panel Upgrade",
+                    "description": "Upgrade electric panels",
+                    "image_name": "service_upgrade_panel",
+                    "service_charge": 85,
+                    "completed_count": 140,
+                    "score": 4.9
+                },
+                {
+                    "service_id": "c3_s4",
+                    "category_id": "c3",
+                    "name": "Ceiling Fan Installation",
+                    "description": "Install ceiling fans",
+                    "image_name": "service_install_ceiling_fan",
+                    "service_charge": 50,
+                    "completed_count": 70,
+                    "score": 4.5
+                },
+                {
+                    "service_id": "c3_s5",
+                    "category_id": "c3",
+                    "name": "Outlet Replacement",
+                    "description": "Replace electrical outlets",
+                    "image_name": "service_replace_outlet",
+                    "service_charge": 30,
+                    "completed_count": 100,
+                    "score": 4.7
+                },
+                {
+                    "service_id": "c3_s6",
+                    "category_id": "c3",
+                    "name": "Generator Installation",
+                    "description": "Install backup generators",
+                    "image_name": "service_install_generator",
+                    "service_charge": 90,
+                    "completed_count": 130,
+                    "score": 4.8
+                }
+            ]
+        },
+        {
+            "category_id": "c4",
+            "name": "Home Cleaning",
+            "category_image": "category_cleaning",
+            "services": [
+                {
+                    "service_id": "c4_s1",
+                    "category_id": "c4",
+                    "name": "Deep Cleaning",
+                    "description": "Thorough cleaning of home",
+                    "image_name": "service_deep_cleaning",
+                    "service_charge": 60,
+                    "completed_count": 50,
+                    "score": 4.3
+                },
+                {
+                    "service_id": "c4_s2",
+                    "category_id": "c4",
+                    "name": "Kitchen Cleaning",
+                    "description": "Clean kitchen surfaces",
+                    "image_name": "service_clean_kitchen",
+                    "service_charge": 30,
+                    "completed_count": 90,
+                    "score": 4.2
+                },
+                {
+                    "service_id": "c4_s3",
+                    "category_id": "c4",
+                    "name": "Bathroom Cleaning",
+                    "description": "Clean and sanitize bathrooms",
+                    "image_name": "service_clean_bathroom",
+                    "service_charge": 25,
+                    "completed_count": 120,
+                    "score": 4.6
+                },
+                {
+                    "service_id": "c4_s4",
+                    "category_id": "c4",
+                    "name": "Living Room Cleaning",
+                    "description": "Clean living room area",
+                    "image_name": "service_clean_living_room",
+                    "service_charge": 40,
+                    "completed_count": 80,
+                    "score": 4.4
+                },
+                {
+                    "service_id": "c4_s5",
+                    "category_id": "c4",
+                    "name": "Carpet Cleaning",
+                    "description": "Deep clean carpets",
+                    "image_name": "service_clean_carpet",
+                    "service_charge": 50,
+                    "completed_count": 110,
+                    "score": 4.5
+                }
+            ]
+        },
+        {
+            "category_id": "c5",
+            "name": "Landscaping",
+            "category_image": "category_landscaping",
+            "services": [
+                {
+                    "service_id": "c5_s1",
+                    "category_id": "c5",
+                    "name": "Lawn Mowing",
+                    "description": "Mow and trim lawn",
+                    "image_name": "service_mow_lawn",
+                    "service_charge": 40,
+                    "completed_count": 65,
+                    "score": 4.4
+                },
+                {
+                    "service_id": "c5_s2",
+                    "category_id": "c5",
+                    "name": "Garden Design",
+                    "description": "Design and plant gardens",
+                    "image_name": "service_garden_design",
+                    "service_charge": 80,
+                    "completed_count": 80,
+                    "score": 4.7
+                },
+                {
+                    "service_id": "c5_s3",
+                    "category_id": "c5",
+                    "name": "Tree Trimming",
+                    "description": "Trim trees and shrubs",
+                    "image_name": "service_trim_tree",
+                    "service_charge": 55,
+                    "completed_count": 110,
+                    "score": 4.8
+                }
+            ]
+        },
+        {
+            "category_id": "c6",
+            "name": "Painting",
+            "category_image": "category_painting",
+            "services": [
+                {
+                    "service_id": "c6_s1",
+                    "category_id": "c6",
+                    "name": "Interior Painting",
+                    "description": "Paint interior walls",
+                    "image_name": "service_paint_interior",
+                    "service_charge": 70,
+                    "completed_count": 70,
+                    "score": 4.5
+                },
+                {
+                    "service_id": "c6_s2",
+                    "category_id": "c6",
+                    "name": "Exterior Painting",
+                    "description": "Paint exterior walls",
+                    "image_name": "service_paint_exterior",
+                    "service_charge": 90,
+                    "completed_count": 100,
+                    "score": 4.6
+                },
+                {
+                    "service_id": "c6_s3",
+                    "category_id": "c6",
+                    "name": "Furniture Painting",
+                    "description": "Paint furniture pieces",
+                    "image_name": "service_paint_furniture",
+                    "service_charge": 50,
+                    "completed_count": 130,
+                    "score": 4.7
+                }
+            ]
+        },
+        {
+            "category_id": "c7",
+            "name": "Pest Control",
+            "category_image": "category_pest_control",
+            "services": [
+                {
+                    "service_id": "c7_s1",
+                    "category_id": "c7",
+                    "name": "Termite Control",
+                    "description": "Control termite infestations",
+                    "image_name": "service_termite_control",
+                    "service_charge": 85,
+                    "completed_count": 40,
+                    "score": 4.4
+                },
+                {
+                    "service_id": "c7_s2",
+                    "category_id": "c7",
+                    "name": "Rodent Extermination",
+                    "description": "Exterminate rodents",
+                    "image_name": "service_rodent_control",
+                    "service_charge": 70,
+                    "completed_count": 70,
+                    "score": 4.3
+                },
+                {
+                    "service_id": "c7_s3",
+                    "category_id": "c7",
+                    "name": "Bed Bug Treatment",
+                    "description": "Eliminate bed bugs",
+                    "image_name": "service_bed_bug_treatment",
+                    "service_charge": 55,
+                    "completed_count": 110,
+                    "score": 4.6
+                }
+            ]
+        },
+        {
+            "category_id": "c8",
+            "name": "Roofing",
+            "category_image": "category_roofing",
+            "services": [
+                {
+                    "service_id": "c8_s1",
+                    "category_id": "c8",
+                    "name": "Roof Repair",
+                    "description": "Repair damaged roofs",
+                    "image_name": "service_repair_roof",
+                    "service_charge": 75,
+                    "completed_count": 55,
+                    "score": 4.5
+                },
+                {
+                    "service_id": "c8_s2",
+                    "category_id": "c8",
+                    "name": "Roof Installation",
+                    "description": "Install new roofs",
+                    "image_name": "service_install_roof",
+                    "service_charge": 95,
+                    "completed_count": 85,
+                    "score": 4.7
+                },
+                {
+                    "service_id": "c8_s3",
+                    "category_id": "c8",
+                    "name": "Roof Inspection",
+                    "description": "Inspect roof condition",
+                    "image_name": "service_inspect_roof",
+                    "service_charge": 50,
+                    "completed_count": 130,
+                    "score": 4.8
+                },
+                {
+                    "service_id": "c8_s4",
+                    "category_id": "c8",
+                    "name": "Gutter Cleaning",
+                    "description": "Clean gutters and downspouts",
+                    "image_name": "service_clean_gutters",
+                    "service_charge": 40,
+                    "completed_count": 100,
+                    "score": 4.6
+                }
+            ]
+        },
+        {
+            "category_id": "c9",
+            "name": "Appliance Repair",
+            "category_image": "category_appliance",
+            "services": [
+                {
+                    "service_id": "c9_s1",
+                    "category_id": "c9",
+                    "name": "Refrigerator Repair",
+                    "description": "Fix refrigerator issues",
+                    "image_name": "service_repair_refrigerator",
+                    "service_charge": 45,
+                    "completed_count": 75,
+                    "score": 4.4
+                },
+                {
+                    "service_id": "c9_s2",
+                    "category_id": "c9",
+                    "name": "Washing Machine Repair",
+                    "description": "Repair washing machine",
+                    "image_name": "service_repair_washing_machine",
+                    "service_charge": 65,
+                    "completed_count": 90,
+                    "score": 4.6
+                },
+                {
+                    "service_id": "c9_s3",
+                    "category_id": "c9",
+                    "name": "Dishwasher Repair",
+                    "description": "Fix dishwasher problems",
+                    "image_name": "service_repair_dishwasher",
+                    "service_charge": 55,
+                    "completed_count": 120,
+                    "score": 4.7
+                },
+                {
+                    "service_id": "c9_s4",
+                    "category_id": "c9",
+                    "name": "Oven Repair",
+                    "description": "Repair oven and stove issues",
+                    "image_name": "service_repair_oven",
+                    "service_charge": 50,
+                    "completed_count": 80,
+                    "score": 4.3
+                },
+                {
+                    "service_id": "c9_s5",
+                    "category_id": "c9",
+                    "name": "Dryer Repair",
+                    "description": "Fix dryer problems",
+                    "image_name": "service_repair_dryer",
+                    "service_charge": 60,
+                    "completed_count": 110,
+                    "score": 4.8
+                },
+                {
+                    "service_id": "c9_s6",
+                    "category_id": "c9",
+                    "name": "Microwave Repair",
+                    "description": "Repair microwave issues",
+                    "image_name": "service_repair_microwave",
+                    "service_charge": 40,
+                    "completed_count": 95,
+                    "score": 4.5
+                }
+            ]
+        },
+        {
+            "category_id": "c10",
+            "name": "Carpentry",
+            "category_image": "category_carpentry",
+            "services": [
+                {
+                    "service_id": "c10_s1",
+                    "category_id": "c10",
+                    "name": "Furniture Assembly",
+                    "description": "Assemble furniture pieces",
+                    "image_name": "service_assemble_furniture",
+                    "service_charge": 35,
+                    "completed_count": 40,
+                    "score": 4.2
+                },
+                {
+                    "service_id": "c10_s2",
+                    "category_id": "c10",
+                    "name": "Cabinet Installation",
+                    "description": "Install cabinets",
+                    "image_name": "service_install_cabinet",
+                    "service_charge": 80,
+                    "completed_count": 70,
+                    "score": 4.5
+                },
+                {
+                    "service_id": "c10_s3",
+                    "category_id": "c10",
+                    "name": "Wooden Flooring",
+                    "description": "Install wooden floors",
+                    "image_name": "service_install_wood_floor",
+                    "service_charge": 90,
+                    "completed_count": 100,
+                    "score": 4.6
+                }
+            ]
+        },
+        {
+            "category_id": "c11",
+            "name": "HVAC",
+            "category_image": "category_hvac",
+            "services": [
+                {
+                    "service_id": "c11_s1",
+                    "category_id": "c11",
+                    "name": "Furnace Repair",
+                    "description": "Repair furnace issues",
+                    "image_name": "service_repair_furnace",
+                    "service_charge": 80,
+                    "completed_count": 50,
+                    "score": 4.4
+                },
+                {
+                    "service_id": "c11_s2",
+                    "category_id": "c11",
+                    "name": "Heat Pump Installation",
+                    "description": "Install heat pumps",
+                    "image_name": "service_install_heat_pump",
+                    "service_charge": 95,
+                    "completed_count": 90,
+                    "score": 4.6
+                },
+                {
+                    "service_id": "c11_s3",
+                    "category_id": "c11",
+                    "name": "Boiler Repair",
+                    "description": "Fix boiler problems",
+                    "image_name": "service_repair_boiler",
+                    "service_charge": 70,
+                    "completed_count": 120,
+                    "score": 4.7
+                }
+            ]
+        },
+        {
+            "category_id": "c12",
+            "name": "Home Security",
+            "category_image": "category_security",
+            "services": [
+                {
+                    "service_id": "c12_s1",
+                    "category_id": "c12",
+                    "name": "Security Camera Installation",
+                    "description": "Install security cameras",
+                    "image_name": "service_install_security_camera",
+                    "service_charge": 60,
+                    "completed_count": 60,
+                    "score": 4.5
+                },
+                {
+                    "service_id": "c12_s2",
+                    "category_id": "c12",
+                    "name": "Alarm System Setup",
+                    "description": "Set up alarm systems",
+                    "image_name": "service_setup_alarm_system",
+                    "service_charge": 85,
+                    "completed_count": 80,
+                    "score": 4.7
+                },
+                {
+                    "service_id": "c12_s3",
+                    "category_id": "c12",
+                    "name": "Smart Lock Installation",
+                    "description": "Install smart locks",
+                    "image_name": "service_install_smart_lock",
+                    "service_charge": 50,
+                    "completed_count": 110,
+                    "score": 4.8
+                }
+            ]
+        }
+    ]
+}

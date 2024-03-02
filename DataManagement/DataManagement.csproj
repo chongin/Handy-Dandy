@@ -6,17 +6,17 @@
 		<!-- Uncomment to also build the tizen app. You will need to install tizen by following this: https://github.com/Samsung/Tizen.NET -->
 		<!-- <TargetFrameworks>$(TargetFrameworks);net7.0-tizen</TargetFrameworks> -->
 		<OutputType>Exe</OutputType>
-		<RootNamespace>Handy_Dandy</RootNamespace>
+		<RootNamespace>DataManagement</RootNamespace>
 		<UseMaui>true</UseMaui>
 		<SingleProject>true</SingleProject>
 		<ImplicitUsings>enable</ImplicitUsings>
 
 		<!-- Display name -->
-		<ApplicationTitle>Handy-Dandy</ApplicationTitle>
+		<ApplicationTitle>DataManagement</ApplicationTitle>
 
 		<!-- App Identifier -->
-		<ApplicationId>com.companyname.handy_dandy</ApplicationId>
-		<ApplicationIdGuid>ae162c4d-d6dc-4de9-bf82-1ecc7625eab6</ApplicationIdGuid>
+		<ApplicationId>com.companyname.datamanagement</ApplicationId>
+		<ApplicationIdGuid>0031c04e-173f-4c5f-8b28-e29bc39a0c67</ApplicationIdGuid>
 
 		<!-- Versions -->
 		<ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
@@ -34,13 +34,6 @@
 	  <CreatePackage>false</CreatePackage>
 	</PropertyGroup>
 	<ItemGroup>
-	  <MauiImage Remove="Resources\Images\beauty_category.jpg" />
-	  <MauiImage Remove="Resources\Images\dotnet_bot.svg" />
-	  <MauiImage Remove="Resources\Images\home.png" />
-	  <MauiImage Remove="Resources\Images\repairing_category.jpg" />
-	  <MauiImage Remove="Resources\Images\cleaning_category.jpg" />
-	</ItemGroup>
-	<ItemGroup>
 		<!-- App Icon -->
 		<MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#512BD4" />
 
@@ -49,6 +42,9 @@
 
 		<!-- Images -->
 		<MauiImage Include="Resources\Images\*" />
+		<MauiImage Update="Resources\Images\dotnet_bot.svg" BaseSize="168,208" />
+
+		<!-- Custom Fonts -->
 		<MauiFont Include="Resources\Fonts\*" />
 
 		<!-- Raw Assets (also remove the "Resources\Raw" prefix) -->
@@ -58,46 +54,19 @@
 	<ItemGroup>
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
 		<PackageReference Include="FirebaseDatabase.net" Version="4.2.0" />
-		<PackageReference Include="CommunityToolkit.Maui" Version="6.1.0" />
-		<PackageReference Include="Bogus" Version="35.4.0" />
-		<PackageReference Include="Syncfusion.Maui.Maps" Version="24.2.3" />
-		<PackageReference Include="Microsoft.Maui.Controls.Maps" Version="7.0.101" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <None Remove="Views\" />
-	  <None Remove="ViewModels\" />
-	  <None Remove="Resources\Images\user.png" />
-	  <None Remove="Resources\Images\password.png" />
-	  <None Remove="Resources\Images\login.png" />
 	  <None Remove="Models\" />
-	  <None Remove="Controllers\" />
-	  <None Remove="Resources\Images\cleaning.jpg" />
-	  <None Remove="Resources\Images\painting.jpg" />
-	  <None Remove="Resources\Images\repairing.jpg" />
-	  <None Remove="Resources\Images\" />
-	  <None Remove="Resources\Images\category_cleaning.jpg" />
-	  <None Remove="Resources\Images\score.png" />
-	  <None Remove="Resources\Images\goto.png" />
-	  <None Remove="Resources\Images\worker.png" />
-	  <None Remove="Resources\Images\money.png" />
-	  <None Remove="Resources\Images\address.png" />
+	  <None Remove="data\" />
+	  <None Remove="data\categories.json" />
 	</ItemGroup>
 	<ItemGroup>
-	  <Folder Include="Views\" />
-	  <Folder Include="ViewModels\" />
 	  <Folder Include="Models\" />
-	  <Folder Include="Controllers\" />
-	  <Folder Include="Resources\Images\" />
+	  <Folder Include="data\" />
 	</ItemGroup>
 	<ItemGroup>
-	  <BundleResource Include="Resources\Images\category_cleaning.jpg" />
-	  <BundleResource Include="Resources\Images\score.png" />
-	  <BundleResource Include="Resources\Images\gotobtn.png" />
-	  <BundleResource Include="Resources\Images\worker.png" />
-	  <BundleResource Include="Resources\Images\money.png" />
-	  <BundleResource Include="Resources\Images\address.png" />
+	  <BundleResource Include="data\categories.json" />
 	</ItemGroup>
 </Project>

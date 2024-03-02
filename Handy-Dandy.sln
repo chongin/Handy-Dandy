@@ -5,6 +5,8 @@ VisualStudioVersion = 25.0.1706.8
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Handy-Dandy", "Handy-Dandy\Handy-Dandy.csproj", "{548366E1-4C00-4AC7-A25B-8B5BCA906824}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataManagement", "DataManagement\DataManagement.csproj", "{6E69CBB4-DD6F-464A-8667-A848865AF704}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{548366E1-4C00-4AC7-A25B-8B5BCA906824}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{548366E1-4C00-4AC7-A25B-8B5BCA906824}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{548366E1-4C00-4AC7-A25B-8B5BCA906824}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6E69CBB4-DD6F-464A-8667-A848865AF704}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6E69CBB4-DD6F-464A-8667-A848865AF704}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6E69CBB4-DD6F-464A-8667-A848865AF704}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6E69CBB4-DD6F-464A-8667-A848865AF704}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

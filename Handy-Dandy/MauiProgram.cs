@@ -14,8 +14,8 @@ public static class MauiProgram
 		var builder = MauiApp.CreateBuilder();
 		builder
 			.UseMauiApp<App>()
+            .UseMauiMaps()
             .UseMauiCommunityToolkit()
-            .ConfigureSyncfusionCore()
             .ConfigureFonts(fonts =>
 			{
 				fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
@@ -52,7 +52,6 @@ public static class MauiProgram
 
         // add navigation service
         builder.Services.AddSingleton<INavigation>(provider => Application.Current.MainPage.Navigation);
-
         return builder.Build();
 	}
 }

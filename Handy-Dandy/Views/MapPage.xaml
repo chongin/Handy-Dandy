@@ -1,40 +1,24 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+﻿<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-              xmlns:maps="clr-namespace:Syncfusion.Maui.Maps;assembly=Syncfusion.Maui.Maps"
+             xmlns:maps="clr-namespace:Microsoft.Maui.Controls.Maps;assembly=Microsoft.Maui.Controls.Maps"
+             xmlns:sensors="clr-namespace:Microsoft.Maui.Devices.Sensors;assembly=Microsoft.Maui.Essentials"
              x:Class="Handy_Dandy.Views.MapPage"
              Title="MapPage">
-    <!--<Shell.BackButtonBehavior>
-        <BackButtonBehavior Command="{Binding BackCommand}" />
-    </Shell.BackButtonBehavior>-->
 
-     <ScrollView VerticalOptions="Fill" VerticalScrollBarVisibility="Always">
-      
-        <maps:SfMaps>
-            <maps:SfMaps.Layer>
-                <maps:MapShapeLayer
-                    DataSource="{Binding CountryList}"
-                    EnableZoomingAnimation="True"
-                    PrimaryValuePath="Name"
-                    ShapeDataField="name"
-                    ShapeFill="LightSalmon"
-                    ShapeHoverFill="DarkGreen"
-                    ShapeHoverStroke="Blue"
-                    ShapeStroke="LightBlue"
-                    ShapesSource="https://cdn.syncfusion.com/maps/map-data/world-map.json"
-                    ShowDataLabels="True">
-                    <maps:MapShapeLayer.DataLabelSettings>
-                        <maps:MapDataLabelSettings DataLabelPath="Name">
-                            <maps:MapDataLabelSettings.DataLabelStyle>
-                                <maps:MapLabelStyle FontSize="12" />
-                            </maps:MapDataLabelSettings.DataLabelStyle>
-                        </maps:MapDataLabelSettings>
-                    </maps:MapShapeLayer.DataLabelSettings>
-                    <maps:MapShapeLayer.ZoomPanBehavior>
-                        <maps:MapZoomPanBehavior EnableZooming="True" />
-                    </maps:MapShapeLayer.ZoomPanBehavior>
-                </maps:MapShapeLayer>
-            </maps:SfMaps.Layer>
-        </maps:SfMaps>
-    </ScrollView>
+    <maps:Map>
+        <x:Arguments>
+            <MapSpan>
+                <x:Arguments>
+                    <sensors:Location>
+                        <x:Arguments>
+                            <x:Double>36.9628066</x:Double>
+                            <x:Double>-122.0194722</x:Double>
+                        </x:Arguments>
+                    </sensors:Location>
+                    <x:Double>0.01</x:Double>
+                    <x:Double>0.01</x:Double>
+                </x:Arguments>
+            </MapSpan>
+        </x:Arguments>
+    </maps:Map>
 </ContentPage>
