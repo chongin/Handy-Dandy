@@ -9,8 +9,43 @@
             Padding="30,0"
             VerticalOptions="Center">
 
-             <Label Text="Select a JSON file to upload to Firebase" FontSize="20" HorizontalOptions="CenterAndExpand" Margin="0,20,0,40"/>
-            <Button x:Name="UploadButton" Text="Select File" Clicked="UploadButton_Clicked" HorizontalOptions="CenterAndExpand"/>
+            <Label Text="Select JSON files for Categories, Workers, and Service Workers" FontSize="30" HorizontalOptions="CenterAndExpand" Margin="0,20,0,40"/>
+
+            <Grid Margin="20" RowSpacing="30" ColumnSpacing="20">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <Label Grid.Row="0" Grid.Column="0" Text="Categories JSON File" HorizontalOptions="Center" VerticalOptions="Center" FontSize ="20" FontAttributes="Bold"/>
+                <Entry x:Name="CategoriesEntry" Grid.Row="0" Grid.Column="1" Placeholder="Select Categories JSON File" IsReadOnly="True"/>
+                <Button Text="Browse" Clicked="CategoriesBrowseButton_Clicked" Grid.Row="0" Grid.Column="2" HorizontalOptions="Center"/>
+
+                <Label Grid.Row="1" Grid.Column="0" Text="Workers JSON File" HorizontalOptions="Center" VerticalOptions="Center" FontSize="20"
+                       FontAttributes="Bold" Margin="0,20,0,0"/>
+                <Entry x:Name="WorkersEntry" Grid.Row="1" Grid.Column="1" Placeholder="Select Workers JSON File" IsReadOnly="True"/>
+                <Button Text="Browse" Clicked="WorkersBrowseButton_Clicked" Grid.Row="1" Grid.Column="2" HorizontalOptions="Center" Margin="0,20,0,0"/>
+
+                <Label Grid.Row="2" Grid.Column="0" Text="Service Workers JSON File" HorizontalOptions="Center" VerticalOptions="Center" FontSize="20"
+                       FontAttributes="Bold" Margin="0,20,0,0"/>
+                <Entry x:Name="ServiceWorkersEntry" Grid.Row="2" Grid.Column="1" Placeholder="Select Service Workers JSON File" IsReadOnly="True"/>
+                <Button Text="Browse" Clicked="ServiceWorkersBrowseButton_Clicked" Grid.Row="2" Grid.Column="2" HorizontalOptions="Center" Margin="0,20,0,0"/>
+
+                <Button Text="Confirm" Clicked="ConfirmButton_Clicked" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3" HorizontalOptions="Center" Margin="0,20,0,0"/>
+            </Grid>
+
+
+            <StackLayout Orientation="Horizontal" Spacing="25">
+                <Label Text="Upload data progress:" FontSize="20" FontAttributes="Bold" HorizontalOptions="Center"/>
+                <ProgressBar x:Name="ProgressBar" Progress="0" IsVisible="True" HorizontalOptions="FillAndExpand"/>
+            </StackLayout>
 
         </VerticalStackLayout>
     </ScrollView>

@@ -86,6 +86,7 @@
 	  <None Remove="Resources\Images\address.png" />
 	</ItemGroup>
 	<ItemGroup>
+	  <Folder Include="NewFolder\" />
 	  <Folder Include="Views\" />
 	  <Folder Include="ViewModels\" />
 	  <Folder Include="Models\" />
