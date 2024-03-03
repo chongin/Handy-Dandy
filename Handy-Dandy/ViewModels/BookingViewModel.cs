@@ -65,8 +65,8 @@ namespace Handy_Dandy.ViewModels
             var bookingModels = await this._databaseService.GetBookingsByState(state);
             foreach (var bookingModel in bookingModels)
             {
-                var workerModel = await this._databaseService.GetWorkerByID(bookingModel.WorkerID);
-                var serviceModel = await this._databaseService.GetServiceByID(bookingModel.ServiceID);
+                var workerModel = await this._databaseService.GetWorkerByID(bookingModel.WorkerId);
+                var serviceModel = await this._databaseService.GetServiceByID(bookingModel.ServiceId);
 
                 BookingDisplayDto model = new BookingDisplayDto();
                 model.BookingDto = new BookingDto(bookingModel);

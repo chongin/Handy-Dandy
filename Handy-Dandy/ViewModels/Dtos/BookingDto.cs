@@ -7,9 +7,9 @@ namespace Handy_Dandy.ViewModels.Dtos
 	public class BookingDto : ObservableObject
     {
         public string BookingID { get; }
-        public string ServiceID { get; }
+        public string ServiceId { get; }
         public string ClientID { get; }
-        public string WorkerID { get; }
+        public string WorkerId { get; }
         public string StartDate { get; }
         public string StartTime { get; }
         public int WorkingHours { get; }
@@ -20,9 +20,9 @@ namespace Handy_Dandy.ViewModels.Dtos
         public BookingDto(BookingModel model)
 		{
             BookingID = model.BookingID;
-            ServiceID = model.ServiceID;
+            ServiceId = model.ServiceId;
             ClientID = model.ClientID;
-            WorkerID = model.WorkerID;
+            WorkerId = model.WorkerId;
             StartDate = model.StartDate;
             StartTime = model.StartTime;
             WorkingHours = model.WorkingHours;

@@ -1,16 +1,21 @@
 ﻿using System;
+using Newtonsoft.Json;
+
 namespace Handy_Dandy.Models
 {
 	public class CategoryModel
 	{
-		public CategoryModel()
-		{
-		}
+        [JsonProperty("category_id")]
+        public string CategoryId { get; set; }
 
-		public string CategoryID { get; set; }
-		public string Name { get; set; }
-		public string CategoryImage { get; set; }
-		public List<ServiceModel> Services { get; set; }
-	}
+        [JsonProperty("name")]
+        public string Name { get; set; }
+
+        [JsonProperty("category_image")]
+        public string CategoryImage { get; set; }
+
+        [JsonProperty("services")]
+        public List<ServiceModel> Services { get; set; }
+    }
 }
 

@@ -58,7 +58,7 @@ namespace Handy_Dandy.ViewModels
 		private async void InitModel()
 		{
             BookingDetailDisplay.ServiceDto = new ServiceDto(await this._databaseService.GetServiceByID("MockServiceID"));
-			BookingDetailDisplay.WorkerDtos = ConvertDto.ConvertToWorkerDtoList(await this._databaseService.GetWorkersByServiceID(BookingDetailDisplay.ServiceDto.ServiceID));
+			BookingDetailDisplay.WorkerDtos = ConvertDto.ConvertToWorkerDtoList(await this._databaseService.GetWorkersByServiceID(BookingDetailDisplay.ServiceDto.ServiceId));
         }
 		private void InitDates()
 		{

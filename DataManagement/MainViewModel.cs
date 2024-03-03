@@ -181,7 +181,7 @@ namespace DataManagement
             AppData workersData = JsonConvert.DeserializeObject<AppData>(jsonText);
             foreach (var worker in workersData.Workers)
             {
-                await _firebaseClient.Child("workers").Child(worker.WorkerID).PutAsync(worker);
+                await _firebaseClient.Child("workers").Child(worker.WorkerId).PutAsync(worker);
             }
         }
 

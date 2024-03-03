@@ -1,21 +1,36 @@
 ﻿using System;
+using Newtonsoft.Json;
+
 namespace Handy_Dandy.Models
 {
 	public class ServiceModel
 	{
-		public ServiceModel()
-		{
-		}
 
-		public string ServiceID { get; set; }
-		public string CategoryID { get; set; }
-		public string Name { get; set; }
-		public string Description { get; set; }
+        [JsonProperty("service_id")]
+        public string ServiceId { get; set; }
+
+        [JsonProperty("category_id")]
+        public string CategoryId { get; set; }
+
+        [JsonProperty("name")]
+        public string Name { get; set; }
+
+        [JsonProperty("description")]
+        public string Description { get; set; }
+
+        [JsonProperty("image_name")]
         public string ImageName { get; set; }
-        public int ServiceCharge { get; set; }
-		public int CompletedCount { get; set; }
-		public float Score { get; set; }
-		public List<string> WorkerIDs { get; set; }
-	}
+
+        [JsonProperty("service_charge")]
+        public float ServiceCharge { get; set; }
+
+        [JsonProperty("completed_count")]
+        public int CompletedCount { get; set; }
+
+        [JsonProperty("score")]
+        public float Score { get; set; }
+
+        public List<string> WorkerIDs { get; set; }
+    }
 }
 

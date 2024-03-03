@@ -7,7 +7,7 @@ using Bogus;
 
 namespace Handy_Dandy.Services
 {
-	public class FireBaseService: IDatabaseService
+	public class FireBaseServiceMock: IDatabaseService
 	{
         private readonly FirebaseClient _firebase;
 		private static string UserRootName = "Clients";
@@ -15,7 +15,7 @@ namespace Handy_Dandy.Services
         private List<string> serviceNames;
         List<string> categoryImageNames;
         List<string> categoryName;
-        public FireBaseService(string firebaseUrl)
+        public FireBaseServiceMock(string firebaseUrl)
 		{
             _firebase = new FirebaseClient(firebaseUrl);
 

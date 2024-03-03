@@ -5,7 +5,7 @@ namespace Handy_Dandy.ViewModels.Dtos
 {
 	public class WorkerDto : ObservableObject
     {
-        public string WorkerID { get; }
+        public string WorkerId { get; }
         public string Name { get; }
         public string Email { get; }
         public string Password { get; }
@@ -17,8 +17,8 @@ namespace Handy_Dandy.ViewModels.Dtos
         public int LaborCost { get; }
         public string ImageName { get; }
 
-        public List<string> ServiceIDs { get; }
-        public UserRole RoleID { get; }
+        public List<string> ServiceIds { get; }
+        public int RoleId { get; }
 
         private Color _currentColor;
         public Color CurrentColor
@@ -30,7 +30,7 @@ namespace Handy_Dandy.ViewModels.Dtos
         public WorkerDto(WorkerModel WorkerModel)
 		{
             _currentColor = Color.FromArgb("#00000000");
-            WorkerID = WorkerModel.WorkerID;
+            WorkerId = WorkerModel.WorkerId;
             Name = WorkerModel.Name;
             Email = WorkerModel.Email;
             Password = WorkerModel.Password;
@@ -41,9 +41,9 @@ namespace Handy_Dandy.ViewModels.Dtos
             LaborCost = WorkerModel.LaborCost;
             ImageName = WorkerModel.ImageName;
 
-            ServiceIDs = new List<string>();
-            ServiceIDs = WorkerModel.ServiceIDs;
-            RoleID = WorkerModel.RoleID;
+            ServiceIds = new List<string>();
+            ServiceIds = WorkerModel.ServiceIds;
+            RoleId = WorkerModel.RoleId;
         }
 
         public string LaborCostStr

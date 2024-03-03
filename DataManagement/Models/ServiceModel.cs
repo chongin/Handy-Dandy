@@ -21,13 +21,13 @@ namespace DataManagement.Models
         public string ImageName { get; set; }
 
         [JsonProperty("service_charge")]
-        public double ServiceCharge { get; set; }
+        public float ServiceCharge { get; set; }
 
         [JsonProperty("completed_count")]
         public int CompletedCount { get; set; }
 
         [JsonProperty("score")]
-        public double Score { get; set; }
+        public float Score { get; set; }
     }
 }
 

@@ -7,7 +7,7 @@ namespace Handy_Dandy.Models
 		{
 		}
 
-		public string UserID { get; set; }
+		public string UserId { get; set; }
 		public string UserName { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
@@ -17,7 +17,7 @@ namespace Handy_Dandy.Models
         public bool IsMember { get; set; }
 		public string City { get; set; }
 		public int Balance { get; set; }
-        public UserRole RoleID { get; set; }
+        public int RoleId { get; set; }
         public List<BookingModel> Orders { get; set; }
 	}
 

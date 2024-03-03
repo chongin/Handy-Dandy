@@ -6,7 +6,7 @@ namespace DataManagement.Models
     public class WorkerModel
     {
         [JsonProperty("worker_id")]
-        public string WorkerID { get; set; }
+        public string WorkerId { get; set; }
 
         [JsonProperty("name")]
         public string Name { get; set; }
@@ -36,7 +36,7 @@ namespace DataManagement.Models
         public string ImageName { get; set; }
 
         [JsonProperty("role_id")]
-        public int RoleID { get; set; }
+        public int RoleId { get; set; }
     }
 }
 
