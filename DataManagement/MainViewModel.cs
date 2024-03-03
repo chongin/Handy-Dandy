@@ -70,6 +70,21 @@ namespace DataManagement
             }
         }
 
+        private bool _enableConfirm;
+
+        public bool EnableConfirm
+        {
+            get => _enableConfirm;
+            set
+            {
+                if (_enableConfirm != value)
+                {
+                    _enableConfirm = value;
+                    OnPropertyChanged(nameof(EnableConfirm));
+                }
+            }
+        }
+
         public ICommand SelectCategoryCommand { get; private set; }
         public ICommand SelectWorkerCommand { get; private set; }
         public ICommand SelectServiceWorkerCommand { get; private set; }
@@ -78,6 +93,7 @@ namespace DataManagement
 
         public MainViewModel()
         {
+            _enableConfirm = false;
             _firebaseClient = new FirebaseClient("https://handy-dandy-1ce26-default-rtdb.firebaseio.com/");
             SelectCategoryCommand = new Command(OnCategoryButtonClickAsync);
             SelectWorkerCommand = new Command(OnWorkerButtonClick);
@@ -93,6 +109,7 @@ namespace DataManagement
                 PickerTitle = "Select a JSON file"
             });
             CategorPath = file.FullPath;
+            CheckConfirmEnable();
         }
 
         private async void OnWorkerButtonClick()
@@ -102,6 +119,7 @@ namespace DataManagement
                 PickerTitle = "Select a JSON file"
             });
             WorkerPath = file.FullPath;
+            CheckConfirmEnable();
         }
 
         private async void OnServiceWorkerButtonClick()
@@ -111,8 +129,20 @@ namespace DataManagement
                 PickerTitle = "Select a JSON file"
             });
             ServiceWorkerPath = file.FullPath;
+            CheckConfirmEnable();
         }
 
+        private void CheckConfirmEnable()
+        {
+            if (CategorPath.Length > 0 && WorkerPath.Length > 0 && ServiceWorkerPath.Length > 0)
+            {
+                EnableConfirm = true;
+            }
+            else
+            {
+                EnableConfirm = false;
+            }
+        }
         private async void OnConfirmButtonClick()
         {
             int totalTasks = 3;

@@ -45,7 +45,8 @@
                 <Button Text="Browse"  Grid.Row="2" Grid.Column="2" HorizontalOptions="Center" Margin="0,20,0,0"
                         Command="{Binding SelectServiceWorkerCommand}"/>
 
-                <Button Text="Confirm" Command="{Binding ConfirmCommand}" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3" HorizontalOptions="Center" Margin="0,20,0,0" WidthRequest="200"/>
+                <Button Text="Confirm" Command="{Binding ConfirmCommand}" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3" HorizontalOptions="Center" Margin="0,20,0,0" WidthRequest="200"
+                        IsEnabled="{Binding EnableConfirm}"/>
             </Grid>
 
 
