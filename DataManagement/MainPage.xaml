@@ -1,13 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="DataManagement.MainPage">
+             x:Class="DataManagement.MainPage"
+             Shell.NavBarIsVisible="False"
+             >
 
     <ScrollView>
         <VerticalStackLayout
             Spacing="25"
             Padding="30,0"
             VerticalOptions="Center">
+
+            <Label Text="DataManagement" FontSize="60" TextColor="BlueViolet" HorizontalOptions="CenterAndExpand" />
 
             <Label Text="Select JSON files for Categories, Workers, and Service Workers" FontSize="30" HorizontalOptions="CenterAndExpand" Margin="0,20,0,40"/>
 
@@ -25,27 +29,35 @@
                 </Grid.ColumnDefinitions>
 
                 <Label Grid.Row="0" Grid.Column="0" Text="Categories JSON File" HorizontalOptions="Center" VerticalOptions="Center" FontSize ="20" FontAttributes="Bold"/>
-                <Entry x:Name="CategoriesEntry" Grid.Row="0" Grid.Column="1" Placeholder="Select Categories JSON File" IsReadOnly="True"/>
-                <Button Text="Browse" Clicked="CategoriesBrowseButton_Clicked" Grid.Row="0" Grid.Column="2" HorizontalOptions="Center"/>
+                <Entry x:Name="CategoriesEntry" Grid.Row="0" Grid.Column="1" Placeholder="Select Categories JSON File" IsReadOnly="True" Text="{Binding CategorPath}"/>
+                <Button Text="Browse"  Grid.Row="0" Grid.Column="2" HorizontalOptions="Center"
+                        Command="{Binding SelectCategoryCommand}"/>
 
                 <Label Grid.Row="1" Grid.Column="0" Text="Workers JSON File" HorizontalOptions="Center" VerticalOptions="Center" FontSize="20"
                        FontAttributes="Bold" Margin="0,20,0,0"/>
-                <Entry x:Name="WorkersEntry" Grid.Row="1" Grid.Column="1" Placeholder="Select Workers JSON File" IsReadOnly="True"/>
-                <Button Text="Browse" Clicked="WorkersBrowseButton_Clicked" Grid.Row="1" Grid.Column="2" HorizontalOptions="Center" Margin="0,20,0,0"/>
+                <Entry x:Name="WorkersEntry" Grid.Row="1" Grid.Column="1" Placeholder="Select Workers JSON File" IsReadOnly="True" Text="{Binding WorkerPath}"/>
+                <Button Text="Browse"  Grid.Row="1" Grid.Column="2" HorizontalOptions="Center" Margin="0,20,0,0"
+                        Command="{Binding SelectWorkerCommand}"/>
 
                 <Label Grid.Row="2" Grid.Column="0" Text="Service Workers JSON File" HorizontalOptions="Center" VerticalOptions="Center" FontSize="20"
                        FontAttributes="Bold" Margin="0,20,0,0"/>
-                <Entry x:Name="ServiceWorkersEntry" Grid.Row="2" Grid.Column="1" Placeholder="Select Service Workers JSON File" IsReadOnly="True"/>
-                <Button Text="Browse" Clicked="ServiceWorkersBrowseButton_Clicked" Grid.Row="2" Grid.Column="2" HorizontalOptions="Center" Margin="0,20,0,0"/>
+                <Entry x:Name="ServiceWorkersEntry" Grid.Row="2" Grid.Column="1" Placeholder="Select Service Workers JSON File" IsReadOnly="True" Text="{Binding ServiceWorkerPath}"/>
+                <Button Text="Browse"  Grid.Row="2" Grid.Column="2" HorizontalOptions="Center" Margin="0,20,0,0"
+                        Command="{Binding SelectServiceWorkerCommand}"/>
 
-                <Button Text="Confirm" Clicked="ConfirmButton_Clicked" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3" HorizontalOptions="Center" Margin="0,20,0,0"/>
+                <Button Text="Confirm" Command="{Binding ConfirmCommand}" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3" HorizontalOptions="Center" Margin="0,20,0,0" WidthRequest="200"/>
             </Grid>
 
 
-            <StackLayout Orientation="Horizontal" Spacing="25">
-                <Label Text="Upload data progress:" FontSize="20" FontAttributes="Bold" HorizontalOptions="Center"/>
-                <ProgressBar x:Name="ProgressBar" Progress="0" IsVisible="True" HorizontalOptions="FillAndExpand"/>
-            </StackLayout>
+            <VerticalStackLayout Spacing="10">
+                <Label Text="Upload data progress:" FontSize="20" FontAttributes="Bold" HorizontalOptions="Start"/>
+                <StackLayout Orientation="Horizontal" Spacing="25">
+                    <Label Text="{Binding UploadProgress, StringFormat='{0:P0}'}" HorizontalOptions="Center" FontSize="25" TextColor="Green"/>
+                
+                    <ProgressBar x:Name="ProgressBar" Progress="{Binding UploadProgress}" IsVisible="True" HorizontalOptions="FillAndExpand" HeightRequest="20"/>
+                </StackLayout>
+            </VerticalStackLayout>
+            
 
         </VerticalStackLayout>
     </ScrollView>

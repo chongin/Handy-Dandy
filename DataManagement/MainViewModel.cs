@@ -2,6 +2,10 @@
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
+using DataManagement.Models;
+using Firebase.Database;
+using Firebase.Database.Query;
+using Newtonsoft.Json;
 
 namespace DataManagement
 {
@@ -17,22 +21,22 @@ namespace DataManagement
                 if (_categoryPath != value)
                 {
                     _categoryPath = value;
-                    OnPropertyChanged();
+                    OnPropertyChanged(nameof(CategorPath));
                 }
             }
         }
 
-        private string _servicePath;
+        private string _workerPath;
 
-        public string ServicePath
+        public string WorkerPath
         {
-            get => _servicePath;
+            get => _workerPath;
             set
             {
-                if (_servicePath != value)
+                if (_workerPath != value)
                 {
-                    _servicePath = value;
-                    OnPropertyChanged();
+                    _workerPath = value;
+                    OnPropertyChanged(nameof(WorkerPath));
                 }
             }
         }
@@ -47,46 +51,118 @@ namespace DataManagement
                 if (_serviceWorkerPath != value)
                 {
                     _serviceWorkerPath = value;
-                    OnPropertyChanged();
+                    OnPropertyChanged(nameof(ServiceWorkerPath));
                 }
             }
         }
 
+        private double uploadProgress;
+        public double UploadProgress
+        {
+            get { return uploadProgress; }
+            set
+            {
+                if (uploadProgress != value)
+                {
+                    uploadProgress = value;
+                    OnPropertyChanged(nameof(UploadProgress));
+                }
+            }
+        }
 
         public ICommand SelectCategoryCommand { get; private set; }
-        public ICommand SelectServiceCommand { get; private set; }
+        public ICommand SelectWorkerCommand { get; private set; }
         public ICommand SelectServiceWorkerCommand { get; private set; }
-
+        private FirebaseClient _firebaseClient;
         public ICommand ConfirmCommand { get; private set; }
 
         public MainViewModel()
         {
-
-            SelectCategoryCommand = new Command(OnCategoryButtonClick);
-            SelectServiceCommand = new Command(OnServiceButtonClick);
+            _firebaseClient = new FirebaseClient("https://handy-dandy-1ce26-default-rtdb.firebaseio.com/");
+            SelectCategoryCommand = new Command(OnCategoryButtonClickAsync);
+            SelectWorkerCommand = new Command(OnWorkerButtonClick);
             SelectServiceWorkerCommand = new Command(OnServiceWorkerButtonClick);
             ConfirmCommand = new Command(OnConfirmButtonClick);
 
         }
 
-        private void OnCategoryButtonClick()
+        private async void OnCategoryButtonClickAsync()
         {
-
+            var file = await FilePicker.PickAsync(new PickOptions
+            {
+                PickerTitle = "Select a JSON file"
+            });
+            CategorPath = file.FullPath;
         }
 
-        private void OnServiceButtonClick()
+        private async void OnWorkerButtonClick()
         {
-
+            var file = await FilePicker.PickAsync(new PickOptions
+            {
+                PickerTitle = "Select a JSON file"
+            });
+            WorkerPath = file.FullPath;
         }
 
-        private void OnServiceWorkerButtonClick()
+        private async void OnServiceWorkerButtonClick()
         {
-
+            var file = await FilePicker.PickAsync(new PickOptions
+            {
+                PickerTitle = "Select a JSON file"
+            });
+            ServiceWorkerPath = file.FullPath;
         }
 
-        private void OnConfirmButtonClick()
+        private async void OnConfirmButtonClick()
         {
+            int totalTasks = 3;
 
+            int taskNum = 0;
+
+            await UploadCategoryData();
+            taskNum += 1;
+            UploadProgress = taskNum / (double)totalTasks;
+
+            await UploadWorkerData();
+            taskNum += 1;
+            UploadProgress = taskNum / (double)totalTasks;
+
+            await UploadServiceWorkerData();
+            taskNum += 1;
+            UploadProgress = taskNum / (double)totalTasks;
+
+            await Shell.Current.CurrentPage.DisplayAlert("Success", "Data successfully uploaded to Firebase!", "OK");
+        }
+
+
+        private async Task UploadCategoryData()
+        {
+            string jsonText = File.ReadAllText(_categoryPath);
+            AppData categoriesData = JsonConvert.DeserializeObject<AppData>(jsonText);
+            foreach (var category in categoriesData.Categories)
+            {
+                await _firebaseClient.Child("categories").Child(category.CategoryId).PutAsync(category);
+            }
+        }
+
+        private async Task UploadWorkerData()
+        {
+            string jsonText = File.ReadAllText(_workerPath);
+            AppData workersData = JsonConvert.DeserializeObject<AppData>(jsonText);
+            foreach (var worker in workersData.Workers)
+            {
+                await _firebaseClient.Child("workers").Child(worker.WorkerID).PutAsync(worker);
+            }
+        }
+
+        private async Task UploadServiceWorkerData()
+        {
+            string jsonText = File.ReadAllText(_serviceWorkerPath);
+            AppData serviceWorkersData = JsonConvert.DeserializeObject<AppData>(jsonText);
+            foreach (var serviceWorker in serviceWorkersData.ServiceWorkers)
+            {
+                await _firebaseClient.Child("service_workers").Child(serviceWorker.ServiceId).PutAsync(serviceWorker);
+            }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
