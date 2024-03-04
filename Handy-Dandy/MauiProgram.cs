@@ -38,10 +38,11 @@ public static class MauiProgram
         builder.Services.AddTransient<MapPage>();
 
         //services
-        builder.Services.AddSingleton< IDatabaseService, FireBaseServiceMock >(_ => new FireBaseServiceMock("https://handy-dandy-1ce26-default-rtdb.firebaseio.com/"));
+        //builder.Services.AddSingleton< IDatabaseService, FireBaseService >(_ => new FireBaseService("https://handy-dandy-1ce26-default-rtdb.firebaseio.com/"));
+        builder.Services.AddSingleton<IDatabaseService, FireBaseServiceMock>(_ => new FireBaseServiceMock("https://handy-dandy-1ce26-default-rtdb.firebaseio.com/"));
 
         //View Models
-		builder.Services.AddTransient<LoginPageViewModel>();
+        builder.Services.AddTransient<LoginPageViewModel>();
         builder.Services.AddTransient<SignUpPageViewModel>();
         builder.Services.AddTransient<HomePageViewModel>();
         builder.Services.AddTransient<ServicePageViewModel>();
