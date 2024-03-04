@@ -98,7 +98,7 @@ namespace Handy_Dandy.Services
 
 
         #region Categories
-        public async Task<List<CategoryModel>> GetCategories()
+        public List<CategoryModel> GetCategories()
         {
             List<CategoryModel> categories = new List<CategoryModel>();
             for (int i = 0; i < 9; ++i)
