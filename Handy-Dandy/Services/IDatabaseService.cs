@@ -7,7 +7,7 @@ namespace Handy_Dandy.Services
 		Task InserUser(UserModel user);
 		Task UpdateUser(UserModel user);
 		Task<UserModel> QueryUserByEmail(string email);
-		Task<List<CategoryModel>> GetCategories();
+        List<CategoryModel> GetCategories();
         Task<List<PromotionModel>> GetPromotions();
 		Task<List<BookingModel>> GetBookingsByState(string state);
 		Task<WorkerModel> GetWorkerByID(string workerID);

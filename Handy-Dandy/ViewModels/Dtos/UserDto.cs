@@ -6,7 +6,7 @@ namespace Handy_Dandy.ViewModels.Dtos
 {
 	public class UserDto : ObservableObject
     {
-        public string UserID { get; }
+        public string UserId { get; }
         public string UserName { get; }
         public string Email { get; }
         public string Password { get; }
@@ -16,18 +16,18 @@ namespace Handy_Dandy.ViewModels.Dtos
         public bool IsMember { get; }
         public string City { get; }
         public int Balance { get; }
-        public UserRole RoleID { get; }
+        public int RoleId { get; }
         public List<BookingModel> Bookings { get; }
 
         public UserDto(UserModel model)
 		{
-            UserID = model.UserID;
+            UserId = model.UserId;
             UserName = model.UserName;
             Email = model.Email;
             Password = model.Password;
             Address = model.Address;
             Phone = model.Phone;
-            RoleID = model.RoleID;
+            RoleId = model.RoleId;
             IsMember = model.IsMember;
             Avatar = model.Avatar;
             City = model.City;

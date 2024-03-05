@@ -44,11 +44,11 @@ namespace Handy_Dandy.ViewModels
                 return;
             }
             UserModel user = new UserModel();
-            user.UserID = Guid.NewGuid().ToString();
+            user.UserId = Guid.NewGuid().ToString();
             user.Email = Email;
             user.UserName = UserName;
             user.Phone = Phone;
-            user.RoleID = UserRole.Client;
+            user.RoleId = (int)UserRole.Client;
             user.Address = Address;
             user.Password = Password;
             user.City = "Sudbury";

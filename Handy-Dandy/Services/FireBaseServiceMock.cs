@@ -7,7 +7,7 @@ using Bogus;
 
 namespace Handy_Dandy.Services
 {
-	public class FireBaseService: IDatabaseService
+	public class FireBaseServiceMock: IDatabaseService
 	{
         private readonly FirebaseClient _firebase;
 		private static string UserRootName = "Clients";
@@ -15,17 +15,10 @@ namespace Handy_Dandy.Services
         private List<string> serviceNames;
         List<string> categoryImageNames;
         List<string> categoryName;
-
-        private List<CategoryModel> _categories;
-        private List<WorkerModel> _workers;
-        private List<ServiceWorkerModel> _serviceWorkers;
-        public FireBaseService(string firebaseUrl)
+        public FireBaseServiceMock(string firebaseUrl)
 		{
-            _categories = new List<CategoryModel>();
-            _workers = new List<WorkerModel>();
-            _serviceWorkers = new List<ServiceWorkerModel>();
-
             _firebase = new FirebaseClient(firebaseUrl);
+
             categoryImageNames = new List<string> { "category_cleaning", "category_repairing", "category_beauty" };
             categoryName = new List<string> { "Cleaning", "Repairing", "Beauty" };
 
@@ -35,11 +28,6 @@ namespace Handy_Dandy.Services
             serviceNames = new List<string> { "Clean Floor", "Clean AC", "Clean Wall",
                 "Laundry", "Maintain Light", "Repair Appliance"};
 
-
-            ReadCategoriesAsync();
-            ReadWorkersAsync();
-            ReadServiceWorkersAsync();
-            Console.WriteLine("Init data success.");
         }
 
         #region User
@@ -112,7 +100,14 @@ namespace Handy_Dandy.Services
         #region Categories
         public List<CategoryModel> GetCategories()
         {
-            return this._categories;
+            List<CategoryModel> categories = new List<CategoryModel>();
+            for (int i = 0; i < 9; ++i)
+            {
+                categories.Add(CreateCategoryModel(i));
+            }
+
+            //await Task.Yield();
+            return categories;
         }
 
         private CategoryModel CreateCategoryModel(int index)
@@ -267,37 +262,6 @@ namespace Handy_Dandy.Services
             return workerModels;
         }
         #endregion
-
-        public async void ReadCategoriesAsync()
-        {
-            var categoryData = await _firebase.Child("categories").OnceAsync<CategoryModel>();
-
-            foreach (var category in categoryData)
-            {
-                category.Object.CategoryImage = "https://deckofcardsapi.com/static/img/6H.png";
-                this._categories.Add(category.Object);
-            }
-        }
-
-        public async void ReadWorkersAsync()
-        {
-            var workersData = await _firebase.Child("workers").OnceAsync<WorkerModel>();
-
-            foreach (var worker in workersData)
-            {
-                this._workers.Add(worker.Object);
-            }
-        }
-
-        public async void ReadServiceWorkersAsync()
-        {
-            var serviceWorkerData = await _firebase.Child("service_workers").OnceAsync<ServiceWorkerModel>();
-
-            foreach (var serviceWorker in serviceWorkerData)
-            {
-                this._serviceWorkers.Add(serviceWorker.Object);
-            }
-        }
     }
 }
 
