@@ -67,6 +67,55 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <None Remove="Resources\Images\service_assemble_furniture.png" />
+	  <None Remove="Resources\Images\service_bed_bug_treatment.png" />
+	  <None Remove="Resources\Images\service_clean_ac.png" />
+	  <None Remove="Resources\Images\service_clean_bathroom.png" />
+	  <None Remove="Resources\Images\service_clean_carpet.png" />
+	  <None Remove="Resources\Images\service_clean_drain.png" />
+	  <None Remove="Resources\Images\service_clean_gutters.png" />
+	  <None Remove="Resources\Images\service_clean_kitchen.png" />
+	  <None Remove="Resources\Images\service_clean_living_room.png" />
+	  <None Remove="Resources\Images\service_deep_cleaning.png" />
+	  <None Remove="Resources\Images\service_garden_design.png" />
+	  <None Remove="Resources\Images\service_inspect_roof.png" />
+	  <None Remove="Resources\Images\service_install_ac.png" />
+	  <None Remove="Resources\Images\service_install_cabinet.png" />
+	  <None Remove="Resources\Images\service_install_ceiling_fan.png" />
+	  <None Remove="Resources\Images\service_install_generator.png" />
+	  <None Remove="Resources\Images\service_install_heat_pump.png" />
+	  <None Remove="Resources\Images\service_install_roof.png" />
+	  <None Remove="Resources\Images\service_install_security_camera.png" />
+	  <None Remove="Resources\Images\service_install_smart_lock.png" />
+	  <None Remove="Resources\Images\service_install_water_heater.png" />
+	  <None Remove="Resources\Images\service_install_wiring.png" />
+	  <None Remove="Resources\Images\service_install_wood_floor.png" />
+	  <None Remove="Resources\Images\service_mow_lawn.png" />
+	  <None Remove="Resources\Images\service_paint_exterior.png" />
+	  <None Remove="Resources\Images\service_paint_furniture.png" />
+	  <None Remove="Resources\Images\service_paint_interior.png" />
+	  <None Remove="Resources\Images\service_pipe_leak.png" />
+	  <None Remove="Resources\Images\service_repair_ac.png" />
+	  <None Remove="Resources\Images\service_repair_boiler.png" />
+	  <None Remove="Resources\Images\service_repair_dishwasher.png" />
+	  <None Remove="Resources\Images\service_repair_dryer.png" />
+	  <None Remove="Resources\Images\service_repair_ductwork.png" />
+	  <None Remove="Resources\Images\service_repair_faucet.png" />
+	  <None Remove="Resources\Images\service_repair_furnace.png" />
+	  <None Remove="Resources\Images\service_repair_light.png" />
+	  <None Remove="Resources\Images\service_repair_microwave.png" />
+	  <None Remove="Resources\Images\service_repair_oven.png" />
+	  <None Remove="Resources\Images\service_repair_refrigerator.png" />
+	  <None Remove="Resources\Images\service_repair_roof.png" />
+	  <None Remove="Resources\Images\service_repair_washing_machine.png" />
+	  <None Remove="Resources\Images\service_replace_compressor.png" />
+	  <None Remove="Resources\Images\service_replace_outlet.png" />
+	  <None Remove="Resources\Images\service_rodent_control.png" />
+	  <None Remove="Resources\Images\service_setup_alarm_system.png" />
+	  <None Remove="Resources\Images\service_termite_control.png" />
+	  <None Remove="Resources\Images\service_trim_tree.png" />
+	  <None Remove="Resources\Images\service_tune_up_ac.png" />
+	  <None Remove="Resources\Images\service_upgrade_panel.png" />
 	  <None Remove="Views\" />
 	  <None Remove="ViewModels\" />
 	  <None Remove="Resources\Images\user.png" />
@@ -91,7 +140,6 @@
 	  <Folder Include="ViewModels\" />
 	  <Folder Include="Models\" />
 	  <Folder Include="Controllers\" />
-	  <Folder Include="Resources\Images\" />
 	</ItemGroup>
 	<ItemGroup>
 	  <BundleResource Include="Resources\Images\category_cleaning.jpg" />

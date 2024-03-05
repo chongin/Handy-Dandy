@@ -1,0 +1,583 @@
+{
+  "service_workers": [
+    {
+      "service_id": "c1_s1",
+      "service_name": "AC Checkup",
+      "worker_ids": [
+        "worker16",
+        "worker1",
+        "worker3",
+        "worker10",
+        "worker8",
+        "worker12"
+      ]
+    },
+    {
+      "service_id": "c1_s2",
+      "service_name": "AC Cleaning",
+      "worker_ids": [
+        "worker7",
+        "worker4",
+        "worker16",
+        "worker20",
+        "worker5",
+        "worker8"
+      ]
+    },
+    {
+      "service_id": "c1_s3",
+      "service_name": "AC Installation",
+      "worker_ids": [
+        "worker1",
+        "worker17",
+        "worker4",
+        "worker19",
+        "worker15"
+      ]
+    },
+    {
+      "service_id": "c1_s4",
+      "service_name": "AC Repair - Ductwork",
+      "worker_ids": [
+        "worker12",
+        "worker14",
+        "worker15",
+        "worker8",
+        "worker11",
+        "worker2",
+        "worker17"
+      ]
+    },
+    {
+      "service_id": "c1_s5",
+      "service_name": "AC Tune-Up",
+      "worker_ids": [
+        "worker11",
+        "worker2",
+        "worker14",
+        "worker18",
+        "worker1",
+        "worker15",
+        "worker8",
+        "worker4"
+      ]
+    },
+    {
+      "service_id": "c1_s6",
+      "service_name": "AC Compressor Replacement",
+      "worker_ids": [
+        "worker17",
+        "worker12",
+        "worker19",
+        "worker15",
+        "worker5",
+        "worker16",
+        "worker7",
+        "worker9"
+      ]
+    },
+    {
+      "service_id": "c2_s1",
+      "service_name": "Pipe Leak Repair",
+      "worker_ids": [
+        "worker4",
+        "worker8",
+        "worker17",
+        "worker2"
+      ]
+    },
+    {
+      "service_id": "c2_s2",
+      "service_name": "Toilet Installation",
+      "worker_ids": [
+        "worker11",
+        "worker19",
+        "worker3",
+        "worker1",
+        "worker7",
+        "worker12",
+        "worker5"
+      ]
+    },
+    {
+      "service_id": "c2_s3",
+      "service_name": "Drain Cleaning",
+      "worker_ids": [
+        "worker4",
+        "worker3",
+        "worker6",
+        "worker19"
+      ]
+    },
+    {
+      "service_id": "c2_s4",
+      "service_name": "Water Heater Installation",
+      "worker_ids": [
+        "worker5",
+        "worker1",
+        "worker11",
+        "worker17"
+      ]
+    },
+    {
+      "service_id": "c2_s5",
+      "service_name": "Faucet Repair",
+      "worker_ids": [
+        "worker12",
+        "worker14",
+        "worker20",
+        "worker5",
+        "worker6",
+        "worker4"
+      ]
+    },
+    {
+      "service_id": "c3_s1",
+      "service_name": "Wiring Installation",
+      "worker_ids": [
+        "worker10",
+        "worker9",
+        "worker13",
+        "worker2"
+      ]
+    },
+    {
+      "service_id": "c3_s2",
+      "service_name": "Light Fixture Repair",
+      "worker_ids": [
+        "worker4",
+        "worker2",
+        "worker19"
+      ]
+    },
+    {
+      "service_id": "c3_s3",
+      "service_name": "Electric Panel Upgrade",
+      "worker_ids": [
+        "worker9",
+        "worker13",
+        "worker18",
+        "worker1",
+        "worker6",
+        "worker11"
+      ]
+    },
+    {
+      "service_id": "c3_s4",
+      "service_name": "Ceiling Fan Installation",
+      "worker_ids": [
+        "worker1",
+        "worker13",
+        "worker5",
+        "worker8"
+      ]
+    },
+    {
+      "service_id": "c3_s5",
+      "service_name": "Outlet Replacement",
+      "worker_ids": [
+        "worker14",
+        "worker16",
+        "worker20",
+        "worker13",
+        "worker6",
+        "worker11",
+        "worker8"
+      ]
+    },
+    {
+      "service_id": "c3_s6",
+      "service_name": "Generator Installation",
+      "worker_ids": [
+        "worker7",
+        "worker14",
+        "worker11",
+        "worker10",
+        "worker1",
+        "worker4"
+      ]
+    },
+    {
+      "service_id": "c4_s1",
+      "service_name": "Deep Cleaning",
+      "worker_ids": [
+        "worker12",
+        "worker9",
+        "worker18",
+        "worker1",
+        "worker5",
+        "worker11"
+      ]
+    },
+    {
+      "service_id": "c4_s2",
+      "service_name": "Kitchen Cleaning",
+      "worker_ids": [
+        "worker20",
+        "worker7",
+        "worker8",
+        "worker16",
+        "worker5",
+        "worker18",
+        "worker10",
+        "worker6"
+      ]
+    },
+    {
+      "service_id": "c4_s3",
+      "service_name": "Bathroom Cleaning",
+      "worker_ids": [
+        "worker19",
+        "worker3",
+        "worker7",
+        "worker13"
+      ]
+    },
+    {
+      "service_id": "c4_s4",
+      "service_name": "Living Room Cleaning",
+      "worker_ids": [
+        "worker8",
+        "worker20",
+        "worker13",
+        "worker2"
+      ]
+    },
+    {
+      "service_id": "c4_s5",
+      "service_name": "Carpet Cleaning",
+      "worker_ids": [
+        "worker20",
+        "worker1",
+        "worker4",
+        "worker17"
+      ]
+    },
+    {
+      "service_id": "c5_s1",
+      "service_name": "Lawn Mowing",
+      "worker_ids": [
+        "worker2",
+        "worker12",
+        "worker8",
+        "worker15",
+        "worker20",
+        "worker16",
+        "worker10",
+        "worker13"
+      ]
+    },
+    {
+      "service_id": "c5_s2",
+      "service_name": "Garden Design",
+      "worker_ids": [
+        "worker19",
+        "worker18",
+        "worker10",
+        "worker2",
+        "worker4",
+        "worker7"
+      ]
+    },
+    {
+      "service_id": "c5_s3",
+      "service_name": "Tree Trimming",
+      "worker_ids": [
+        "worker4",
+        "worker3",
+        "worker12",
+        "worker1"
+      ]
+    },
+    {
+      "service_id": "c6_s1",
+      "service_name": "Interior Painting",
+      "worker_ids": [
+        "worker10",
+        "worker4",
+        "worker16",
+        "worker17",
+        "worker2"
+      ]
+    },
+    {
+      "service_id": "c6_s2",
+      "service_name": "Exterior Painting",
+      "worker_ids": [
+        "worker7",
+        "worker15",
+        "worker9",
+        "worker13",
+        "worker2"
+      ]
+    },
+    {
+      "service_id": "c6_s3",
+      "service_name": "Furniture Painting",
+      "worker_ids": [
+        "worker20",
+        "worker1",
+        "worker9",
+        "worker8",
+        "worker6",
+        "worker14"
+      ]
+    },
+    {
+      "service_id": "c7_s1",
+      "service_name": "Termite Control",
+      "worker_ids": [
+        "worker3",
+        "worker5",
+        "worker4"
+      ]
+    },
+    {
+      "service_id": "c7_s2",
+      "service_name": "Rodent Extermination",
+      "worker_ids": [
+        "worker18",
+        "worker14",
+        "worker2",
+        "worker9",
+        "worker15",
+        "worker17"
+      ]
+    },
+    {
+      "service_id": "c7_s3",
+      "service_name": "Bed Bug Treatment",
+      "worker_ids": [
+        "worker18",
+        "worker17",
+        "worker16",
+        "worker5",
+        "worker10"
+      ]
+    },
+    {
+      "service_id": "c8_s1",
+      "service_name": "Roof Repair",
+      "worker_ids": [
+        "worker13",
+        "worker11",
+        "worker7",
+        "worker6"
+      ]
+    },
+    {
+      "service_id": "c8_s2",
+      "service_name": "Roof Installation",
+      "worker_ids": [
+        "worker8",
+        "worker18",
+        "worker11",
+        "worker17",
+        "worker12",
+        "worker14"
+      ]
+    },
+    {
+      "service_id": "c8_s3",
+      "service_name": "Roof Inspection",
+      "worker_ids": [
+        "worker1",
+        "worker10",
+        "worker18",
+        "worker5",
+        "worker16"
+      ]
+    },
+    {
+      "service_id": "c8_s4",
+      "service_name": "Gutter Cleaning",
+      "worker_ids": [
+        "worker6",
+        "worker18",
+        "worker20",
+        "worker9",
+        "worker12"
+      ]
+    },
+    {
+      "service_id": "c9_s1",
+      "service_name": "Refrigerator Repair",
+      "worker_ids": [
+        "worker2",
+        "worker9",
+        "worker15",
+        "worker16",
+        "worker18",
+        "worker19",
+        "worker6"
+      ]
+    },
+    {
+      "service_id": "c9_s2",
+      "service_name": "Washing Machine Repair",
+      "worker_ids": [
+        "worker11",
+        "worker8",
+        "worker16",
+        "worker15",
+        "worker2",
+        "worker12",
+        "worker6",
+        "worker17"
+      ]
+    },
+    {
+      "service_id": "c9_s3",
+      "service_name": "Dishwasher Repair",
+      "worker_ids": [
+        "worker6",
+        "worker19",
+        "worker11",
+        "worker4",
+        "worker12"
+      ]
+    },
+    {
+      "service_id": "c9_s4",
+      "service_name": "Oven Repair",
+      "worker_ids": [
+        "worker4",
+        "worker12",
+        "worker16",
+        "worker15",
+        "worker1",
+        "worker9"
+      ]
+    },
+    {
+      "service_id": "c9_s5",
+      "service_name": "Dryer Repair",
+      "worker_ids": [
+        "worker4",
+        "worker9",
+        "worker20",
+        "worker2",
+        "worker7",
+        "worker13"
+      ]
+    },
+    {
+      "service_id": "c9_s6",
+      "service_name": "Microwave Repair",
+      "worker_ids": [
+        "worker4",
+        "worker5",
+        "worker9",
+        "worker19",
+        "worker1",
+        "worker6",
+        "worker13",
+        "worker10"
+      ]
+    },
+    {
+      "service_id": "c10_s1",
+      "service_name": "Furniture Assembly",
+      "worker_ids": [
+        "worker15",
+        "worker7",
+        "worker3"
+      ]
+    },
+    {
+      "service_id": "c10_s2",
+      "service_name": "Cabinet Installation",
+      "worker_ids": [
+        "worker3",
+        "worker13",
+        "worker8",
+        "worker6",
+        "worker1",
+        "worker12"
+      ]
+    },
+    {
+      "service_id": "c10_s3",
+      "service_name": "Wooden Flooring",
+      "worker_ids": [
+        "worker9",
+        "worker8",
+        "worker4",
+        "worker1",
+        "worker10",
+        "worker2",
+        "worker20"
+      ]
+    },
+    {
+      "service_id": "c11_s1",
+      "service_name": "Furnace Repair",
+      "worker_ids": [
+        "worker7",
+        "worker5",
+        "worker10",
+        "worker17",
+        "worker14",
+        "worker6"
+      ]
+    },
+    {
+      "service_id": "c11_s2",
+      "service_name": "Heat Pump Installation",
+      "worker_ids": [
+        "worker7",
+        "worker16",
+        "worker14",
+        "worker9",
+        "worker10"
+      ]
+    },
+    {
+      "service_id": "c11_s3",
+      "service_name": "Boiler Repair",
+      "worker_ids": [
+        "worker14",
+        "worker11",
+        "worker2",
+        "worker3",
+        "worker18",
+        "worker6",
+        "worker16",
+        "worker9"
+      ]
+    },
+    {
+      "service_id": "c12_s1",
+      "service_name": "Security Camera Installation",
+      "worker_ids": [
+        "worker2",
+        "worker15",
+        "worker11",
+        "worker3",
+        "worker6",
+        "worker4",
+        "worker20"
+      ]
+    },
+    {
+      "service_id": "c12_s2",
+      "service_name": "Alarm System Setup",
+      "worker_ids": [
+        "worker5",
+        "worker13",
+        "worker16"
+      ]
+    },
+    {
+      "service_id": "c12_s3",
+      "service_name": "Smart Lock Installation",
+      "worker_ids": [
+        "worker4",
+        "worker11",
+        "worker12",
+        "worker13",
+        "worker2"
+      ]
+    }
+  ]
+}

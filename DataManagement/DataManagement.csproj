@@ -62,10 +62,8 @@
 	  <None Remove="data\" />
 	  <None Remove="data\categories.json" />
 	</ItemGroup>
+
 	<ItemGroup>
-	  <Folder Include="data\" />
-	</ItemGroup>
-	<ItemGroup>
-	  <BundleResource Include="data\categories.json" />
+	  <Content Include="data\categories.json" />
 	</ItemGroup>
 </Project>
