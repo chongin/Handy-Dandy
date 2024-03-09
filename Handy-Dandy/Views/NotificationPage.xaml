@@ -1,13 +1,87 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+﻿<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:models="clr-namespace:Handy_Dandy.Models"
+             xmlns:viewModels="clr-namespace:Handy_Dandy.ViewModels"
+             xmlns:displaymodels="clr-namespace:Handy_Dandy.ViewModels.Dtos"
              x:Class="Handy_Dandy.Views.NotificationPage"
-             Title="NotificationPage">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-        <Button Text="Click" Command="{Binding }"/>
-    </VerticalStackLayout>
+             Title="{Binding Category.Name}">
+
+    <Shell.BackButtonBehavior>
+        <BackButtonBehavior Command="{Binding BackCommand}" />
+    </Shell.BackButtonBehavior>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <StackLayout Grid.Row="0" Margin="10,0">
+            <Label Text="Notifications" FontSize="Title" FontAttributes="Bold" />
+            <CollectionView ItemsSource="{Binding Notifications}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout Padding="10" BackgroundColor="LightGray" Margin="0,5">
+                            <Label Text="{Binding Title}" FontSize="Medium" FontAttributes="Bold" />
+                            <Label Text="{Binding Message}" FontSize="Small" />
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </StackLayout>
+
+        <ScrollView Padding="10">
+            <VerticalStackLayout>
+                <CollectionView ItemsSource="{Binding Category.Services}">
+                    <CollectionView.ItemsLayout>
+                        <GridItemsLayout Orientation="Vertical" Span="1" VerticalItemSpacing="10" HorizontalItemSpacing="10"/>
+                    </CollectionView.ItemsLayout>
+
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="displaymodels:ServiceDto">
+                            <Grid Padding="5">
+                                <Frame HeightRequest="90"  Padding="0"  BorderColor="{StaticResource Primary}" HorizontalOptions="FillAndExpand">
+                                    <Frame.GestureRecognizers>
+                                        <TapGestureRecognizer CommandParameter="{Binding .}"
+                                                              Command="{Binding Source={RelativeSource AncestorType={x:Type viewModels:ServicePageViewModel}}, Path=TabServiceCommand}"/>
+
+                                    </Frame.GestureRecognizers>
+
+                                    <Grid ColumnSpacing="10" Padding="5">
+
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="auto"/>
+                                            <ColumnDefinition Width=".9*"/>
+                                            <ColumnDefinition Width="auto"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <Image Source="{Binding ImageName}" Aspect="Fill" HorizontalOptions="Start"
+                                                Grid.Column="0"/>
+
+                                        <StackLayout Grid.Column="1" Spacing="10">
+                                            <StackLayout Orientation="Horizontal" Spacing="5">
+                                                <Image Source="score" HeightRequest="20"/>
+                                                <Label Text="{Binding Score}" />
+                                                <Label Text="{Binding CompletedCount}" />
+                                            </StackLayout>
+                                            <Label Text="{Binding Name}" FontSize="16" FontAttributes="Bold" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
+
+                                            <Label Text="{Binding ServiceCharge}" FontSize="16" TextColor="Blue"/>
+                                        </StackLayout>
+
+
+                                        <Button ImageSource="gotobtn" HorizontalOptions="End" Grid.Column="2" HeightRequest="30" FontSize="8" Background="Transparent"
+                                                Command="{Binding Source={RelativeSource AncestorType={x:Type viewModels:ServicePageViewModel}}, Path=TabBookingDetailCommand }"
+                                                CommandParameter="{Binding .}"/>
+                                    </Grid>
+                                </Frame>
+                            </Grid>
+
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+
+                </CollectionView>
+
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
 </ContentPage>
