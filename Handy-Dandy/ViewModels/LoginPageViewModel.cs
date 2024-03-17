@@ -29,17 +29,20 @@ namespace Handy_Dandy.ViewModels
         public IAsyncRelayCommand TextChangedCommand { get; }
 
         private readonly IDatabaseService _dataService;
-		public LoginPageViewModel(IDatabaseService dataService)
+        private readonly IDatabaseService1 _dataService1;
+
+        public LoginPageViewModel(IDatabaseService dataService, IDatabaseService1 dataService1)
 		{
             this._dataService = dataService;
-
-			this.LoginCommand = new AsyncRelayCommand(OnLogin);
+            this._dataService1 = dataService1;
+            this.LoginCommand = new AsyncRelayCommand(OnLogin);
 			this.SignUpCommand = new AsyncRelayCommand(OnSignUp);
             this.TextChangedCommand = new AsyncRelayCommand(OnTextChanged);
         }
 
 		private async Task OnLogin()
 		{
+            await _dataService1.InitData();
             //var user = await this._dataService.QueryUserByEmail(Email);
             //if (user == null)
             //{
