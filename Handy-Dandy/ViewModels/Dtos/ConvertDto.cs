@@ -23,6 +23,14 @@ namespace Handy_Dandy.ViewModels.Dtos
 
         public static List<CategoryDto> ConvertToCategoryDtoDtoList(List<CategoryModel> models)
         {
+            var categoryImageNames = new List<string> { "category_cleaning", "category_repairing", "category_beauty" };
+            Random random = new Random();
+           
+            foreach (var model in models)
+            {
+                int randomNameIndex = random.Next(categoryImageNames.Count);
+                model.CategoryImage = $"{categoryImageNames[randomNameIndex]}";
+            }
             return models.Select(model => new CategoryDto(model)).ToList();
         }
     }

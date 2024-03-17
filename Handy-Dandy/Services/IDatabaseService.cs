@@ -22,7 +22,9 @@ namespace Handy_Dandy.Services
         Task UpdateUser(UserModel user);
         Task<UserModel> QueryUserByEmail(string email);
 
-       // List<CategoryModel> GetCategories();
+        List<CategoryModel> GetCategories();
+        List<ServiceWorkerModel> GetServiceWorkerModels();
+        List<WorkerModel> GetWorkerModels();
 
         Task InitData(); 
         
