@@ -4,13 +4,20 @@ using Firebase.Database.Query;
 using Handy_Dandy.Models;
 using Handy_Dandy.ViewModels;
 using Bogus;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace Handy_Dandy.Services
 {
-	public class FireBaseService: IDatabaseService
-	{
+	public class FireBaseService: IDatabaseService1
+    {
         private readonly FirebaseClient _firebase;
 		private static string UserRootName = "Clients";
+        private static string CategoriesRootName = "categories";
+        private static string ServiceWorkersRootName = "service_workers";
+        private static string WorkersRootName = "workers";
+        private static string BookingRootName = "bookings";
+
         private List<string> serviceImageNames;
         private List<string> serviceNames;
         List<string> categoryImageNames;
@@ -26,20 +33,15 @@ namespace Handy_Dandy.Services
             _serviceWorkers = new List<ServiceWorkerModel>();
 
             _firebase = new FirebaseClient(firebaseUrl);
-            categoryImageNames = new List<string> { "category_cleaning", "category_repairing", "category_beauty" };
-            categoryName = new List<string> { "Cleaning", "Repairing", "Beauty" };
-
-            serviceImageNames = new List<string> { "sercie_clean_floor", "service_clean_ac", "service_clean_wall",
-                "service_laundry", "service_maintain_light", "service_repair_appliance"};
-
-            serviceNames = new List<string> { "Clean Floor", "Clean AC", "Clean Wall",
-                "Laundry", "Maintain Light", "Repair Appliance"};
-
-
-            ReadCategoriesAsync();
-            ReadWorkersAsync();
-            ReadServiceWorkersAsync();
+          
             Console.WriteLine("Init data success.");
+        }
+
+        public async Task InitData()
+        {
+            this._categories = await GetCategories();
+            this._serviceWorkers = await GetServiceWorkerModels();
+            this._workers = await GetWorkerModels();
         }
 
         #region User
@@ -91,212 +93,98 @@ namespace Handy_Dandy.Services
  
         public async Task<UserModel> GetUserById(string userId)
         {
-            var faker = new Faker();
-            UserModel model = new UserModel();
-            model.UserId = userId;
-            model.UserName = faker.Name.FullName();
-            model.Email = $"{model.UserName}@gmail.com";
-            model.Password = faker.Random.AlphaNumeric(10);
-            model.Address = faker.Address.FullAddress();
-            model.Phone = faker.Phone.PhoneNumber();
-            model.IsMember = false;
-            model.RoleId = (int)UserRole.Client;
-            model.Avatar = "dotnet_bot";
-            model.City = faker.Address.City();
-            model.Balance = faker.Random.Int(0, 100);
-            return model;
+            try
+            {
+                var userRef = this._firebase.Child(UserRootName);
+                var userSnapshot = await userRef.OnceAsync<UserModel>();
+
+                var user = userSnapshot.FirstOrDefault(u => u.Object.UserId == userId);
+
+                if (user != null)
+                {
+                    return user.Object;
+                }
+                else
+                {
+                    Console.WriteLine($"User with UserId: {userId} not found.");
+                    return null;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error querying user with UserId: {userId}. Exception: {ex.Message}");
+                return null;
+            }
         }
         #endregion
 
 
         #region Categories
-        public List<CategoryModel> GetCategories()
+        public async Task<List<CategoryModel>> GetCategories()
         {
-            return this._categories;
-        }
-
-        private CategoryModel CreateCategoryModel(int index)
-        {
-            Random random = new Random();
-            int randomNameIndex = random.Next(categoryImageNames.Count);
-            CategoryModel category = new CategoryModel
+            List<CategoryModel> categories = new List<CategoryModel>();
+            try
             {
-                CategoryId = $"C{index}_{randomNameIndex}",
-                Name = $"{categoryName[randomNameIndex]}{index}",
-                CategoryImage = $"{categoryImageNames[randomNameIndex]}",
-                Services = new List<ServiceModel>()
-            };
-
-            
-
-            int numberOfServices = random.Next(3, 11);
-
-            var faker = new Faker();
-            for (int j = 0; j < numberOfServices; j++)
-            {
-                int randomIndex = random.Next(serviceNames.Count);
-                ServiceModel service = new ServiceModel
+                var json = await _firebase.Child(CategoriesRootName).OnceSingleAsync<JObject>();
+                foreach (var category in json)
                 {
-                    ServiceId = $"{category.CategoryId}_S{j}",
-                    CategoryId = category.CategoryId,
-                    Name = $"{category.Name}.{serviceNames[randomIndex]}",
-                    Description = $"Description of Service {serviceNames[randomIndex]}",
-                    ServiceCharge = random.Next(20, 100),
-                    Score = (float)Math.Round(faker.Random.Double(3, 5), 1),
-                    CompletedCount = random.Next(80, 999),
-                    ImageName = $"{serviceImageNames[randomIndex]}"
-                };
-                category.Services.Add(service);
+                    var categoryJson = category.Value.ToString();
+                    var categoryModel = JsonConvert.DeserializeObject<CategoryModel>(categoryJson);
+                    categories.Add(categoryModel);
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"GetCategories error. Exception: {ex.Message}");
+                throw;
             }
 
-
-            return category;
+            return categories;
         }
         #endregion
 
-        #region Promotions
-        public async Task<List<PromotionModel>> GetPromotions()
+        public async Task<List<ServiceWorkerModel>> GetServiceWorkerModels()
         {
-            List<PromotionModel> promotionModels = new List<PromotionModel>();
-            promotionModels.Add(new PromotionModel
+            List<ServiceWorkerModel> serviceWorkerModels = new List<ServiceWorkerModel>();
+            try
             {
-                Title = "Cleaning",
-                Description = "Best Cleaning",
-                ImageName = "cleaning"
-            });
-
-            promotionModels.Add(new PromotionModel
+                var json = await _firebase.Child(ServiceWorkersRootName).OnceSingleAsync<JObject>();
+                foreach (var serviceWorker in json)
+                {
+                    var serviceWorkerJson = serviceWorker.Value.ToString();
+                    var serviceWorkerModel = JsonConvert.DeserializeObject<ServiceWorkerModel>(serviceWorkerJson);
+                    serviceWorkerModels.Add(serviceWorkerModel);
+                }
+            }
+            catch (Exception ex)
             {
-                Title = "Repairing",
-                Description = "Best Repairing",
-                ImageName = "repairing"
-            });
-
-            promotionModels.Add(new PromotionModel
-            {
-                Title = "Painting",
-                Description = "Best Painting",
-                ImageName = "painting"
-            });
-
-            return promotionModels;
-        }
-        #endregion
-
-        #region Service
-        public async Task<ServiceModel> GetServiceByID(string serviceID)
-        {
-            var faker = new Faker();
-            ServiceModel model = new ServiceModel();
-            model.ServiceId = serviceID;
-            model.CategoryId = faker.Random.AlphaNumeric(10);
-            model.Name = serviceNames[faker.Random.Int(0, serviceNames.Count - 1)];
-            model.ImageName = serviceImageNames[faker.Random.Int(0, serviceImageNames.Count - 1)];
-            model.ServiceCharge = faker.Random.Int(20, 100);
-            model.CompletedCount = faker.Random.Int(50, 200);
-            model.Score = (float)Math.Round(faker.Random.Double(3, 5), 1);
-            return model;
-        }
-
-        #endregion
-
-        #region Bookings
-
-        public async Task<List<BookingModel>> GetBookingsByState(string state)
-        {
-            var faker = new Faker();
-            int count = faker.Random.Int(3, 10);
-            List<BookingModel> models = new List<BookingModel>();
-            for (int i = 0; i < count; ++i)
-            {
-                var bookingModel = new BookingModel();
-                bookingModel.BookingID = faker.Random.AlphaNumeric(10);
-                bookingModel.ServiceId = faker.Random.AlphaNumeric(10);
-                bookingModel.ClientID = faker.Random.AlphaNumeric(10);
-                bookingModel.WorkerId = faker.Random.AlphaNumeric(10);
-
-                bookingModel.StartDate = faker.Date.Between(DateTime.Today, DateTime.Today.AddDays(7)).ToString("yyyy-MM-dd");
-                TimeSpan startTime = faker.Date.Timespan();
-
-                bookingModel.StartTime = $"{startTime.Hours:D2}:{startTime.Minutes:D2}";
-                bookingModel.WorkingHours = faker.Random.Int(1, 5);
-                bookingModel.Description = faker.Lorem.Sentences(2);
-                bookingModel.TotalPrice = faker.Random.Int(30, 150);
-                bookingModel.State = BookingModel.ConvertBookingState(state);
-
-                models.Add(bookingModel);
+                Console.WriteLine($"GetServiceWorkerModels error. Exception: {ex.Message}");
+                throw;
             }
 
-            return models;
-
-        }
-        #endregion
-
-
-        #region Workders
-        public async Task<WorkerModel> GetWorkerByID(string workerID)
-        {
-            var faker = new Faker();
-            WorkerModel workerModel = new WorkerModel();
-            workerModel.WorkerId = workerID;
-            workerModel.RoleId = (int)UserRole.Workder;
-            workerModel.Name = faker.Name.FullName();
-            workerModel.Email = faker.Internet.Email();
-            workerModel.Phone = faker.Phone.PhoneNumber();
-            workerModel.Address = faker.Address.FullAddress();
-            workerModel.Score = (float)Math.Round(faker.Random.Double(3, 5), 1);
-            workerModel.Ratings = faker.Random.Int(80, 999);
-            workerModel.ImageName = "worker";
-            workerModel.ServiceIds = new List<string>();
-            workerModel.LaborCost = faker.Random.Int(20, 99);
-            return workerModel;
+            return serviceWorkerModels;
         }
 
-        public async Task<List<WorkerModel>> GetWorkersByServiceID(string serviceID)
+        public async Task<List<WorkerModel>> GetWorkerModels()
         {
             List<WorkerModel> workerModels = new List<WorkerModel>();
-            var faker = new Faker();
-            int count = faker.Random.Int(2, 10);
-            for (int i = 0; i < count; ++i)
+            try
             {
-                WorkerModel workerModel = await GetWorkerByID(faker.Random.AlphaNumeric(10));
-                workerModel.ServiceIds.Add(serviceID);
-                workerModels.Add(workerModel);
+                var json = await _firebase.Child(WorkersRootName).OnceSingleAsync<JObject>();
+                foreach (var worker in json)
+                {
+                    var workerJson = worker.Value.ToString();
+                    var workerModel = JsonConvert.DeserializeObject<WorkerModel>(workerJson);
+                    workerModels.Add(workerModel);
+                }
             }
-            
+            catch (Exception ex)
+            {
+                Console.WriteLine($"GetWorkerModels error. Exception: {ex.Message}");
+                throw;
+            }
+
             return workerModels;
-        }
-        #endregion
-
-        public async void ReadCategoriesAsync()
-        {
-            var categoryData = await _firebase.Child("categories").OnceAsync<CategoryModel>();
-
-            foreach (var category in categoryData)
-            {
-                category.Object.CategoryImage = "https://deckofcardsapi.com/static/img/6H.png";
-                this._categories.Add(category.Object);
-            }
-        }
-
-        public async void ReadWorkersAsync()
-        {
-            var workersData = await _firebase.Child("workers").OnceAsync<WorkerModel>();
-
-            foreach (var worker in workersData)
-            {
-                this._workers.Add(worker.Object);
-            }
-        }
-
-        public async void ReadServiceWorkersAsync()
-        {
-            var serviceWorkerData = await _firebase.Child("service_workers").OnceAsync<ServiceWorkerModel>();
-
-            foreach (var serviceWorker in serviceWorkerData)
-            {
-                this._serviceWorkers.Add(serviceWorker.Object);
-            }
         }
     }
 }

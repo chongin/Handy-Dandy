@@ -15,5 +15,16 @@ namespace Handy_Dandy.Services
 		Task<List<WorkerModel>> GetWorkersByServiceID(string serviceID);
 		Task<UserModel> GetUserById(string userId);
     }
+
+    public interface IDatabaseService1
+    {
+        Task InserUser(UserModel user);
+        Task UpdateUser(UserModel user);
+        Task<UserModel> QueryUserByEmail(string email);
+        Task<List<CategoryModel>> GetCategories();
+
+        Task InitData(); 
+        
+    }
 }
 
