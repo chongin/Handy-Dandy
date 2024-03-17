@@ -39,11 +39,15 @@ namespace Handy_Dandy.Services
 
         public async Task InitData()
         {
-            this._categories = await GetCategories();
-            this._serviceWorkers = await GetServiceWorkerModels();
-            this._workers = await GetWorkerModels();
+            this._categories = await GetCategoriesAsync();
+            this._serviceWorkers = await GetServiceWorkerModelsAsync();
+            this._workers = await GetWorkerModelsAsync();
         }
 
+        List<CategoryModel> GetCategories()
+        {
+            return this._categories;
+        }
         #region User
         public async Task InserUser(UserModel user)
 		{
@@ -120,7 +124,7 @@ namespace Handy_Dandy.Services
 
 
         #region Categories
-        public async Task<List<CategoryModel>> GetCategories()
+        public async Task<List<CategoryModel>> GetCategoriesAsync()
         {
             List<CategoryModel> categories = new List<CategoryModel>();
             try
@@ -143,7 +147,7 @@ namespace Handy_Dandy.Services
         }
         #endregion
 
-        public async Task<List<ServiceWorkerModel>> GetServiceWorkerModels()
+        public async Task<List<ServiceWorkerModel>> GetServiceWorkerModelsAsync()
         {
             List<ServiceWorkerModel> serviceWorkerModels = new List<ServiceWorkerModel>();
             try
@@ -165,7 +169,7 @@ namespace Handy_Dandy.Services
             return serviceWorkerModels;
         }
 
-        public async Task<List<WorkerModel>> GetWorkerModels()
+        public async Task<List<WorkerModel>> GetWorkerModelsAsync()
         {
             List<WorkerModel> workerModels = new List<WorkerModel>();
             try
