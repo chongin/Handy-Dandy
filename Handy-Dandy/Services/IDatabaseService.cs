@@ -8,7 +8,8 @@ namespace Handy_Dandy.Services
 		Task UpdateUser(UserModel user);
 		Task<UserModel> QueryUserByEmail(string email);
         List<CategoryModel> GetCategories();
-        Task<List<PromotionModel>> GetPromotions();
+        List<PromotionModel> GetPromotions();
+
 		Task<List<BookingModel>> GetBookingsByState(string state);
 		Task<WorkerModel> GetWorkerByID(string workerID);
 		Task<ServiceModel> GetServiceByID(string serviceID);
