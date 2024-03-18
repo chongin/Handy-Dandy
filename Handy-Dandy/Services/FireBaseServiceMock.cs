@@ -150,7 +150,7 @@ namespace Handy_Dandy.Services
         #endregion
 
         #region Promotions
-        public async Task<List<PromotionModel>> GetPromotions()
+        public List<PromotionModel> GetPromotions()
         {
             List<PromotionModel> promotionModels = new List<PromotionModel>();
             promotionModels.Add(new PromotionModel
