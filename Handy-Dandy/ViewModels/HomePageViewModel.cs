@@ -47,7 +47,7 @@ namespace Handy_Dandy.ViewModels
 
 		public async void InitData()
 		{
-            this.Promotions = ConvertDto.ConvertToPromotionDtoList(await this._databaseService.GetPromotions());
+            this.Promotions = ConvertDto.ConvertToPromotionDtoList(this._databaseService.GetPromotions());
             this.Categories = ConvertDto.ConvertToCategoryDtoDtoList(this._databaseService1.GetCategories());
         }
 
