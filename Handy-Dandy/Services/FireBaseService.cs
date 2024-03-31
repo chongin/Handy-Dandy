@@ -9,10 +9,10 @@ using Newtonsoft.Json.Linq;
 
 namespace Handy_Dandy.Services
 {
-	public class FireBaseService: IDatabaseService1
+    public class FireBaseService : IDatabaseService1
     {
         private readonly FirebaseClient _firebase;
-		private static string UserRootName = "Clients";
+        private static string UserRootName = "Clients";
         private static string CategoriesRootName = "categories";
         private static string ServiceWorkersRootName = "service_workers";
         private static string WorkersRootName = "workers";
@@ -27,13 +27,13 @@ namespace Handy_Dandy.Services
         private List<WorkerModel> _workers;
         private List<ServiceWorkerModel> _serviceWorkers;
         public FireBaseService(string firebaseUrl)
-		{
+        {
             _categories = new List<CategoryModel>();
             _workers = new List<WorkerModel>();
             _serviceWorkers = new List<ServiceWorkerModel>();
 
             _firebase = new FirebaseClient(firebaseUrl);
-          
+
             Console.WriteLine("Init data success.");
         }
 
@@ -44,25 +44,25 @@ namespace Handy_Dandy.Services
             this._workers = await GetWorkerModelsAsync();
         }
 
-        
+
         #region User
         public async Task InserUser(UserModel user)
-		{
-			var result = await this._firebase.Child(UserRootName).PostAsync(user);
-			if (result.Key != null)
-			{
-				Console.WriteLine("Success to insert data into Firebase");
+        {
+            var result = await this._firebase.Child(UserRootName).PostAsync(user);
+            if (result.Key != null)
+            {
+                Console.WriteLine("Success to insert data into Firebase");
             }
-			else
-			{
+            else
+            {
                 Console.WriteLine("Failed to insert data into Firebase");
             }
-		}
+        }
 
-		public async Task UpdateUser(UserModel user)
-		{
-			var userRef = this._firebase.Child(UserRootName).Child(user.UserId);
-			await userRef.PutAsync(user);
+        public async Task UpdateUser(UserModel user)
+        {
+            var userRef = this._firebase.Child(UserRootName).Child(user.UserId);
+            await userRef.PutAsync(user);
         }
 
         public async Task<UserModel> QueryUserByEmail(string email)
@@ -91,7 +91,7 @@ namespace Handy_Dandy.Services
             }
         }
 
- 
+
         public async Task<UserModel> GetUserById(string userId)
         {
             try
@@ -187,9 +187,22 @@ namespace Handy_Dandy.Services
         }
         #endregion
 
+        public async Task InserBooking(string userName, BookingModel model)
+        {
+            var result = await this._firebase.Child(BookingRootName).Child(userName).PostAsync(model);
+            if (result.Key != null)
+            {
+                Console.WriteLine("Success to insert booking into Firebase");
+            }
+            else
+            {
+                Console.WriteLine("Failed to insert booking into Firebase");
+            }
+        }
+
         public CategoryModel GetCategoryById(string categoryId)
         {
-            foreach(var category in _categories)
+            foreach (var category in _categories)
             {
                 if (category.CategoryId == categoryId)
                 {
@@ -202,11 +215,11 @@ namespace Handy_Dandy.Services
         public List<WorkerModel> GetWorkersByServiceId(string serviceId)
         {
             List<WorkerModel> workerModels = new List<WorkerModel>();
-            foreach(var serviceWorkder in _serviceWorkers)
+            foreach (var serviceWorkder in _serviceWorkers)
             {
                 if (serviceWorkder.ServiceId == serviceId)
                 {
-                    foreach(var workerId in serviceWorkder.WorkerIds)
+                    foreach (var workerId in serviceWorkder.WorkerIds)
                     {
                         workerModels.Add(GetWorkerByWorkerId(workerId));
                     }
