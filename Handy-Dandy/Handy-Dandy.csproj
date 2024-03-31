@@ -67,6 +67,18 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <None Remove="Resources\Images\category_ac_repair.png" />
+	  <None Remove="Resources\Images\category_appliance.png" />
+	  <None Remove="Resources\Images\category_carpentry.png" />
+	  <None Remove="Resources\Images\category_cleaning.png" />
+	  <None Remove="Resources\Images\category_electrical.png" />
+	  <None Remove="Resources\Images\category_hvac.png" />
+	  <None Remove="Resources\Images\category_landscaping.png" />
+	  <None Remove="Resources\Images\category_painting.png" />
+	  <None Remove="Resources\Images\category_pest_control.png" />
+	  <None Remove="Resources\Images\category_plumbing.png" />
+	  <None Remove="Resources\Images\category_roofing.png" />
+	  <None Remove="Resources\Images\category_security.png" />
 	  <None Remove="Resources\Images\service_assemble_furniture.png" />
 	  <None Remove="Resources\Images\service_bed_bug_treatment.png" />
 	  <None Remove="Resources\Images\service_clean_ac.png" />
@@ -127,7 +139,6 @@
 	  <None Remove="Resources\Images\painting.jpg" />
 	  <None Remove="Resources\Images\repairing.jpg" />
 	  <None Remove="Resources\Images\" />
-	  <None Remove="Resources\Images\category_cleaning.jpg" />
 	  <None Remove="Resources\Images\score.png" />
 	  <None Remove="Resources\Images\goto.png" />
 	  <None Remove="Resources\Images\worker.png" />
