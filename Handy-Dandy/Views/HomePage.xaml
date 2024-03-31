@@ -28,9 +28,9 @@
                 </Grid>
             </Frame>
 
-           <VerticalStackLayout>
-               <!--Promotion-->
-                <CarouselView HorizontalOptions="FillAndExpand" IndicatorView="promotion_indicatorview"
+            <VerticalStackLayout HeightRequest="240" Padding="0,10,0,0">
+                <!-- Promotion -->
+                <CarouselView HeightRequest="200" HorizontalOptions="FillAndExpand" IndicatorView="promotion_indicatorview"
                     ItemsSource="{Binding Promotions}"
                     PositionChangedCommand="{Binding CarouselPositionChangedCommand}"
                     PositionChangedCommandParameter="{Binding Source={RelativeSource Self}, Path=Position}" >
@@ -38,16 +38,16 @@
                     <CarouselView.ItemTemplate>
                         <DataTemplate x:DataType="displaymodels:PromotionDto">
                             <VerticalStackLayout>
-                                <Image Source="{Binding ImageName}" Aspect="AspectFill" Grid.Row="0" HeightRequest="240"/>
-                                <Label Text="{Binding Description}"  HorizontalOptions="Center" FontSize="20" TextColor="Gray"/>
+                                <Image Source="{Binding ImageName}" Aspect="AspectFill" Grid.Row="0" HeightRequest="170"/>
+                                <Label Text="{Binding Description}" HorizontalOptions="Center" FontSize="16" TextColor="Gray"/>
                             </VerticalStackLayout>
-                            
                         </DataTemplate>
-
                     </CarouselView.ItemTemplate>
                 </CarouselView>
-               <IndicatorView x:Name="promotion_indicatorview" Margin="5" HorizontalOptions="Center" IndicatorColor="LightBlue" SelectedIndicatorColor="Red"/>
+
+                <IndicatorView x:Name="promotion_indicatorview" Margin="10" HorizontalOptions="Center" IndicatorColor="LightBlue" SelectedIndicatorColor="Red"/>
             </VerticalStackLayout>
+
             
 
             <!--Categories-->
@@ -60,13 +60,13 @@
                     </CollectionView.Header>
 
                     <CollectionView.ItemsLayout>
-                        <GridItemsLayout Orientation="Vertical" Span="{OnIdiom Desktop=1, Default=3}" VerticalItemSpacing="10" HorizontalItemSpacing="10"/>
+                        <GridItemsLayout Orientation="Vertical" Span="{OnIdiom Desktop=1, Default=3}" VerticalItemSpacing="5" HorizontalItemSpacing="5"/>
                     </CollectionView.ItemsLayout>
 
                     <CollectionView.ItemTemplate>
                         <DataTemplate x:DataType="displaymodels:CategoryDto">
                             <Grid Padding="5">
-                                <Frame HeightRequest="120" Padding="0"  BorderColor="Transparent">
+                                <Frame Padding="0"  BorderColor="Transparent">
                                     <Frame.GestureRecognizers>
                                         <TapGestureRecognizer CommandParameter="{Binding .}"
                                                               Command="{Binding Source={RelativeSource AncestorType={x:Type viewModels:HomePageViewModel}}, Path=TabCategoryCommand}"/>
@@ -80,10 +80,10 @@
                                             <RowDefinition Height="auto"/>
                                         </Grid.RowDefinitions>
                                 
-                                        <Image Source="{Binding CategoryImage}" Aspect="AspectFit" Grid.Row="0"/>
+                                        <Image Source="{Binding CategoryImage}" Aspect="AspectFit" Grid.Row="0" HeightRequest="80"/>
 
-                                        <Label Text="{Binding Name}" FontSize="12" HorizontalOptions="CenterAndExpand" VerticalOptions="Center"
-                                                Grid.Row="1" BackgroundColor="LightSkyBlue"/>
+                                        <Label Text="{Binding Name}" FontSize="14" HorizontalOptions="Center" VerticalOptions="Center"
+                                                Grid.Row="1"  HeightRequest="20"/>
                                     </Grid>
                                 </Frame>
                             </Grid>

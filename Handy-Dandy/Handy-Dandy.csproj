@@ -152,7 +152,6 @@
 	  <Folder Include="Controllers\" />
 	</ItemGroup>
 	<ItemGroup>
-	  <BundleResource Include="Resources\Images\category_cleaning.jpg" />
 	  <BundleResource Include="Resources\Images\score.png" />
 	  <BundleResource Include="Resources\Images\gotobtn.png" />
 	  <BundleResource Include="Resources\Images\worker.png" />
