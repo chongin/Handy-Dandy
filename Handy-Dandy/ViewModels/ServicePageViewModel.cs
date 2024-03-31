@@ -8,7 +8,6 @@ using Handy_Dandy.ViewModels.Dtos;
 
 namespace Handy_Dandy.ViewModels
 {
-	[QueryProperty("Category", "Category")]
 	public partial class ServicePageViewModel: BaseViewModel
 	{
 		[ObservableProperty]
@@ -19,11 +18,13 @@ namespace Handy_Dandy.ViewModels
         public IAsyncRelayCommand TabBookingDetailCommand { get; }
         public IAsyncRelayCommand BackCommand { get; }
 
-        private readonly IDatabaseService _dataService;
-
-        public ServicePageViewModel(IDatabaseService dataService)
+        private readonly IDatabaseService1 _dataService1;
+        private INavigation _navigation;
+        public ServicePageViewModel(IDatabaseService1 dataService1, CategoryDto category, INavigation navigation)
 		{
-            this._dataService = dataService;
+            _navigation = navigation;
+            Category = category;
+            this._dataService1 = dataService1;
             this.TabServiceCommand = new AsyncRelayCommand<ServiceDto>(
                 async model => await OnTabService(model));
 
@@ -39,10 +40,12 @@ namespace Handy_Dandy.ViewModels
 
             selectServiceDto = service;
 
-            await Shell.Current.GoToAsync($"{nameof(BookingDetailPage)}", true,
-               new Dictionary<string, Object>{
-                    { "Category",  Category }
-               });
+            await Application.Current.MainPage.Navigation.PushAsync(new BookingDetailPage(new BookingDetailViewModel(_dataService1, service, _navigation)));
+
+            //await Shell.Current.GoToAsync($"{nameof(BookingDetailPage)}", true,
+            //   new Dictionary<string, Object>{
+            //        { "Category",  Category }
+            //   });
         }
 
         private async Task OnClcikGoToBookingDetail(ServiceDto service)
@@ -52,15 +55,17 @@ namespace Handy_Dandy.ViewModels
                 return;
             }
 
-            await Shell.Current.GoToAsync($"{nameof(BookingDetailPage)}", true,
-                new Dictionary<string, Object>{
-                    { "Category",  Category }
-                });
+            await Application.Current.MainPage.Navigation.PushAsync(new BookingDetailPage(new BookingDetailViewModel(_dataService1, service, _navigation)));
+
+            //await Shell.Current.GoToAsync($"{nameof(BookingDetailPage)}", true,
+            //    new Dictionary<string, Object>{
+            //        { "Category",  Category }
+            //    });
         }
 
         private async Task OnBackPressed()
         {
-            await Shell.Current.GoToAsync($"//{nameof(HomePage)}", true);
+            await Application.Current.MainPage.Navigation.PushAsync(new HomePage(new HomePageViewModel(_dataService1, _navigation)));
         }
     }
 }

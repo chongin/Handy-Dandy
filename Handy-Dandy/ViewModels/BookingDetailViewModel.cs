@@ -13,7 +13,7 @@ namespace Handy_Dandy.ViewModels
 	{
 
         [ObservableProperty]
-        CategoryDto category;
+        ServiceDto service;
 
         [ObservableProperty]
 		private BookingDetailDto bookingDetailDisplay;
@@ -33,9 +33,12 @@ namespace Handy_Dandy.ViewModels
 		private int currentSelectDateIndex = 0;
 		private int currentSelectWorkerIndex = 0;
 
-		private IDatabaseService _databaseService { get; set; }
-		public BookingDetailViewModel(IDatabaseService databaseService)
+		private IDatabaseService1 _databaseService1 { get; set; }
+        private INavigation _navigation;
+        public BookingDetailViewModel(IDatabaseService1 databaseService1, ServiceDto service, INavigation navigation)
 		{
+            _navigation = navigation;
+            Service = service;
             BookingDetailDisplay = new BookingDetailDto();
 			TabTimeCommand = new AsyncRelayCommand<TimeDisplayModel>(
 				async (arg) => await OnTabTime(arg));
@@ -47,7 +50,7 @@ namespace Handy_Dandy.ViewModels
                 async (arg) => await OnTabWorker(arg));
 
 			BackCommand = new AsyncRelayCommand(OnBackPressed);
-            this._databaseService = databaseService;
+            this._databaseService1 = databaseService1;
 
 
 			InitModel();
@@ -57,8 +60,8 @@ namespace Handy_Dandy.ViewModels
 
 		private async void InitModel()
 		{
-            BookingDetailDisplay.ServiceDto = new ServiceDto(await this._databaseService.GetServiceByID("MockServiceID"));
-			BookingDetailDisplay.WorkerDtos = ConvertDto.ConvertToWorkerDtoList(await this._databaseService.GetWorkersByServiceID(BookingDetailDisplay.ServiceDto.ServiceId));
+            BookingDetailDisplay.ServiceDto = Service;
+            BookingDetailDisplay.WorkerDtos = ConvertDto.ConvertToWorkerDtoList(this._databaseService1.GetWorkersByServiceId(Service.ServiceId));
         }
 		private void InitDates()
 		{
@@ -116,10 +119,14 @@ namespace Handy_Dandy.ViewModels
 
         private async Task OnBackPressed()
         {
-            await Shell.Current.GoToAsync($"{nameof(ServicePage)}", true,
-                new Dictionary<string, object>{
-                    { "Category", Category }
-                });
+            var categoryModel = _databaseService1.GetCategoryById(Service.CategoryId);
+
+            await Application.Current.MainPage.Navigation.PushAsync(new ServicePage(new ServicePageViewModel(_databaseService1, new CategoryDto(categoryModel), _navigation)));
+
+            //await Shell.Current.GoToAsync($"{nameof(ServicePage)}", true,
+            //    new Dictionary<string, object>{
+            //        { "Category", Category }
+            //    });
         }
 
         private async Task OnConfirmed()

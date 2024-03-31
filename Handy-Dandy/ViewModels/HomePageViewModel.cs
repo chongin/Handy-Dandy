@@ -27,11 +27,11 @@ namespace Handy_Dandy.ViewModels
 
         public IAsyncRelayCommand SelectionChangedCommand { get; }
         public IAsyncRelayCommand TabCategoryCommand { get; }
-        private IDatabaseService _databaseService;
         private IDatabaseService1 _databaseService1;
-        public HomePageViewModel(IDatabaseService databaseService, IDatabaseService1 databaseService1)
+        private INavigation _navigation;
+        public HomePageViewModel(IDatabaseService1 databaseService1, INavigation navigation)
 		{
-            this._databaseService = databaseService;
+            _navigation = navigation;
             this._databaseService1 = databaseService1;
             CarouselPositionChangedCommand = new AsyncRelayCommand<int>(async (currentPosition) => await OnCarouselPositionChanged(currentPosition));
         
@@ -47,7 +47,7 @@ namespace Handy_Dandy.ViewModels
 
 		public async void InitData()
 		{
-            this.Promotions = ConvertDto.ConvertToPromotionDtoList(this._databaseService.GetPromotions());
+            this.Promotions = ConvertDto.ConvertToPromotionDtoList(this._databaseService1.GetPromotions());
             this.Categories = ConvertDto.ConvertToCategoryDtoDtoList(this._databaseService1.GetCategories());
         }
 
@@ -66,11 +66,13 @@ namespace Handy_Dandy.ViewModels
             if (category is null)
                 return;
 
-            await Shell.Current.GoToAsync($"{nameof(ServicePage)}", true,
-                new Dictionary<string, object>
-                {
-                    { "Category", category }
-                });
+            await Application.Current.MainPage.Navigation.PushAsync(new ServicePage(new ServicePageViewModel(_databaseService1, category, _navigation)));
+
+            //await Shell.Current.GoToAsync($"{nameof(ServicePage)}", true,
+            //    new Dictionary<string, object>
+            //    {
+            //        { "Category", category }
+            //    });
         }
 
         private async Task OnCarouselPositionChanged(int currentPosition)
