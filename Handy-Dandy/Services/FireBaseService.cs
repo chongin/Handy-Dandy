@@ -119,6 +119,34 @@ namespace Handy_Dandy.Services
         }
         #endregion
 
+        #region Promotions
+        public List<PromotionModel> GetPromotions()
+        {
+            List<PromotionModel> promotionModels = new List<PromotionModel>();
+            promotionModels.Add(new PromotionModel
+            {
+                Title = "Cleaning",
+                Description = "Best Cleaning",
+                ImageName = "cleaning"
+            });
+
+            promotionModels.Add(new PromotionModel
+            {
+                Title = "Repairing",
+                Description = "Best Repairing",
+                ImageName = "repairing"
+            });
+
+            promotionModels.Add(new PromotionModel
+            {
+                Title = "Painting",
+                Description = "Best Painting",
+                ImageName = "painting"
+            });
+
+            return promotionModels;
+        }
+        #endregion
 
         #region Categories
         public List<CategoryModel> GetCategories()
@@ -158,6 +186,46 @@ namespace Handy_Dandy.Services
             return categories;
         }
         #endregion
+
+        public CategoryModel GetCategoryById(string categoryId)
+        {
+            foreach(var category in _categories)
+            {
+                if (category.CategoryId == categoryId)
+                {
+                    return category;
+                }
+            }
+            throw new Exception($"Cannot found category by this category id: {categoryId}");
+        }
+
+        public List<WorkerModel> GetWorkersByServiceId(string serviceId)
+        {
+            List<WorkerModel> workerModels = new List<WorkerModel>();
+            foreach(var serviceWorkder in _serviceWorkers)
+            {
+                if (serviceWorkder.ServiceId == serviceId)
+                {
+                    foreach(var workerId in serviceWorkder.WorkerIds)
+                    {
+                        workerModels.Add(GetWorkerByWorkerId(workerId));
+                    }
+                }
+            }
+            return workerModels;
+        }
+
+        public WorkerModel GetWorkerByWorkerId(string workerId)
+        {
+            foreach (var worker in _workers)
+            {
+                if (worker.WorkerId == workerId)
+                {
+                    return worker;
+                }
+            }
+            throw new Exception($"Cannot found worker by this worker id: {workerId}");
+        }
 
         public async Task<List<ServiceWorkerModel>> GetServiceWorkerModelsAsync()
         {
