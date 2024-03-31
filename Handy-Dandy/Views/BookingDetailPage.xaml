@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:mct="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              xmlns:displaymodels="clr-namespace:Handy_Dandy.ViewModels.Dtos"
              xmlns:viewmodels="clr-namespace:Handy_Dandy.ViewModels"
              xmlns:models="clr-namespace:Handy_Dandy.Models"
@@ -46,7 +47,7 @@
             </Frame>
 
             <VerticalStackLayout>
-                <Label Text="Date and Time" FontAttributes="Bold" Margin="0,0,0,8"/>
+                <Label Text="Date" FontAttributes="Bold" Margin="0,0,0,8"/>
                 <CollectionView ItemsSource="{Binding Next7Dates}">
                     <CollectionView.ItemsLayout>
                         <LinearItemsLayout Orientation="Horizontal" ItemSpacing="10"/>
@@ -74,33 +75,44 @@
             </VerticalStackLayout>
 
             <!--Time-->
-            <CollectionView ItemsSource="{Binding StartWorkTimes}">
-                <CollectionView.ItemsLayout>
-                    <GridItemsLayout Orientation="Vertical"  Span="3" HorizontalItemSpacing="20"/>
-                </CollectionView.ItemsLayout>
+            <VerticalStackLayout>
+                <Label Text="Start Time" FontAttributes="Bold" Margin="0,0,0,8"/>
+                <CollectionView ItemsSource="{Binding StartWorkTimes}">
+                    <CollectionView.ItemsLayout>
+                        <GridItemsLayout Orientation="Vertical"  Span="3" HorizontalItemSpacing="20"/>
+                    </CollectionView.ItemsLayout>
 
-                <CollectionView.ItemTemplate>
-                    <DataTemplate x:DataType="displaymodels:TimeDisplayModel">
-                        <Frame Padding="3" CornerRadius="4" BorderColor="LightGray"
-                            BackgroundColor="{Binding CurrentColor}" HeightRequest="30" Margin="3">
-                            <Frame.GestureRecognizers>
-                                <TapGestureRecognizer CommandParameter="{Binding .}"
-                                    Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:BookingDetailViewModel}}, Path=TabTimeCommand}"/>
-                            </Frame.GestureRecognizers>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="displaymodels:TimeDisplayModel">
+                            <Frame Padding="3" CornerRadius="4" BorderColor="LightGray"
+                                BackgroundColor="{Binding CurrentColor}" HeightRequest="30" Margin="3">
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer CommandParameter="{Binding .}"
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:BookingDetailViewModel}}, Path=TabTimeCommand}"/>
+                                </Frame.GestureRecognizers>
 
-                            <Label Text="{Binding Time}" FontSize="14" HorizontalOptions="Center" VerticalOptions="Center"/>
-                        </Frame>
+                                <Label Text="{Binding Time}" FontSize="14" HorizontalOptions="Center" VerticalOptions="Center"/>
+                            </Frame>
                         
 
-                    </DataTemplate>
+                        </DataTemplate>
 
-                </CollectionView.ItemTemplate>
-            </CollectionView>
-
-            <!--Workder-->
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+                <StackLayout Orientation="Horizontal" VerticalOptions="Center" Spacing="2">
+                    <Label Text="Hours:" FontAttributes="Bold" Margin="0,0,8,0" VerticalOptions="Center"/>
+                    <Picker x:Name="hoursPicker" Title="Select Hours" VerticalOptions="Center" HorizontalOptions="Center"
+                            SelectedItem="{Binding WorkingHours, Mode=TwoWay}">
+                        <Picker.Behaviors>
+                            <mct:EventToCommandBehavior EventName="SelectedIndexChanged" Command="{Binding HoursSelectedCommand}" />
+                        </Picker.Behaviors>
+                    </Picker>
+                </StackLayout>
+             </VerticalStackLayout>
+            <!--Worker-->
             <CollectionView ItemsSource="{Binding BookingDetailDisplay.WorkerDtos}">
                 <CollectionView.Header>
-                    <Label Text="Worker" FontAttributes="Bold"/>
+                    <Label Text="Worker Can be selected" FontAttributes="Bold"/>
                 </CollectionView.Header>
 
                 <CollectionView.ItemsLayout>
@@ -166,9 +178,9 @@
                         </Grid.ColumnDefinitions>
 
                         <Label Text="SubTotal" HorizontalOptions="Start" VerticalOptions="Center" Grid.Row="0" Grid.Column="0"/>
-                        <Label Text="$156.0" Grid.Row="0" Grid.Column="1" FontAttributes="Bold"/>
+                        <Label Text="{Binding SubTotal}" Grid.Row="0" Grid.Column="1" FontAttributes="Bold"/>
                         <Label Text="Est.Tax" VerticalOptions="Center" HorizontalOptions="Start" Grid.Row="1" Grid.Column="0"/>
-                        <Label Text="$13.5" Grid.Row="1" Grid.Column="1" FontAttributes="Bold"/>
+                        <Label Text="{Binding EstimatedTax}" Grid.Row="1" Grid.Column="1" FontAttributes="Bold"/>
                     </Grid>
 
 

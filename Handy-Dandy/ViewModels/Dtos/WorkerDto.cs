@@ -39,8 +39,8 @@ namespace Handy_Dandy.ViewModels.Dtos
             Score = WorkerModel.Score;
             Ratings = WorkerModel.Ratings;
             LaborCost = WorkerModel.LaborCost;
-            ImageName = WorkerModel.ImageName;
-
+            //ImageName = WorkerModel.ImageName;
+            ImageName = "worker.png"; // hard code first
             ServiceIds = new List<string>();
             ServiceIds = WorkerModel.ServiceIds;
             RoleId = WorkerModel.RoleId;

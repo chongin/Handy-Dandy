@@ -5,6 +5,7 @@ using Handy_Dandy.Models;
 using Handy_Dandy.ViewModels.Dtos;
 using Handy_Dandy.Services;
 using Handy_Dandy.Views;
+using System.Windows.Input;
 
 namespace Handy_Dandy.ViewModels
 {
@@ -18,7 +19,16 @@ namespace Handy_Dandy.ViewModels
         [ObservableProperty]
 		private BookingDetailDto bookingDetailDisplay;
 
-		[ObservableProperty]
+        [ObservableProperty]
+        private string workingHours = "1";
+
+        [ObservableProperty]
+        private string subTotal = "";
+
+        [ObservableProperty]
+        private string estimatedTax = "";
+
+        [ObservableProperty]
 		private List<DateDisplayModel> next7Dates = new List<DateDisplayModel>();
 
 		[ObservableProperty]
@@ -29,9 +39,11 @@ namespace Handy_Dandy.ViewModels
 		public IAsyncRelayCommand TabWorkerCommand { get; }
 		public IAsyncRelayCommand BackCommand { get; }
 
-        private int currentSelectTimeIndex = 0;
-		private int currentSelectDateIndex = 0;
-		private int currentSelectWorkerIndex = 0;
+        public IAsyncRelayCommand HoursSelectedCommand { get; }
+
+        private int currentSelectTimeIndex = -1;
+		private int currentSelectDateIndex = -1;
+		private int currentSelectWorkerIndex = -1;
 
 		private IDatabaseService1 _databaseService1 { get; set; }
         private INavigation _navigation;
@@ -50,6 +62,9 @@ namespace Handy_Dandy.ViewModels
                 async (arg) => await OnTabWorker(arg));
 
 			BackCommand = new AsyncRelayCommand(OnBackPressed);
+
+            HoursSelectedCommand = new AsyncRelayCommand(async (arg) =>await OnHoursSelected(arg));
+
             this._databaseService1 = databaseService1;
 
 
@@ -86,8 +101,12 @@ namespace Handy_Dandy.ViewModels
 
 		private async Task OnTabTime(TimeDisplayModel timeModel)
 		{
-            var preTime = StartWorkTimes[currentSelectTimeIndex];
-            preTime.CurrentColor = Color.FromArgb("#00000000");
+            if (currentSelectTimeIndex >= 0)
+            {
+                var preTime = StartWorkTimes[currentSelectTimeIndex];
+                preTime.CurrentColor = Color.FromArgb("#00000000");
+            }
+           
 
             int currentIndex = StartWorkTimes.IndexOf(timeModel);
 			timeModel.CurrentColor = Color.FromRgb(35, 206, 250);
@@ -97,8 +116,12 @@ namespace Handy_Dandy.ViewModels
 
         private async Task OnTabDate(DateDisplayModel dateModel)
         {
-			var preDate = Next7Dates[currentSelectDateIndex];
-            preDate.CurrentColor = Color.FromArgb("#00000000");
+            if (currentSelectDateIndex >= 0)
+            {
+                var preDate = Next7Dates[currentSelectDateIndex];
+                preDate.CurrentColor = Color.FromArgb("#00000000");
+            }
+			
 
 			int currentIndex = Next7Dates.IndexOf(dateModel);
             dateModel.CurrentColor = Color.FromRgb(35, 206, 250);
@@ -108,13 +131,18 @@ namespace Handy_Dandy.ViewModels
 
         private async Task OnTabWorker(WorkerDto workerDto)
         {
-            var preWorker = BookingDetailDisplay.WorkerDtos[currentSelectWorkerIndex];
-            preWorker.CurrentColor = Color.FromArgb("#00000000");
+            if (currentSelectWorkerIndex >= 0)
+            {
+                var preWorker = BookingDetailDisplay.WorkerDtos[currentSelectWorkerIndex];
+                preWorker.CurrentColor = Color.FromArgb("#00000000");
+            }
 
             int currentIndex = BookingDetailDisplay.WorkerDtos.IndexOf(workerDto);
             workerDto.CurrentColor = Color.FromRgb(35, 206, 250);
 
             currentSelectWorkerIndex = currentIndex;
+
+            UpdateMoney();
         }
 
         private async Task OnBackPressed()
@@ -132,6 +160,26 @@ namespace Handy_Dandy.ViewModels
         private async Task OnConfirmed()
         {
 
+        }
+
+        private async Task OnHoursSelected(object obj)
+        {
+            string s = WorkingHours;
+            Console.WriteLine(s);
+            UpdateMoney();
+        }
+
+        private void UpdateMoney()
+        {
+            if (currentSelectWorkerIndex >= 0)
+            {
+                var currentWorker = BookingDetailDisplay.WorkerDtos[currentSelectWorkerIndex];
+                int hours = int.Parse(WorkingHours);
+                decimal total = currentWorker.LaborCost * hours;
+                decimal tax = total * 0.13m;
+                SubTotal = $"${total}";
+                EstimatedTax = $"${tax}";
+            }
         }
     }
 }

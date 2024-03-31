@@ -10,7 +10,7 @@ namespace Handy_Dandy.ViewModels.Dtos
 		{
 		}
 
-		public BookingDto BookingDto { get; set; }
+		//public BookingDto BookingDto { get; set; }
 		public ServiceDto ServiceDto { get; set; }
 		public List<WorkerDto> WorkerDtos { get; set; }
 
