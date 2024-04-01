@@ -67,12 +67,6 @@ namespace Handy_Dandy.ViewModels
                 return;
 
             await Application.Current.MainPage.Navigation.PushAsync(new ServicePage(new ServicePageViewModel(_databaseService1, category, _navigation)));
-
-            //await Shell.Current.GoToAsync($"{nameof(ServicePage)}", true,
-            //    new Dictionary<string, object>
-            //    {
-            //        { "Category", category }
-            //    });
         }
 
         private async Task OnCarouselPositionChanged(int currentPosition)
