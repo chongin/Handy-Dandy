@@ -62,11 +62,11 @@ namespace Handy_Dandy.ViewModels
 		private async Task<List<BookingDisplayDto>> GetBookingModel(string state)
 		{
 			List<BookingDisplayDto> Models = new List<BookingDisplayDto>();
-            var bookingModels = await this._databaseService.GetBookingsByState(state);
+            var bookingModels = await _databaseService.GetBookingsByState(state);
             foreach (var bookingModel in bookingModels)
             {
-                var workerModel = await this._databaseService.GetWorkerByID(bookingModel.WorkerId);
-                var serviceModel = await this._databaseService.GetServiceByID(bookingModel.ServiceId);
+                var workerModel = await _databaseService.GetWorkerByID(bookingModel.WorkerId);
+                var serviceModel = await _databaseService.GetServiceByID(bookingModel.ServiceId);
 
                 BookingDisplayDto model = new BookingDisplayDto();
                 model.BookingDto = new BookingDto(bookingModel);
