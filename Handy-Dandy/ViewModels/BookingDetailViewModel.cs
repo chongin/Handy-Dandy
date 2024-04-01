@@ -86,8 +86,9 @@ namespace Handy_Dandy.ViewModels
         {
             DateTime currentDate = DateTime.Today;
             Next7Dates.Add(new DateDisplayModel(currentDate));
+            int daysToAdd = 10;
 
-            for (int i = 1; i < 10; i++)
+            for (int i = 1; i < daysToAdd; i++)
             {
                 DateTime nextDate = currentDate.AddDays(i);
                 Next7Dates.Add(new DateDisplayModel(nextDate));
