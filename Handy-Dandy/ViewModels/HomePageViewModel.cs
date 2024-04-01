@@ -32,7 +32,7 @@ namespace Handy_Dandy.ViewModels
         public HomePageViewModel(IDatabaseService1 databaseService1, INavigation navigation)
 		{
             _navigation = navigation;
-            this._databaseService1 = databaseService1;
+            _databaseService1 = databaseService1;
             CarouselPositionChangedCommand = new AsyncRelayCommand<int>(async (currentPosition) => await OnCarouselPositionChanged(currentPosition));
         
 
@@ -47,8 +47,8 @@ namespace Handy_Dandy.ViewModels
 
 		public async void InitData()
 		{
-            this.Promotions = ConvertDto.ConvertToPromotionDtoList(this._databaseService1.GetPromotions());
-            this.Categories = ConvertDto.ConvertToCategoryDtoDtoList(this._databaseService1.GetCategories());
+            this.Promotions = ConvertDto.ConvertToPromotionDtoList(_databaseService1.GetPromotions());
+            this.Categories = ConvertDto.ConvertToCategoryDtoDtoList(_databaseService1.GetCategories());
         }
 
         private async Task OnSelectionChanged(PromotionDto currentItem)
