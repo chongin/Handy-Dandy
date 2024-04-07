@@ -171,13 +171,13 @@ namespace Handy_Dandy.ViewModels
             {
 
                 var currentWorker = BookingDetailDisplay.WorkerDtos[currentSelectWorkerIndex];
-                var currTime = StartWorkTimes[currentSelectTimeIndex];
+                var currTime = StartWorkTimes[currentSelectTimeIndex].Time;
                 BookingModel model = new BookingModel();
                 model.BookingID = Guid.NewGuid().ToString();
                 model.ServiceId = Service.ServiceId;
                 model.ClientID = "7ed249e2-072a-43b0-a7e8-b7997a22cdea";
                 model.WorkerId = currentWorker.WorkerId;
-                model.StartDate = "";
+                model.StartDate = Next7Dates[currentSelectDateIndex].DateTime.ToString();
                 model.StartTime = currTime.ToString();
                 model.WorkingHours = int.Parse(WorkingHours);
                 model.TotalPrice = TotalPrice();
