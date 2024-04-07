@@ -45,8 +45,8 @@ namespace Handy_Dandy.ViewModels
         public IAsyncRelayCommand ConfirmCommand { get; }
 
         private int currentSelectTimeIndex = -1;
-        private int currentSelectDateIndex = -1;
-        private int currentSelectWorkerIndex = -1;
+		private int currentSelectDateIndex = -1;
+		private int currentSelectWorkerIndex = -1;
 
         private IDatabaseService1 _databaseService1 { get; set; }
         private INavigation _navigation;

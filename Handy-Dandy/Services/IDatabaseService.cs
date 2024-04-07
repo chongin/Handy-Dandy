@@ -20,7 +20,7 @@ namespace Handy_Dandy.Services
     public interface IDatabaseService1
     {
         Task InserUser(UserModel user);
-
+        
         Task UpdateUser(UserModel user);
         Task<UserModel> QueryUserByEmail(string email);
         List<PromotionModel> GetPromotions();

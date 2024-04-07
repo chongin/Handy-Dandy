@@ -184,7 +184,7 @@
                     </Grid>
 
 
-
+                    
                     <Button Text="Book Now" Command="{Binding ConfirmCommand}"/>
                 </StackLayout>
             </VerticalStackLayout>
