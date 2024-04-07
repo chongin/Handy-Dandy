@@ -143,12 +143,36 @@ namespace Handy_Dandy.ViewModels
 
         public async Task OnComplete(BookingDisplayDto booking)
         {
-            int i = 0;
+            var bookingModel = new BookingModel();
+            bookingModel.BookingID = booking.BookingDto.BookingID;
+            bookingModel.ServiceId = booking.BookingDto.ServiceId;
+            bookingModel.ClientID = booking.BookingDto.ClientID;
+            bookingModel.WorkerId = booking.BookingDto.WorkerId;
+            bookingModel.StartDate = booking.BookingDto.StartDate;
+            bookingModel.StartTime = booking.BookingDto.StartTime;
+            bookingModel.WorkingHours = booking.BookingDto.WorkingHours;
+            bookingModel.TotalPrice = booking.BookingDto.TotalPrice;
+            bookingModel.Description = booking.BookingDto.Description;
+            bookingModel.State = BookingState.Success;
+
+            await _databaseService.UpdateBooking(_databaseService.GetCurrentUser().UserName, bookingModel);
         }
 
         public async Task OnCancel(BookingDisplayDto booking)
         {
-            int i = 1;
+            var bookingModel = new BookingModel();
+            bookingModel.BookingID = booking.BookingDto.BookingID;
+            bookingModel.ServiceId = booking.BookingDto.ServiceId;
+            bookingModel.ClientID = booking.BookingDto.ClientID;
+            bookingModel.WorkerId = booking.BookingDto.WorkerId;
+            bookingModel.StartDate = booking.BookingDto.StartDate;
+            bookingModel.StartTime = booking.BookingDto.StartTime;
+            bookingModel.WorkingHours = booking.BookingDto.WorkingHours;
+            bookingModel.TotalPrice = booking.BookingDto.TotalPrice;
+            bookingModel.Description = booking.BookingDto.Description;
+            bookingModel.State = BookingState.Cancelled;
+
+            await _databaseService.UpdateBooking(_databaseService.GetCurrentUser().UserName, bookingModel);
         }
     }
 }

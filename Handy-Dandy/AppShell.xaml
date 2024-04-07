@@ -72,9 +72,9 @@
             ContentTemplate="{DataTemplate local:BookingPage}"
             Route="BookingPage" />
 
-        <ShellContent Title="Notification" Icon="home.png"
+        <!--<ShellContent Title="Notification" Icon="home.png"
             ContentTemplate="{DataTemplate local:NotificationPage}"
-            Route="NotificationPage" />
+            Route="NotificationPage" />-->
 
          <ShellContent Title="Profile" Icon="home.png"
             ContentTemplate="{DataTemplate local:ProfilePage}"

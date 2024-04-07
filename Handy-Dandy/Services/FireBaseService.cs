@@ -200,15 +200,7 @@ namespace Handy_Dandy.Services
 
         public async Task InserBooking(string userName, BookingModel model)
         {
-            var result = await this._firebase.Child(BookingRootName).Child(userName).PostAsync(model);
-            if (result.Key != null)
-            {
-                Console.WriteLine("Success to insert booking into Firebase");
-            }
-            else
-            {
-                Console.WriteLine("Failed to insert booking into Firebase");
-            }
+            await this._firebase.Child(BookingRootName).Child(userName).Child(model.BookingID).PutAsync(model);
         }
 
         public CategoryModel GetCategoryById(string categoryId)
@@ -302,11 +294,14 @@ namespace Handy_Dandy.Services
             {
                 var bookingRef = this._firebase.Child(BookingRootName);
                 var bookings = await bookingRef.OnceSingleAsync<JObject>();
-                
-                foreach (var booking in bookings)
+                if (bookings == null)
                 {
-                    var bookingjson = booking.Value.ToString();
-                    Dictionary<string, BookingModel> bookingsDict = JsonConvert.DeserializeObject<Dictionary<string, BookingModel>>(bookingjson);
+                    return bookingModels;
+                }
+                foreach (var bookinguser in bookings)
+                {
+                    var bookingjson = bookinguser.Value.ToString();
+                    var bookingsDict = JsonConvert.DeserializeObject<Dictionary<string, BookingModel>>(bookingjson);
                     foreach (var bookingVal in bookingsDict)
                     {
                         if (userId == bookingVal.Value.ClientID)
@@ -314,7 +309,7 @@ namespace Handy_Dandy.Services
                             bookingModels.Add(bookingVal.Value);
                         }
                     }
-                    
+
                 }
             }
             catch (Exception ex)
@@ -357,6 +352,11 @@ namespace Handy_Dandy.Services
                 }
             }
             return serviceModel;
+        }
+
+        public async Task UpdateBooking(string userName, BookingModel model)
+        {
+           await this._firebase.Child(BookingRootName).Child(userName).Child(model.BookingID).PutAsync(model);
         }
     }
 }

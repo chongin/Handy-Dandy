@@ -41,6 +41,8 @@ namespace Handy_Dandy.Services
 
         WorkerModel GetWorkerByID(string workerID);
         ServiceModel GetServiceByID(string serviceID);
+
+        Task UpdateBooking(string userName, BookingModel model);
     }
 }
 
