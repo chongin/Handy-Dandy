@@ -6,6 +6,7 @@ using Handy_Dandy.ViewModels;
 using Bogus;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using System.Collections.Generic;
 
 namespace Handy_Dandy.Services
 {
@@ -292,6 +293,70 @@ namespace Handy_Dandy.Services
             }
 
             return workerModels;
+        }
+
+        public async Task<List<BookingModel>> GetBookingsByUser(string userId)
+        {
+            List<BookingModel> bookingModels = new List<BookingModel>();
+            try
+            {
+                var bookingRef = this._firebase.Child(BookingRootName);
+                var bookings = await bookingRef.OnceSingleAsync<JObject>();
+                
+                foreach (var booking in bookings)
+                {
+                    var bookingjson = booking.Value.ToString();
+                    Dictionary<string, BookingModel> bookingsDict = JsonConvert.DeserializeObject<Dictionary<string, BookingModel>>(bookingjson);
+                    foreach (var bookingVal in bookingsDict)
+                    {
+                        if (userId == bookingVal.Value.ClientID)
+                        {
+                            bookingModels.Add(bookingVal.Value);
+                        }
+                    }
+                    
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error querying booking with userid: {userId}. Exception: {ex.Message}");
+                return null;
+            }
+
+           
+            return bookingModels;
+
+        }
+
+        public WorkerModel GetWorkerByID(string workerID)
+        {
+            WorkerModel workerModel = new WorkerModel();
+            foreach(var model in _workers)
+            {
+                if (model.WorkerId == workerID)
+                {
+                    workerModel = model;
+                    break;
+                }
+            }
+            return workerModel;
+        }
+
+        public ServiceModel GetServiceByID(string serviceID)
+        {
+            ServiceModel serviceModel = new ServiceModel();
+            foreach (var category in _categories)
+            {
+                foreach(var service in category.Services)
+                {
+                    if (service.ServiceId == serviceID)
+                    {
+                        serviceModel = service;
+                        break;
+                    }
+                }
+            }
+            return serviceModel;
         }
     }
 }

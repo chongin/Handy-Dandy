@@ -13,8 +13,8 @@ namespace Handy_Dandy.ViewModels
 
     public partial class BookingViewModel : BaseViewModel
     {
-        private IDatabaseService _databaseService;
-
+        private IDatabaseService1 _databaseService;
+        private INavigation _navigation;
 
         public List<BookingDisplayDto> ActiveBookingModels { get; set; }
         public List<BookingDisplayDto> SuccessBookingModels { get; set; }
@@ -40,8 +40,9 @@ namespace Handy_Dandy.ViewModels
         [ObservableProperty]
         private Color cancelledButtonColor;
 
-        public BookingViewModel(IDatabaseService databaseService)
+        public BookingViewModel(IDatabaseService1 databaseService, INavigation navigation)
 		{
+            _navigation = navigation;
             ActiveCommand = new AsyncRelayCommand(OnClickActive);
             SuccessCommand = new AsyncRelayCommand(OnClickSuccess);
             CancelledCommand = new AsyncRelayCommand(OnClickCancelled);
@@ -54,27 +55,33 @@ namespace Handy_Dandy.ViewModels
 
 		private async void InitData()
 		{
-			ActiveBookingModels = await GetBookingModel("Active");
+			ActiveBookingModels = await GetBookingModel(BookingState.Active);
             CurrentBookingModels = ActiveBookingModels;
             updateButtonColor();
         }
 
-		private async Task<List<BookingDisplayDto>> GetBookingModel(string state)
+		private async Task<List<BookingDisplayDto>> GetBookingModel(BookingState state)
 		{
 			List<BookingDisplayDto> Models = new List<BookingDisplayDto>();
-            var bookingModels = await _databaseService.GetBookingsByState(state);
+            var bookingModels = await this._databaseService.GetBookingsByUser(this._databaseService.GetCurrentUser().UserId);
+
             foreach (var bookingModel in bookingModels)
             {
-                var workerModel = await _databaseService.GetWorkerByID(bookingModel.WorkerId);
-                var serviceModel = await _databaseService.GetServiceByID(bookingModel.ServiceId);
+                if (bookingModel.State != state)
+                {
+                    continue;
+                }
+                var workerModel = _databaseService.GetWorkerByID(bookingModel.WorkerId);
+                var serviceModel = _databaseService.GetServiceByID(bookingModel.ServiceId);
 
                 BookingDisplayDto model = new BookingDisplayDto();
                 model.BookingDto = new BookingDto(bookingModel);
                 model.WorkerDto = new WorkerDto(workerModel);
                 model.ServiceDto = new ServiceDto(serviceModel);
+                
                 Models.Add(model);
             }
-			return Models;
+            return Models;
         }
 
         public async Task OnClickActive()
@@ -83,7 +90,7 @@ namespace Handy_Dandy.ViewModels
             updateButtonColor();
             if (ActiveBookingModels is null || ActiveBookingModels.Count == 0)
             {
-                ActiveBookingModels = await GetBookingModel("Active");
+                ActiveBookingModels = await GetBookingModel(BookingState.Active);
             }
             CurrentBookingModels = ActiveBookingModels;
         }
@@ -94,7 +101,7 @@ namespace Handy_Dandy.ViewModels
             updateButtonColor();
             if (SuccessBookingModels is null || SuccessBookingModels.Count == 0)
             {
-                SuccessBookingModels = await GetBookingModel("Success");
+                SuccessBookingModels = await GetBookingModel(BookingState.Success);
             }
             CurrentBookingModels = SuccessBookingModels;
         }
@@ -105,7 +112,7 @@ namespace Handy_Dandy.ViewModels
             updateButtonColor();
             if (CancelBookingModels is null || CancelBookingModels.Count == 0)
             {
-                CancelBookingModels = await GetBookingModel("Cancelled");
+                CancelBookingModels = await GetBookingModel(BookingState.Cancelled);
             }
             CurrentBookingModels = CancelBookingModels;
         }

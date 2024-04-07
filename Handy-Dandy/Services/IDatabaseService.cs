@@ -36,6 +36,11 @@ namespace Handy_Dandy.Services
 
         void SetCurrentUser(UserModel user);
         UserModel GetCurrentUser();
+
+        Task<List<BookingModel>> GetBookingsByUser(string username);
+
+        WorkerModel GetWorkerByID(string workerID);
+        ServiceModel GetServiceByID(string serviceID);
     }
 }
 

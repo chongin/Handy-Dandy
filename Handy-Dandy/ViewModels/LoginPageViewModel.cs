@@ -42,7 +42,8 @@ namespace Handy_Dandy.ViewModels
 
 		private async Task OnLogin()
 		{
-
+            Email = "chongin@gmail.com";
+            Password = "A12345!";
             var user = await this._dataService.QueryUserByEmail(Email);
             if (user == null)
             {
