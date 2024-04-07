@@ -26,53 +26,65 @@
 
                     <CollectionView.ItemTemplate>
                         <DataTemplate x:DataType="displaymodels:BookingDisplayDto">
-                            <Frame HorizontalOptions="FillAndExpand">
-                                <VerticalStackLayout>
-                                    <Grid x:Name="bookinggrid">
+                            <SwipeView>
+                                 <SwipeView.RightItems>
+                                    <SwipeItems>
+                                        <SwipeItem Text="Complete" BackgroundColor="Green"
+                                                   Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:BookingViewModel}}, Path=CompleteCommand}"
+                                                   CommandParameter="{Binding .}"/>
+                                        <SwipeItem Text="Cancel" BackgroundColor="Red"
+                                                   Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:BookingViewModel}}, Path=CancelCommand}"
+                                                   CommandParameter="{Binding .}"/>
+                                    </SwipeItems>
+                                </SwipeView.RightItems>
+                                <Frame HorizontalOptions="FillAndExpand">
+                                    <VerticalStackLayout>
+                                        <Grid x:Name="bookinggrid">
                                         
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="*"/>
-                                            <ColumnDefinition Width="auto"/>
-                                        </Grid.ColumnDefinitions>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="auto"/>
+                                            </Grid.ColumnDefinitions>
 
-                                        <StackLayout Grid.Row="0" Grid.Column="0" Orientation="Vertical" Spacing="5">
-                                            <Label Text="{Binding BookingDto.BookingID}" TextColor="Blue" FontAttributes="Bold"/>
-                                            <Label Text="{Binding ServiceDto.Name}" FontAttributes="Bold" />
-                                            <Label Text="{Binding BookingDto.StartDate}"/>
-                                        </StackLayout>
-
-                                        <StackLayout Grid.Row="0" Grid.Column="1" Orientation="Vertical" HorizontalOptions="End" VerticalOptions="Center" Spacing="5">
-                                            <Label Text="{Binding BookingDto.StateName}"  TextColor="Blue" FontAttributes="Bold"/>
-                                            <StackLayout Orientation="Horizontal" HorizontalOptions="End">
-                                                <Label Text="$" FontAttributes="Bold"/>
-                                                <Label Text="{Binding BookingDto.TotalPrice}" FontAttributes="Bold" />
+                                            <StackLayout Grid.Row="0" Grid.Column="0" Orientation="Vertical" Spacing="5">
+                                                <Label Text="{Binding BookingDto.BookingID}" TextColor="Blue" FontAttributes="Bold"/>
+                                                <Label Text="{Binding ServiceDto.Name}" FontAttributes="Bold" />
+                                                <Label Text="{Binding BookingDto.StartDate}"/>
                                             </StackLayout>
-                                        </StackLayout>
-                                    </Grid>
 
-                                    <Label HeightRequest="1" BackgroundColor="Gray"/>
-
-                                    <Grid x:Name="workergrid">
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="*"/>
-                                            <ColumnDefinition Width="auto"/>
-                                        </Grid.ColumnDefinitions>
-                                        <StackLayout Grid.Row="1" Grid.Column="0" Orientation="Vertical" Spacing="5" Padding="0, 10">
-                                            <Label Text="{Binding WorkerDto.Name}" FontAttributes="Bold" />
-                                            <StackLayout Orientation="Horizontal">
-                                                <Image Source="score.png" HeightRequest="18"/>
-                                                <Label Text="{Binding WorkerDto.Score}" TextColor="Blue"/>
-                                                <Label Text="   "/>
-                                                <Label Text="{Binding WorkerDto.Ratings}"/>
-                                                <Label Text=" "/>
-                                                <Label Text="Ratings"/>
+                                            <StackLayout Grid.Row="0" Grid.Column="1" Orientation="Vertical" HorizontalOptions="End" VerticalOptions="Center" Spacing="5">
+                                                <Label Text="{Binding BookingDto.StateName}"  TextColor="Blue" FontAttributes="Bold"/>
+                                                <StackLayout Orientation="Horizontal" HorizontalOptions="End">
+                                                    <Label Text="$" FontAttributes="Bold"/>
+                                                    <Label Text="{Binding BookingDto.TotalPrice}" FontAttributes="Bold" />
+                                                </StackLayout>
                                             </StackLayout>
-                                        </StackLayout>
-                                         <Image Grid.Row="1" Grid.Column="1" Source="worker.png" Aspect="AspectFit" HeightRequest="32"/>
-                                    </Grid>
-                                </VerticalStackLayout>
+                                        </Grid>
+
+                                        <Label HeightRequest="1" BackgroundColor="Gray"/>
+
+                                        <Grid x:Name="workergrid">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="auto"/>
+                                            </Grid.ColumnDefinitions>
+                                            <StackLayout Grid.Row="1" Grid.Column="0" Orientation="Vertical" Spacing="5" Padding="0, 10">
+                                                <Label Text="{Binding WorkerDto.Name}" FontAttributes="Bold" />
+                                                <StackLayout Orientation="Horizontal">
+                                                    <Image Source="score.png" HeightRequest="18"/>
+                                                    <Label Text="{Binding WorkerDto.Score}" TextColor="Blue"/>
+                                                    <Label Text="   "/>
+                                                    <Label Text="{Binding WorkerDto.Ratings}"/>
+                                                    <Label Text=" "/>
+                                                    <Label Text="Ratings"/>
+                                                </StackLayout>
+                                            </StackLayout>
+                                             <Image Grid.Row="1" Grid.Column="1" Source="worker.png" Aspect="AspectFit" HeightRequest="32"/>
+                                        </Grid>
+                                    </VerticalStackLayout>
                               
-                            </Frame>
+                                </Frame>
+                            </SwipeView>
                         </DataTemplate>
 
                     </CollectionView.ItemTemplate>

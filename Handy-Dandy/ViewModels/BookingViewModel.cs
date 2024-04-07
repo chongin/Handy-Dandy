@@ -33,6 +33,9 @@ namespace Handy_Dandy.ViewModels
         public IAsyncRelayCommand SuccessCommand { get; }
         public IAsyncRelayCommand CancelledCommand { get; }
 
+        public IAsyncRelayCommand CompleteCommand { get; }
+        public IAsyncRelayCommand CancelCommand { get; }
+
         [ObservableProperty]
         private Color activeButtonColor;
         [ObservableProperty]
@@ -46,6 +49,11 @@ namespace Handy_Dandy.ViewModels
             ActiveCommand = new AsyncRelayCommand(OnClickActive);
             SuccessCommand = new AsyncRelayCommand(OnClickSuccess);
             CancelledCommand = new AsyncRelayCommand(OnClickCancelled);
+
+            CompleteCommand = new AsyncRelayCommand<BookingDisplayDto>(
+                async(arg) => await OnComplete(arg));
+            CancelCommand = new AsyncRelayCommand<BookingDisplayDto>(
+                async(arg) => await OnCancel(arg));
 
             this._databaseService = databaseService;
             CurrentBookingModels = new List<BookingDisplayDto>();
@@ -131,6 +139,16 @@ namespace Handy_Dandy.ViewModels
             else {
                 CancelledButtonColor = Color.FromRgb(120, 195, 230);
             }
+        }
+
+        public async Task OnComplete(BookingDisplayDto booking)
+        {
+            int i = 0;
+        }
+
+        public async Task OnCancel(BookingDisplayDto booking)
+        {
+            int i = 1;
         }
     }
 }
