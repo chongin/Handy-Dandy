@@ -57,6 +57,7 @@ namespace Handy_Dandy.ViewModels
                 return;
             }
 
+            _dataService1.SetCurrentUser(user);
             await _dataService1.InitData();
             await Shell.Current.GoToAsync($"//{nameof(HomePage)}");
         }

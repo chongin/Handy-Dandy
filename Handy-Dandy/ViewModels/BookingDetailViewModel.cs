@@ -184,7 +184,7 @@ namespace Handy_Dandy.ViewModels
                 model.Description = "a new Booking";
                 model.State = BookingState.Active;
 
-                var username = "chongin";
+                var username = _databaseService1.GetCurrentUser().UserName;
                 await _databaseService1.InserBooking(username, model);
             }
             else

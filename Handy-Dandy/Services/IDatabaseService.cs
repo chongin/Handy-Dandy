@@ -33,6 +33,9 @@ namespace Handy_Dandy.Services
 
         Task InitData();
         Task InserBooking(string userName, BookingModel model);
+
+        void SetCurrentUser(UserModel user);
+        UserModel GetCurrentUser();
     }
 }
 

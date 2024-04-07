@@ -26,6 +26,8 @@ namespace Handy_Dandy.Services
         private List<CategoryModel> _categories;
         private List<WorkerModel> _workers;
         private List<ServiceWorkerModel> _serviceWorkers;
+
+        private UserModel _currentUser;
         public FireBaseService(string firebaseUrl)
         {
             _categories = new List<CategoryModel>();
@@ -46,6 +48,14 @@ namespace Handy_Dandy.Services
 
 
         #region User
+        public void SetCurrentUser(UserModel user)
+        {
+            _currentUser = user;
+        }
+
+        public UserModel GetCurrentUser() {
+            return _currentUser;
+        }
         public async Task InserUser(UserModel user)
         {
             var result = await this._firebase.Child(UserRootName).PostAsync(user);
